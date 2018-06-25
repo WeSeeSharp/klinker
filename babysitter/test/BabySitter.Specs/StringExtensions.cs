@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using NodaTime;
+﻿using NodaTime;
 
 namespace BabySitter.Specs
 {
@@ -13,7 +12,7 @@ namespace BabySitter.Specs
             var hours = int.Parse(parts[0]);
             if (time.ToLowerInvariant().Contains("pm"))
                 hours += 12;
-            
+
             var minutes = int.Parse(parts[1]);
             return new LocalTime(hours, minutes);
         }

@@ -8,7 +8,7 @@ namespace BabySitter.Specs
 {
     public class BabySitterFeature : Feature
     {
-        public BabySitterFeature(ITestOutputHelper output) 
+        public BabySitterFeature(ITestOutputHelper output)
             : base(output)
         {
         }

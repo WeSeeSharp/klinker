@@ -14,7 +14,7 @@ namespace BabySitter.Core
             return hours.Hours * parameters.HourlyRate;
         }
 
-        private bool IsArrivalTimeInvalid(LocalTime arrivalTime)
+        private static bool IsArrivalTimeInvalid(LocalTime arrivalTime)
         {
             return arrivalTime < new LocalTime(17, 0);
         }

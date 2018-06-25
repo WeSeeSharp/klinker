@@ -1,5 +1,4 @@
-﻿using System.Diagnostics;
-using BabySitter.Specs.Support.Scenarios;
+﻿using BabySitter.Specs.Support.Scenarios;
 using NodaTime;
 
 namespace BabySitter.Specs.Steps
@@ -45,7 +44,7 @@ namespace BabySitter.Specs.Steps
         {
             context.Set(ChargeAmountKey, chargeAmount);
         }
-        
+
         public static long ChargeAmount(this ScenarioContext context)
         {
             return context.Get<long>(ChargeAmountKey);
