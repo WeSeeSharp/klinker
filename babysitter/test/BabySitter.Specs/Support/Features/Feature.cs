@@ -38,7 +38,7 @@ namespace BabySitter.Specs.Support.Features
         private async Task ExecuteStep<T>(string text)
         {
             var step = Steps.SingleOrDefault(s => s.IsMatch<T>(text))
-                       ?? throw new InvalidOperationException($"No matchin step definition was found for: {text}");
+                       ?? throw new InvalidOperationException($"No matching step definition was found for: {text}");
 
             await step.Execute(text, Output);
         }

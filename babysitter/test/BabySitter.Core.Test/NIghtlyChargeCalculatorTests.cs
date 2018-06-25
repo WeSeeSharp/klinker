@@ -10,10 +10,9 @@ namespace BabySitter.Core.Test
         public void ShouldCalculateChargeForThreeHoursAtNormalRate()
         {
             var parameters = new NightlyChargeParameters(
-                new LocalTime(17, 0),
-                new LocalTime(23, 0),
-                new LocalTime(20, 0),
-                12);
+                new LocalDateTime(1, 1, 1, 17, 0),
+                new LocalDateTime(1, 1, 1, 23, 0),
+                new LocalDateTime(1, 1, 1, 20, 0));
 
             var calculator = new NightlyChargeCalculator();
             var chargeAmount = calculator.Calculate(parameters);
@@ -24,12 +23,24 @@ namespace BabySitter.Core.Test
         public void ShouldThrowInvalidOperationWhenArrivalIsBefore1700Hours()
         {
             var parameters = new NightlyChargeParameters(
-                new LocalTime(16, 59),
-                new LocalTime(),
-                new LocalTime(),
-                12);
+                new LocalDateTime(1, 1, 1, 16, 59),
+                new LocalDateTime(1, 1, 1, 0, 0),
+                new LocalDateTime(1, 1, 1, 0, 0));
             var calculator = new NightlyChargeCalculator();
             Assert.Throws<InvalidOperationException>(() => calculator.Calculate(parameters));
+        }
+
+        [Fact]
+        public void ShouldCalculateChargeForTimeBetweenBedtimeAndMidnight()
+        {
+            var parameters = new NightlyChargeParameters(
+                new LocalDateTime(1, 1, 1, 21, 0),
+                new LocalDateTime(1, 1, 1, 21, 0),
+                new LocalDateTime(1, 1, 2, 0, 0));
+            
+            var calculator = new NightlyChargeCalculator();
+            var chargeAmount = calculator.Calculate(parameters);
+            Assert.Equal(24, chargeAmount);
         }
     }
 }

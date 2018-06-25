@@ -1,10 +1,11 @@
-﻿using NodaTime;
+﻿using System;
+using NodaTime;
 
 namespace BabySitter.Specs
 {
     public static class StringExtensions
     {
-        public static LocalTime ToLocalTime(this string time)
+        public static LocalDateTime ToLocalDateTime(this string time)
         {
             var parts = time.Split(':');
             parts[1] = parts[1].Split(' ')[0];
@@ -14,7 +15,8 @@ namespace BabySitter.Specs
                 hours += 12;
 
             var minutes = int.Parse(parts[1]);
-            return new LocalTime(hours, minutes);
+            return new LocalTime(hours, minutes)
+                .On(LocalDate.FromDateTime(DateTime.Now));
         }
     }
 }
