@@ -10,6 +10,6 @@
     <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\src\BabySitter.Core\BabySitter.Core.csproj" />
+    <ProjectReference Include="..\..\src\BabySitter.Cli\BabySitter.Cli.csproj" />
   </ItemGroup>
 </Project>

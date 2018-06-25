@@ -1,7 +1,7 @@
 ﻿using System;
 using NodaTime;
 
-namespace BabySitter.Specs
+namespace BabySitter.Core
 {
     public static class StringExtensions
     {
