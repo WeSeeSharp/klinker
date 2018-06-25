@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Net.Http.Headers;
 using NodaTime;
 using Xunit;
 
@@ -41,6 +42,19 @@ namespace BabySitter.Core.Test
             var calculator = new NightlyChargeCalculator();
             var chargeAmount = calculator.Calculate(parameters);
             Assert.Equal(24, chargeAmount);
+        }
+        
+        [Fact]
+        public void ShouldCalculateChargeForTimeAfterMidnight()
+        {
+            var parameters = new NightlyChargeParameters(
+                new LocalDateTime(1, 1, 1, 21, 0),
+                new LocalDateTime(1, 1, 1, 21, 0),
+                new LocalDateTime(1, 1, 2, 4, 0));
+            
+            var calculator = new NightlyChargeCalculator();
+            var chargeAmount = calculator.Calculate(parameters);
+            Assert.Equal(88, chargeAmount);
         }
     }
 }

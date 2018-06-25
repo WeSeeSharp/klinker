@@ -8,6 +8,7 @@ namespace BabySitter.Specs.Steps
         public const string ArrivalTimeKey = "ArrivalTime";
         public const string HourlyRateKey = "HourlyRate";
         public const string HourlyRateBetweenBedtimeAndMidnightKey = "HourlyRateBetweenBedtimeAndMidnight";
+        public const string HourlyRateAfterMidnightKey = "HourlyRateAfterMidnight";
         public const string BedtimeKey = "Bedtime";
         public const string ChargeAmountKey = "ChargeAmount";
 
@@ -39,6 +40,16 @@ namespace BabySitter.Specs.Steps
         public static long HourlyRateBetweenBedtimeAndMidnight(this ScenarioContext context)
         {
             return context.Get<long>(HourlyRateBetweenBedtimeAndMidnightKey);
+        }
+        
+        public static void HourlyRateAfterMidnight(this ScenarioContext context, long rate)
+        {
+            context.Set(HourlyRateAfterMidnightKey, rate);
+        }
+
+        public static long HourlyRateAfterMidnight(this ScenarioContext context)
+        {
+            return context.Get<long>(HourlyRateAfterMidnightKey);
         }
 
         public static void Bedtime(this ScenarioContext context, LocalDateTime time)

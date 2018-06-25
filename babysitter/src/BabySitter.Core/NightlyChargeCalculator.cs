@@ -12,8 +12,10 @@ namespace BabySitter.Core
 
             var normalCharge = GetNormalCharge(parameters);
             var bedtimeToMidnightCharge = GetBedtimeToMidnightCharge(parameters);
-            
-            return normalCharge + bedtimeToMidnightCharge;
+            var afterMidnightCharge = GetAfterMidnightCharge(parameters);
+            return normalCharge 
+                   + bedtimeToMidnightCharge
+                   + afterMidnightCharge;
         }
 
         private static bool IsArrivalTimeInvalid(LocalDateTime arrivalTime)
@@ -32,15 +34,30 @@ namespace BabySitter.Core
 
         private static long GetBedtimeToMidnightCharge(NightlyChargeParameters parameters)
         {
-            var midnight = parameters.ArrivalTime
-                .Date
-                .PlusDays(1)
-                .AtMidnight();
+            var midnight = GetMidnight(parameters.ArrivalTime);
 
             if (parameters.LeaveTime < midnight)
                 return 0;
 
             return (midnight - parameters.Bedtime).Hours * parameters.HourlyRateBetweenBedtimeAndMidnight;
+        }
+
+        private static long GetAfterMidnightCharge(NightlyChargeParameters parameters)
+        {
+            var midnight = GetMidnight(parameters.ArrivalTime);
+
+            if (parameters.LeaveTime < midnight)
+                return 0;
+
+            return parameters.LeaveTime.Hour * parameters.HourlyRateAfterMidnight;
+        }
+
+        private static LocalDateTime GetMidnight(LocalDateTime arrivalTime)
+        {
+            return arrivalTime
+                .Date
+                .PlusDays(1)
+                .AtMidnight();
         }
     }
 }

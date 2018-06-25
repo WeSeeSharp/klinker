@@ -32,6 +32,12 @@ namespace BabySitter.Specs.Steps
             ScenarioContext.Current.HourlyRateBetweenBedtimeAndMidnight(hourlyRate);
         }
 
+        [Given("I charge \\$(\\d*) per hour after midnight$")]
+        public void GivenIChargeAmountPerHourAfterMidnight(long hourlyRate)
+        {
+            ScenarioContext.Current.HourlyRateAfterMidnight(hourlyRate);
+        }
+        
         [When("I leave at bedtime$")]
         public void WhenILeaveAtBedtime()
         {
@@ -56,6 +62,22 @@ namespace BabySitter.Specs.Steps
                 ScenarioContext.Current.ArrivalTime(),
                 ScenarioContext.Current.Bedtime(),
                 midnight.AtMidnight(),
+                ScenarioContext.Current.HourlyRate(),
+                ScenarioContext.Current.HourlyRateBetweenBedtimeAndMidnight());
+            
+            var calculator = new NightlyChargeCalculator();
+            var chargeAmount = calculator.Calculate(parameters);
+            ScenarioContext.Current.ChargeAmount(chargeAmount);
+        }
+
+        [When("I leave at (.*) AM$")]
+        public void WhenILeaveAt(string time)
+        {
+            var leaveTime = time.ToLocalDateTime().PlusDays(1);
+            var parameters = new NightlyChargeParameters(
+                ScenarioContext.Current.ArrivalTime(),
+                ScenarioContext.Current.Bedtime(),
+                leaveTime,
                 ScenarioContext.Current.HourlyRate(),
                 ScenarioContext.Current.HourlyRateBetweenBedtimeAndMidnight());
             
