@@ -12,13 +12,10 @@ namespace BabySitter.Core
 
             if (IsLeaveTimeInvalid(parameters.ArrivalTime, parameters.LeaveTime))
                 throw new InvalidOperationException();
-            
-            var normalCharge = GetNormalCharge(parameters);
-            var bedtimeToMidnightCharge = GetBedtimeToMidnightCharge(parameters);
-            var afterMidnightCharge = GetAfterMidnightCharge(parameters);
-            return normalCharge 
-                   + bedtimeToMidnightCharge
-                   + afterMidnightCharge;
+
+            return GetNormalCharge(parameters)
+                   + GetBedtimeToMidnightCharge(parameters)
+                   + GetAfterMidnightCharge(parameters);
         }
 
         private static bool IsLeaveTimeInvalid(LocalDateTime arrivalTime, LocalDateTime leaveTime)
@@ -38,22 +35,21 @@ namespace BabySitter.Core
             var hours = parameters.LeaveTime < parameters.Bedtime
                 ? (parameters.LeaveTime - parameters.ArrivalTime).Hours
                 : (parameters.Bedtime - parameters.ArrivalTime).Hours;
-            
+
             return hours * parameters.HourlyRate;
         }
 
         private static long GetBedtimeToMidnightCharge(NightlyChargeParameters parameters)
         {
             var midnight = GetMidnight(parameters.ArrivalTime);
-            var leaveTime = parameters.LeaveTime;
-            var bedTime = parameters.Bedtime;
 
             long hours = 0;
-            if (leaveTime > midnight)
-                hours = (midnight - bedTime).Hours;
-            else if (leaveTime > bedTime)
-                hours = (leaveTime - bedTime).Hours;
-            
+            if (parameters.LeaveTime > midnight)
+                hours = (midnight - parameters.Bedtime).Hours;
+
+            else if (parameters.LeaveTime > parameters.Bedtime)
+                hours = (parameters.LeaveTime - parameters.Bedtime).Hours;
+
             return hours * parameters.HourlyRateBetweenBedtimeAndMidnight;
         }
 

@@ -1,5 +1,4 @@
-﻿using System.Runtime.InteropServices.ComTypes;
-using BabySitter.Core;
+﻿using BabySitter.Core;
 using BabySitter.Specs.Support.Scenarios;
 using BabySitter.Specs.Support.Steps;
 using NodaTime;
@@ -38,12 +37,12 @@ namespace BabySitter.Specs.Steps
         {
             ScenarioContext.Current.HourlyRateAfterMidnight(hourlyRate);
         }
-        
+
         [When("I leave at bedtime$")]
         public void WhenILeaveAtBedtime()
         {
             var parameters = CreateParameters(ScenarioContext.Current.Bedtime());
-            
+
             var calculator = new NightlyChargeCalculator();
             var chargeAmount = calculator.Calculate(parameters);
             ScenarioContext.Current.ChargeAmount(chargeAmount);
@@ -56,7 +55,7 @@ namespace BabySitter.Specs.Steps
                 .PlusDays(1)
                 .Date;
             var parameters = CreateParameters(midnight.AtMidnight());
-            
+
             var calculator = new NightlyChargeCalculator();
             var chargeAmount = calculator.Calculate(parameters);
             ScenarioContext.Current.ChargeAmount(chargeAmount);
@@ -67,9 +66,9 @@ namespace BabySitter.Specs.Steps
         {
             var leaveTime = $"{time} {amOrPm}".ToLocalDateTime();
             leaveTime = amOrPm == "AM" ? leaveTime.PlusDays(1) : leaveTime;
-            
+
             var parameters = CreateParameters(leaveTime);
-            
+
             var calculator = new NightlyChargeCalculator();
             var chargeAmount = calculator.Calculate(parameters);
             ScenarioContext.Current.ChargeAmount(chargeAmount);

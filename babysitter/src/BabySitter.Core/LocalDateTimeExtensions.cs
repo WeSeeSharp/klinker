@@ -7,7 +7,7 @@ namespace BabySitter.Core
         Up,
         Down
     }
-    
+
     public static class LocalDateTimeExtensions
     {
         public static LocalDateTime ToNearestHour(this LocalDateTime dateTime, RoundingDirection direction)

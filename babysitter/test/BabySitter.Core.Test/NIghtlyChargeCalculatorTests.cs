@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Net.Http.Headers;
 using NodaTime;
 using Xunit;
 
@@ -7,69 +6,35 @@ namespace BabySitter.Core.Test
 {
     public class NIghtlyChargeCalculatorTests
     {
-        private NightlyChargeCalculator _calculator;
-
         public NIghtlyChargeCalculatorTests()
         {
             _calculator = new NightlyChargeCalculator();
         }
-        
+
+        private readonly NightlyChargeCalculator _calculator;
+
         [Fact]
-        public void ShouldCalculateChargeForThreeHoursAtNormalRate()
+        public void ShouldCalculateChargeForFullHourOfArrival()
         {
             var parameters = new NightlyChargeParameters(
-                new LocalDateTime(1, 1, 1, 17, 0),
-                new LocalDateTime(1, 1, 1, 23, 0),
-                new LocalDateTime(1, 1, 1, 20, 0));
+                new LocalDateTime(1, 1, 1, 17, 45),
+                new LocalDateTime(1, 1, 1, 21, 0),
+                new LocalDateTime(1, 1, 1, 19, 45));
 
             var chargeAmount = _calculator.Calculate(parameters);
             Assert.Equal(36, chargeAmount);
         }
 
         [Fact]
-        public void ShouldThrowInvalidOperationWhenArrivalIsBefore1700Hours()
+        public void ShouldCalculateChargeForFullHourOfBedtime()
         {
             var parameters = new NightlyChargeParameters(
-                new LocalDateTime(1, 1, 1, 16, 59),
-                new LocalDateTime(1, 1, 1, 0, 0),
-                new LocalDateTime(1, 1, 1, 0, 0));
-            
-            Assert.Throws<InvalidOperationException>(() => _calculator.Calculate(parameters));
-        }
+                new LocalDateTime(1, 1, 1, 17, 45),
+                new LocalDateTime(1, 1, 1, 21, 30),
+                new LocalDateTime(1, 1, 1, 22, 45));
 
-        [Fact]
-        public void ShouldThrowInvalidOperationWhenLeavetimeIsAfter400Hours()
-        {
-            var parameters = new NightlyChargeParameters(
-                new LocalDateTime(1, 1, 1, 17, 0, 0),
-                new LocalDateTime(1, 1, 1, 9, 0, 0),
-                new LocalDateTime(1, 1, 2, 4, 1, 0));
-            
-            Assert.Throws<InvalidOperationException>(() => _calculator.Calculate(parameters));
-        }
-
-        [Fact]
-        public void ShouldCalculateChargeForTimeBetweenBedtimeAndMidnight()
-        {
-            var parameters = new NightlyChargeParameters(
-                new LocalDateTime(1, 1, 1, 21, 0),
-                new LocalDateTime(1, 1, 1, 21, 0),
-                new LocalDateTime(1, 1, 2, 0, 0));
-            
             var chargeAmount = _calculator.Calculate(parameters);
-            Assert.Equal(24, chargeAmount);
-        }
-        
-        [Fact]
-        public void ShouldCalculateChargeForTimeAfterMidnight()
-        {
-            var parameters = new NightlyChargeParameters(
-                new LocalDateTime(1, 1, 1, 21, 0),
-                new LocalDateTime(1, 1, 1, 21, 0),
-                new LocalDateTime(1, 1, 2, 4, 0));
-            
-            var chargeAmount = _calculator.Calculate(parameters);
-            Assert.Equal(88, chargeAmount);
+            Assert.Equal(68, chargeAmount);
         }
 
         [Fact]
@@ -83,29 +48,63 @@ namespace BabySitter.Core.Test
             var chargeAmount = _calculator.Calculate(parameters);
             Assert.Equal(36, chargeAmount);
         }
-        
+
         [Fact]
-        public void ShouldCalculateChargeForFullHourOfArrival()
+        public void ShouldCalculateChargeForThreeHoursAtNormalRate()
         {
             var parameters = new NightlyChargeParameters(
-                new LocalDateTime(1, 1, 1, 17, 45),
-                new LocalDateTime(1, 1, 1, 21, 0),
-                new LocalDateTime(1, 1, 1, 19, 45));
+                new LocalDateTime(1, 1, 1, 17, 0),
+                new LocalDateTime(1, 1, 1, 23, 0),
+                new LocalDateTime(1, 1, 1, 20, 0));
 
             var chargeAmount = _calculator.Calculate(parameters);
             Assert.Equal(36, chargeAmount);
         }
-        
+
         [Fact]
-        public void ShouldCalculateChargeForFullHourOfBedtime()
+        public void ShouldCalculateChargeForTimeAfterMidnight()
         {
             var parameters = new NightlyChargeParameters(
-                new LocalDateTime(1, 1, 1, 17, 45),
-                new LocalDateTime(1, 1, 1, 21, 30),
-                new LocalDateTime(1, 1, 1, 22, 45));
+                new LocalDateTime(1, 1, 1, 21, 0),
+                new LocalDateTime(1, 1, 1, 21, 0),
+                new LocalDateTime(1, 1, 2, 4, 0));
 
             var chargeAmount = _calculator.Calculate(parameters);
-            Assert.Equal(68, chargeAmount);
+            Assert.Equal(88, chargeAmount);
+        }
+
+        [Fact]
+        public void ShouldCalculateChargeForTimeBetweenBedtimeAndMidnight()
+        {
+            var parameters = new NightlyChargeParameters(
+                new LocalDateTime(1, 1, 1, 21, 0),
+                new LocalDateTime(1, 1, 1, 21, 0),
+                new LocalDateTime(1, 1, 2, 0, 0));
+
+            var chargeAmount = _calculator.Calculate(parameters);
+            Assert.Equal(24, chargeAmount);
+        }
+
+        [Fact]
+        public void ShouldThrowInvalidOperationWhenArrivalIsBefore1700Hours()
+        {
+            var parameters = new NightlyChargeParameters(
+                new LocalDateTime(1, 1, 1, 16, 59),
+                new LocalDateTime(1, 1, 1, 0, 0),
+                new LocalDateTime(1, 1, 1, 0, 0));
+
+            Assert.Throws<InvalidOperationException>(() => _calculator.Calculate(parameters));
+        }
+
+        [Fact]
+        public void ShouldThrowInvalidOperationWhenLeavetimeIsAfter400Hours()
+        {
+            var parameters = new NightlyChargeParameters(
+                new LocalDateTime(1, 1, 1, 17, 0, 0),
+                new LocalDateTime(1, 1, 1, 9, 0, 0),
+                new LocalDateTime(1, 1, 2, 4, 1, 0));
+
+            Assert.Throws<InvalidOperationException>(() => _calculator.Calculate(parameters));
         }
     }
 }
