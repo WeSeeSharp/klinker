@@ -10,15 +10,15 @@ namespace BabySitter.Web.BabySitters
     [Route("[controller]")]
     public class BabySittersController : Controller
     {
-        private readonly IQueryHandler<GetAllBabySittersArgs, BabySitterModel[]> _getAllQuery;
-        private readonly IQueryHandler<GetBabySitterByIdArgs, BabySitterModel> _getByIdQuery;
-        private readonly ICommandWithResult<AddBabySitterArgs, BabySitterModel> _addBabySitterCommand;
+        private readonly IQueryHandler<GetAllBabySittersArgs, SitterModel[]> _getAllQuery;
+        private readonly IQueryHandler<GetBabySitterByIdArgs, SitterModel> _getByIdQuery;
+        private readonly ICommandWithResult<AddBabySitterArgs, SitterModel> _addBabySitterCommand;
         private readonly NightlyChargeCalculator _calculator;
 
         public BabySittersController(
-            IQueryHandler<GetAllBabySittersArgs, BabySitterModel[]> getAllQuery,
-            IQueryHandler<GetBabySitterByIdArgs, BabySitterModel> getByIdQuery,
-            ICommandWithResult<AddBabySitterArgs, BabySitterModel> addBabySitterCommand,
+            IQueryHandler<GetAllBabySittersArgs, SitterModel[]> getAllQuery,
+            IQueryHandler<GetBabySitterByIdArgs, SitterModel> getByIdQuery,
+            ICommandWithResult<AddBabySitterArgs, SitterModel> addBabySitterCommand,
             NightlyChargeCalculator calculator)
         {
             _getAllQuery = getAllQuery;
@@ -38,7 +38,6 @@ namespace BabySitter.Web.BabySitters
         public async Task<IActionResult> GetById(int id)
         {
             var model = await _getByIdQuery.Execute(new GetBabySitterByIdArgs(id));
-
             return Ok(model);
         }
 

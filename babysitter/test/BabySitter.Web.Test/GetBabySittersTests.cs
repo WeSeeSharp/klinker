@@ -25,7 +25,7 @@ namespace BabySitter.Web.Test
             
             using (var client = _fixture.CreateClient())
             {
-                var babySitters = await client.GetJsonAsync<BabySitterModel[]>("babysitters");
+                var babySitters = await client.GetJsonAsync<SitterModel[]>("babysitters");
                 Assert.Equal(3, babySitters.Length);
             }
         }
@@ -38,7 +38,7 @@ namespace BabySitter.Web.Test
 
             using (var client = _fixture.CreateClient())
             {
-                var babySitters = await client.GetJsonAsync<BabySitterModel[]>("babysitters");
+                var babySitters = await client.GetJsonAsync<SitterModel[]>("babysitters");
                 var actual = babySitters[0];
                 Assert.Equal(babySitter.FirstName, actual.FirstName);
                 Assert.Equal(babySitter.LastName, actual.LastName);

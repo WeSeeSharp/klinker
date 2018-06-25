@@ -15,9 +15,9 @@ namespace BabySitter.Core
         {
             services.AddDbContext<BabySitterContext>(options);
             services.AddTransient<NightlyChargeCalculator>();
-            services.AddTransient<IQueryHandler<GetAllBabySittersArgs, BabySitterModel[]>, GetAllBabySittersQuery>();
-            services.AddTransient<IQueryHandler<GetBabySitterByIdArgs, BabySitterModel>, GetBabySitterByIdQuery>();
-            services.AddTransient<ICommandWithResult<AddBabySitterArgs, BabySitterModel>, AddBabySitterCommand>();
+            services.AddTransient<IQueryHandler<GetAllBabySittersArgs, SitterModel[]>, GetAllBabySittersQuery>();
+            services.AddTransient<IQueryHandler<GetBabySitterByIdArgs, SitterModel>, GetBabySitterByIdQuery>();
+            services.AddTransient<ICommandWithResult<AddBabySitterArgs, SitterModel>, AddBabySitterCommand>();
             return services;
         }
     }

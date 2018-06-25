@@ -11,7 +11,7 @@ namespace BabySitter.Core.Queries
         
     }
     
-    public class GetAllBabySittersQuery : IQueryHandler<GetAllBabySittersArgs, BabySitterModel[]>
+    public class GetAllBabySittersQuery : IQueryHandler<GetAllBabySittersArgs, SitterModel[]>
     {
         private readonly BabySitterContext _context;
 
@@ -20,10 +20,10 @@ namespace BabySitter.Core.Queries
             _context = context;
         }
 
-        public async Task<BabySitterModel[]> Execute(GetAllBabySittersArgs args)
+        public async Task<SitterModel[]> Execute(GetAllBabySittersArgs args)
         {
             return await _context.BabySitters
-                .Select(Entities.BabySitter.ToModelExpression())
+                .Select(Entities.Sitter.ToModelExpression())
                 .ToArrayAsync();
         }
     }
