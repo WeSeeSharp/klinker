@@ -87,5 +87,19 @@ namespace BabySitter.Cli.Test
             
             Assert.Equal(2, _output.Messages.Count(m => m == "Total: $48"));
         }
+        
+        [Fact]
+        public void ShouldAdjustDateForTimesOnOrAfterMidnight()
+        {
+            _input.Clear();
+            _input.EnterLine("5:00 PM");
+            _input.EnterLine("12:00 AM");
+            _input.EnterLine("9:00 PM");
+            _input.EnterLine("N");
+            
+            _program.Execute();
+
+            Assert.Contains("Total: $72", _output.Messages);
+        }
     }
 }

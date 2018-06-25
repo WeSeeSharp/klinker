@@ -51,7 +51,10 @@ namespace BabySitter.Cli
             var startTime = _input.ReadLine().ToLocalDateTime();
             
             _output.WriteLine("Please enter leave time:");
-            var leaveTime = _input.ReadLine().ToLocalDateTime();
+            var leaveTimeText = _input.ReadLine();
+            var leaveTime = leaveTimeText.ToLowerInvariant().Contains("am")
+                ? leaveTimeText.ToLocalDateTime().PlusDays(1)
+                : leaveTimeText.ToLocalDateTime();
             
             _output.WriteLine("Please enter bedtime:");
             var bedTime = _input.ReadLine().ToLocalDateTime();

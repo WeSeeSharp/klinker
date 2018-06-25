@@ -21,5 +21,10 @@ namespace BabySitter.Cli.Test.Fakes
         {
             _lines.Enqueue(line);
         }
+
+        public void Clear()
+        {
+            _lines.Clear();
+        }
     }
 }

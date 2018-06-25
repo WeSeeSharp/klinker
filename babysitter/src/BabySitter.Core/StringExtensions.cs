@@ -13,10 +13,12 @@ namespace BabySitter.Core
             var hours = int.Parse(parts[0]);
             if (time.ToLowerInvariant().Contains("pm"))
                 hours += 12;
+            else if (hours == 12)
+                hours = 0;
 
             var minutes = int.Parse(parts[1]);
             return new LocalTime(hours, minutes)
-                .On(LocalDate.FromDateTime(DateTime.Now));
+                .On(LocalDate.FromDateTime(DateTime.Today));
         }
     }
 }
