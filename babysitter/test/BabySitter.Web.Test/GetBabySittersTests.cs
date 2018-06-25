@@ -6,11 +6,11 @@ using Xunit;
 namespace BabySitter.Web.Test
 {
     [Collection(ServerFixtureCollection.Name)]
-    public class GetBabySitters
+    public class GetBabySittersTests
     {
         private readonly ServerFixture _fixture;
 
-        public GetBabySitters(ServerFixture fixture)
+        public GetBabySittersTests(ServerFixture fixture)
         {
             _fixture = fixture;
             _fixture.ClearDatabase();

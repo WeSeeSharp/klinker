@@ -1,4 +1,5 @@
-﻿using System.Net.Http;
+﻿using System;
+using System.Net.Http;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -22,6 +23,11 @@ namespace BabySitter.Web.Test.General
         {
             var json = await client.GetStringAsync(url);
             return JsonConvert.DeserializeObject<T>(json, SerializerSettings);
+        }
+
+        public static async Task<T> GetJsonAsync<T>(this HttpClient client, Uri uri)
+        {
+            return await client.GetJsonAsync<T>(uri.ToString());
         }
     }
 }

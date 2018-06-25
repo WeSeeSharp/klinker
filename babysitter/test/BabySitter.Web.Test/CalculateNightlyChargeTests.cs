@@ -1,4 +1,5 @@
 ﻿using System.Net;
+using System.Net.Http;
 using System.Threading.Tasks;
 using BabySitter.Core;
 using BabySitter.Web.Test.General;
@@ -8,11 +9,11 @@ using Xunit;
 namespace BabySitter.Web.Test
 {
     [Collection(ServerFixtureCollection.Name)]
-    public class CalculateNightlyCharge
+    public class CalculateNightlyChargeTests
     {
         private readonly ServerFixture _fixture;
 
-        public CalculateNightlyCharge(ServerFixture fixture)
+        public CalculateNightlyChargeTests(ServerFixture fixture)
         {
             _fixture = fixture;
         }
