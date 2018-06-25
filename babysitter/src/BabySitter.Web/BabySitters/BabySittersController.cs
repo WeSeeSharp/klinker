@@ -1,60 +1,52 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using BabySitter.Core;
-using BabySitter.Web.BabySitters.Models;
-using BabySitter.Web.Storage;
+using BabySitter.Core.Commands;
+using BabySitter.Core.Models;
+using BabySitter.Core.Queries;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace BabySitter.Web.BabySitters
 {
     [Route("[controller]")]
     public class BabySittersController : Controller
     {
+        private readonly IQueryHandler<GetAllBabySittersArgs, BabySitterModel[]> _getAllQuery;
+        private readonly IQueryHandler<GetBabySitterByIdArgs, BabySitterModel> _getByIdQuery;
+        private readonly ICommandWithResult<AddBabySitterArgs, BabySitterModel> _addBabySitterCommand;
         private readonly NightlyChargeCalculator _calculator;
-        private readonly BabySitterContext _context;
 
-        public BabySittersController(NightlyChargeCalculator calculator, BabySitterContext context)
+        public BabySittersController(
+            IQueryHandler<GetAllBabySittersArgs, BabySitterModel[]> getAllQuery,
+            IQueryHandler<GetBabySitterByIdArgs, BabySitterModel> getByIdQuery,
+            ICommandWithResult<AddBabySitterArgs, BabySitterModel> addBabySitterCommand,
+            NightlyChargeCalculator calculator)
         {
+            _getAllQuery = getAllQuery;
+            _getByIdQuery = getByIdQuery;
+            _addBabySitterCommand = addBabySitterCommand;
             _calculator = calculator;
-            _context = context;
         }
 
         [HttpGet(Name = "GetAllBabySitters")]
         public async Task<IActionResult> GetAll()
         {
-            var items = await _context.BabySitters
-                .Select(b => new BabySitterItemModel
-                {
-                    FirstName = b.FirstName,
-                    LastName = b.LastName,
-                    Id = b.Id
-                }).ToArrayAsync();
-            
+            var items = await _getAllQuery.Execute(new GetAllBabySittersArgs());
             return Ok(items);
         }
 
         [HttpGet("{id:int}", Name = "GetBabySitterById")]
         public async Task<IActionResult> GetById(int id)
         {
-            var model = await _context.BabySitters
-                .Where(b => b.Id == id)
-                .Select(b => new BabySitterModel
-                {
-                    FirstName = b.FirstName,
-                    LastName = b.LastName
-                }).SingleAsync();
+            var model = await _getByIdQuery.Execute(new GetBabySitterByIdArgs(id));
 
             return Ok(model);
         }
 
         [HttpPost]
-        public async Task<IActionResult> AddBabySitter([FromBody] AddBabySitterModel model)
+        public async Task<IActionResult> AddBabySitter([FromBody] AddBabySitterArgs args)
         {
-            var babySitter = new Entities.BabySitter {FirstName = model.FirstName, LastName = model.LastName};
-            _context.Add(babySitter);
-            await _context.SaveChangesAsync();
-            return CreatedAtRoute("GetBabySitterById", new {id = babySitter.Id}, babySitter);
+            var model = await _addBabySitterCommand.Execute(args);
+            return CreatedAtRoute("GetBabySitterById", new {id = model.Id}, model);
         }
 
         [HttpPost("nightlyCharge")]

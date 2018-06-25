@@ -1,5 +1,5 @@
 ﻿using System.Threading.Tasks;
-using BabySitter.Web.BabySitters.Models;
+using BabySitter.Core.Models;
 using BabySitter.Web.Test.General;
 using Xunit;
 

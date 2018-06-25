@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 
-namespace BabySitter.Web.Storage
+namespace BabySitter.Core.Storage
 {
     public class BabySitterContext : DbContext
     {
-        public DbSet<BabySitters.Entities.BabySitter> BabySitters { get; set; }
+        public DbSet<Entities.BabySitter> BabySitters { get; set; }
         
         public BabySitterContext(DbContextOptions<BabySitterContext> options)
             : base(options)

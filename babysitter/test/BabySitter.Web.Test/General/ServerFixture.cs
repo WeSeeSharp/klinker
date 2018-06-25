@@ -2,7 +2,7 @@
 using System.IO;
 using System.Linq;
 using System.Net.Http;
-using BabySitter.Web.Storage;
+using BabySitter.Core.Storage;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;

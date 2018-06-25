@@ -1,5 +1,5 @@
 ﻿using BabySitter.Core;
-using BabySitter.Web.Storage;
+using BabySitter.Core.Storage;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -25,8 +25,7 @@ namespace BabySitter.Web
             services.AddMvc()
                 .AddJsonOptions(o => o.SerializerSettings.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb));
 
-            services.AddDbContext<BabySitterContext>(o =>
-                o.UseNpgsql(_configuration.GetConnectionString("BabySitterDb")));
+            services.AddBabySitterServices(o => o.UseNpgsql(_configuration.GetConnectionString("BabySitterDb")));
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
