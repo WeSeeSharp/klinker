@@ -28,8 +28,13 @@ namespace BabySitter.Specs.Steps
         [When("I leave at bedtime")]
         public void WhenILeaveAtBedtime()
         {
+            var parameters = new NightlyChargeParameters(
+                ScenarioContext.Current.ArrivalTime(),
+                ScenarioContext.Current.Bedtime(),
+                ScenarioContext.Current.Bedtime(),
+                ScenarioContext.Current.HourlyRate());
             var calculator = new NightlyChargeCalculator();
-            var chargeAmount = calculator.Calculate();
+            var chargeAmount = calculator.Calculate(parameters);
             ScenarioContext.Current.ChargeAmount(chargeAmount);
         }
 
