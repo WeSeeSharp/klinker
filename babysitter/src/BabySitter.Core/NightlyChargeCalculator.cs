@@ -5,12 +5,15 @@ namespace BabySitter.Core
 {
     public class NightlyChargeCalculator
     {
+        private const int EarliestStartTime = 17;
+        private const int MaximumNumberOfHours = 11;
+
         public long Calculate(NightlyChargeParameters parameters)
         {
-            if (IsArrivalTimeInvalid(parameters.ArrivalTime))
+            if (IsStartTimeInvalid(parameters.StartTime))
                 throw new InvalidOperationException();
 
-            if (IsLeaveTimeInvalid(parameters.ArrivalTime, parameters.LeaveTime))
+            if (IsLeaveTimeInvalid(parameters.StartTime, parameters.LeaveTime))
                 throw new InvalidOperationException();
 
             return GetNormalCharge(parameters)
@@ -21,27 +24,26 @@ namespace BabySitter.Core
         private static bool IsLeaveTimeInvalid(LocalDateTime arrivalTime, LocalDateTime leaveTime)
         {
             var totalTime = leaveTime - arrivalTime;
-            return totalTime.Hours >= 11
-                   && totalTime.Minutes >= 0;
+            return totalTime.Hours >= MaximumNumberOfHours;
         }
 
-        private static bool IsArrivalTimeInvalid(LocalDateTime arrivalTime)
+        private static bool IsStartTimeInvalid(LocalDateTime arrivalTime)
         {
-            return arrivalTime.Hour < 17;
+            return arrivalTime.Hour < EarliestStartTime;
         }
 
         private static long GetNormalCharge(NightlyChargeParameters parameters)
         {
             var hours = parameters.LeaveTime < parameters.Bedtime
-                ? (parameters.LeaveTime - parameters.ArrivalTime).Hours
-                : (parameters.Bedtime - parameters.ArrivalTime).Hours;
+                ? (parameters.LeaveTime - parameters.StartTime).Hours
+                : (parameters.Bedtime - parameters.StartTime).Hours;
 
             return hours * parameters.HourlyRate;
         }
 
         private static long GetBedtimeToMidnightCharge(NightlyChargeParameters parameters)
         {
-            var midnight = GetMidnight(parameters.ArrivalTime);
+            var midnight = GetMidnight(parameters.StartTime);
 
             long hours = 0;
             if (parameters.LeaveTime > midnight)
@@ -55,7 +57,7 @@ namespace BabySitter.Core
 
         private static long GetAfterMidnightCharge(NightlyChargeParameters parameters)
         {
-            var midnight = GetMidnight(parameters.ArrivalTime);
+            var midnight = GetMidnight(parameters.StartTime);
 
             if (parameters.LeaveTime < midnight)
                 return 0;
