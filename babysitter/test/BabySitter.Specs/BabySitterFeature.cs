@@ -21,7 +21,7 @@ namespace BabySitter.Specs
             await Given("I charge $12 per hour");
             await Given("bedtime is 9:00 PM");
             await When("I leave at bedtime");
-            await Then("I should be paid $48");
+            await Then("I should charge $48");
         }
     }
 }
