@@ -1,4 +1,4 @@
-﻿namespace BabySitter.Web.BabySitters
+﻿namespace BabySitter.Web.BabySitters.Models
 {
     public class TotalModel
     {

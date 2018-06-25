@@ -2,7 +2,7 @@
 using System.Threading.Tasks;
 using Newtonsoft.Json;
 
-namespace BabySitter.Web.Test
+namespace BabySitter.Web.Test.General
 {
     public static class HttpResponseMessageExtensions
     {

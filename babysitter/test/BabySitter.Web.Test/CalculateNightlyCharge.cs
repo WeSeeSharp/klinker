@@ -27,7 +27,7 @@ namespace BabySitter.Web.Test
                     "9:00 PM".ToLocalDateTime(),
                     "12:00 AM".ToLocalDateTime().PlusDays(1));
 
-                var response = await client.PostJsonAsync("nightlyCharge", parameters);
+                var response = await client.PostJsonAsync("babySitters/nightlyCharge", parameters);
                 var data = await response.ReadAsJsonAsync<JObject>();
                 Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 Assert.Equal(72, data.Value<long>("total"));

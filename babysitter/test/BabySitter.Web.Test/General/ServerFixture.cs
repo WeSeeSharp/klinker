@@ -1,9 +1,13 @@
 ﻿using System;
 using System.IO;
+using System.Linq;
 using System.Net.Http;
+using BabySitter.Web.Storage;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace BabySitter.Web.Test.General
 {
@@ -15,7 +19,6 @@ namespace BabySitter.Web.Test.General
         {
             _server = new TestServer(WebHost.CreateDefaultBuilder()
                 .UseStartup<Startup>());
-
         }
 
         public HttpClient CreateClient()
@@ -26,6 +29,29 @@ namespace BabySitter.Web.Test.General
         public void Dispose()
         {
             _server.Dispose();
+        }
+
+        public void Add<T>(T entity)
+            where T : class
+        {
+            using (var scope = _server.CreateScope())
+            using (var context = scope.GetService<BabySitterContext>())
+            {
+                context.Add(entity);
+                context.SaveChanges();
+            }
+        }
+
+        public void ClearDatabase()
+        {
+            using (var scope = _server.CreateScope())
+            using (var context = scope.GetService<BabySitterContext>())
+            {
+                context.BabySitters
+                    .ToList()
+                    .ForEach(b => context.Remove(b));
+                context.SaveChanges();
+            }
         }
     }
 }
