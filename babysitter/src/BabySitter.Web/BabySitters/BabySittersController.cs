@@ -13,18 +13,21 @@ namespace BabySitter.Web.BabySitters
         private readonly IQueryHandler<GetAllBabySittersArgs, SitterModel[]> _getAllQuery;
         private readonly IQueryHandler<GetBabySitterByIdArgs, SitterModel> _getByIdQuery;
         private readonly ICommandWithResult<AddBabySitterArgs, SitterModel> _addBabySitterCommand;
+        private readonly ICommand<UpdateBabySitterArgs> _updateBabySitterCommand;
         private readonly NightlyChargeCalculator _calculator;
 
         public BabySittersController(
             IQueryHandler<GetAllBabySittersArgs, SitterModel[]> getAllQuery,
             IQueryHandler<GetBabySitterByIdArgs, SitterModel> getByIdQuery,
             ICommandWithResult<AddBabySitterArgs, SitterModel> addBabySitterCommand,
+            ICommand<UpdateBabySitterArgs> updateBabySitterCommand,
             NightlyChargeCalculator calculator)
         {
             _getAllQuery = getAllQuery;
             _getByIdQuery = getByIdQuery;
             _addBabySitterCommand = addBabySitterCommand;
             _calculator = calculator;
+            _updateBabySitterCommand = updateBabySitterCommand;
         }
 
         [HttpGet(Name = "GetAllBabySitters")]
@@ -46,6 +49,14 @@ namespace BabySitter.Web.BabySitters
         {
             var model = await _addBabySitterCommand.Execute(args);
             return CreatedAtRoute("GetBabySitterById", new {id = model.Id}, model);
+        }
+
+        [HttpPut("{id:int}")]
+        public async Task<IActionResult> UpdateBabySitter(int id, [FromBody] UpdateBabySitterArgs args)
+        {
+            args = UpdateBabySitterArgs.WithId(id, args);
+            await _updateBabySitterCommand.Execute(args);
+            return Ok();
         }
 
         [HttpPost("nightlyCharge")]

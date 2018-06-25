@@ -31,7 +31,7 @@ namespace BabySitter.Web.Test.General
             _server.Dispose();
         }
 
-        public void Add<T>(T entity)
+        public T Add<T>(T entity)
             where T : class
         {
             using (var scope = _server.CreateScope())
@@ -39,6 +39,7 @@ namespace BabySitter.Web.Test.General
             {
                 context.Add(entity);
                 context.SaveChanges();
+                return entity;
             }
         }
 

@@ -18,6 +18,7 @@ namespace BabySitter.Core
             services.AddTransient<IQueryHandler<GetAllBabySittersArgs, SitterModel[]>, GetAllBabySittersQuery>();
             services.AddTransient<IQueryHandler<GetBabySitterByIdArgs, SitterModel>, GetBabySitterByIdQuery>();
             services.AddTransient<ICommandWithResult<AddBabySitterArgs, SitterModel>, AddBabySitterCommand>();
+            services.AddTransient<ICommand<UpdateBabySitterArgs>, UpdateBabySitterCommand>();
             return services;
         }
     }

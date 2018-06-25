@@ -19,6 +19,12 @@ namespace BabySitter.Web.Test.General
             return client.PostAsync(url, new StringContent(json, Encoding.UTF8, "application/json"));
         }
 
+        public static Task<HttpResponseMessage> PutJsonAsync<T>(this HttpClient client, string url, T body)
+        {
+            var json = JsonConvert.SerializeObject(body, SerializerSettings);
+            return client.PutAsync(url, new StringContent(json, Encoding.UTF8, "application/json"));
+        }
+
         public static async Task<T> GetJsonAsync<T>(this HttpClient client, string url)
         {
             var json = await client.GetStringAsync(url);
