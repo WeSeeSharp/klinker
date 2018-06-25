@@ -1,4 +1,5 @@
-﻿using BabySitter.Core;
+﻿using System.Runtime.InteropServices.ComTypes;
+using BabySitter.Core;
 using BabySitter.Specs.Support.Scenarios;
 using BabySitter.Specs.Support.Steps;
 using NodaTime;
@@ -41,11 +42,7 @@ namespace BabySitter.Specs.Steps
         [When("I leave at bedtime$")]
         public void WhenILeaveAtBedtime()
         {
-            var parameters = new NightlyChargeParameters(
-                ScenarioContext.Current.ArrivalTime(),
-                ScenarioContext.Current.Bedtime(),
-                ScenarioContext.Current.Bedtime(),
-                ScenarioContext.Current.HourlyRate());
+            var parameters = CreateParameters(ScenarioContext.Current.Bedtime());
             
             var calculator = new NightlyChargeCalculator();
             var chargeAmount = calculator.Calculate(parameters);
@@ -58,29 +55,20 @@ namespace BabySitter.Specs.Steps
             var midnight = ScenarioContext.Current.ArrivalTime()
                 .PlusDays(1)
                 .Date;
-            var parameters = new NightlyChargeParameters(
-                ScenarioContext.Current.ArrivalTime(),
-                ScenarioContext.Current.Bedtime(),
-                midnight.AtMidnight(),
-                ScenarioContext.Current.HourlyRate(),
-                ScenarioContext.Current.HourlyRateBetweenBedtimeAndMidnight());
+            var parameters = CreateParameters(midnight.AtMidnight());
             
             var calculator = new NightlyChargeCalculator();
             var chargeAmount = calculator.Calculate(parameters);
             ScenarioContext.Current.ChargeAmount(chargeAmount);
         }
 
-        [When("I leave at (.*) AM$")]
-        public void WhenILeaveAt(string time)
+        [When("I leave at (.*) (AM|PM)$")]
+        public void WhenILeaveAt(string time, string amOrPm)
         {
-            var leaveTime = time.ToLocalDateTime().PlusDays(1);
-            var parameters = new NightlyChargeParameters(
-                ScenarioContext.Current.ArrivalTime(),
-                ScenarioContext.Current.Bedtime(),
-                leaveTime,
-                ScenarioContext.Current.HourlyRate(),
-                ScenarioContext.Current.HourlyRateBetweenBedtimeAndMidnight(),
-                ScenarioContext.Current.HourlyRateAfterMidnight());
+            var leaveTime = $"{time} {amOrPm}".ToLocalDateTime();
+            leaveTime = amOrPm == "AM" ? leaveTime.PlusDays(1) : leaveTime;
+            
+            var parameters = CreateParameters(leaveTime);
             
             var calculator = new NightlyChargeCalculator();
             var chargeAmount = calculator.Calculate(parameters);
@@ -92,6 +80,17 @@ namespace BabySitter.Specs.Steps
         {
             var actual = ScenarioContext.Current.ChargeAmount();
             Assert.Equal(chargeAmount, actual);
+        }
+
+        private static NightlyChargeParameters CreateParameters(LocalDateTime leaveTime)
+        {
+            return new NightlyChargeParameters(
+                ScenarioContext.Current.ArrivalTime(),
+                ScenarioContext.Current.Bedtime(),
+                leaveTime,
+                ScenarioContext.Current.HourlyRate(),
+                ScenarioContext.Current.HourlyRateBetweenBedtimeAndMidnight(),
+                ScenarioContext.Current.HourlyRateAfterMidnight());
         }
     }
 }

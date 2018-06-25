@@ -1,4 +1,5 @@
-﻿using NodaTime;
+﻿using System.ComponentModel;
+using NodaTime;
 
 namespace BabySitter.Core
 {
@@ -16,9 +17,9 @@ namespace BabySitter.Core
             long hourlyRateBetweenBedtimeAndMidnight = 8,
             long hourlyRateAfterMidnight = 16)
         {
-            ArrivalTime = arrivalTime;
-            Bedtime = bedtime;
-            LeaveTime = leaveTime;
+            ArrivalTime = arrivalTime.ToNearestHour(RoundingDirection.Down);
+            Bedtime = bedtime.ToNearestHour(RoundingDirection.Up);
+            LeaveTime = leaveTime.ToNearestHour(RoundingDirection.Up);
             HourlyRate = hourlyRate;
             HourlyRateBetweenBedtimeAndMidnight = hourlyRateBetweenBedtimeAndMidnight;
             HourlyRateAfterMidnight = hourlyRateAfterMidnight;
