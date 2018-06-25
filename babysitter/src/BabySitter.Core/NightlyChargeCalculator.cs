@@ -10,12 +10,21 @@ namespace BabySitter.Core
             if (IsArrivalTimeInvalid(parameters.ArrivalTime))
                 throw new InvalidOperationException();
 
+            if (IsLeaveTimeInvalid(parameters.LeaveTime))
+                throw new InvalidOperationException();
+            
             var normalCharge = GetNormalCharge(parameters);
             var bedtimeToMidnightCharge = GetBedtimeToMidnightCharge(parameters);
             var afterMidnightCharge = GetAfterMidnightCharge(parameters);
             return normalCharge 
                    + bedtimeToMidnightCharge
                    + afterMidnightCharge;
+        }
+
+        private static bool IsLeaveTimeInvalid(LocalDateTime leaveTime)
+        {
+            return leaveTime.Hour >= 4
+                   && leaveTime.Minute > 0;
         }
 
         private static bool IsArrivalTimeInvalid(LocalDateTime arrivalTime)

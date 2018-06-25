@@ -79,7 +79,8 @@ namespace BabySitter.Specs.Steps
                 ScenarioContext.Current.Bedtime(),
                 leaveTime,
                 ScenarioContext.Current.HourlyRate(),
-                ScenarioContext.Current.HourlyRateBetweenBedtimeAndMidnight());
+                ScenarioContext.Current.HourlyRateBetweenBedtimeAndMidnight(),
+                ScenarioContext.Current.HourlyRateAfterMidnight());
             
             var calculator = new NightlyChargeCalculator();
             var chargeAmount = calculator.Calculate(parameters);

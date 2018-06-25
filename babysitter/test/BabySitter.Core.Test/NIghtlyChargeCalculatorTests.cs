@@ -32,6 +32,18 @@ namespace BabySitter.Core.Test
         }
 
         [Fact]
+        public void ShouldThrowInvalidOperationWhenLeavetimeIsAfter400Hours()
+        {
+            var parameters = new NightlyChargeParameters(
+                new LocalDateTime(1, 1, 1, 17, 0, 0),
+                new LocalDateTime(1, 1, 1, 9, 0, 0),
+                new LocalDateTime(1, 1, 2, 4, 1, 0));
+            
+            var calculator = new NightlyChargeCalculator();
+            Assert.Throws<InvalidOperationException>(() => calculator.Calculate(parameters));
+        }
+
+        [Fact]
         public void ShouldCalculateChargeForTimeBetweenBedtimeAndMidnight()
         {
             var parameters = new NightlyChargeParameters(
