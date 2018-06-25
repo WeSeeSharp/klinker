@@ -1,0 +1,27 @@
+﻿using System.Threading.Tasks;
+using BabySitter.Specs.Support.Features;
+using BabySitter.Specs.Support.Scenarios;
+using Xunit;
+using Xunit.Abstractions;
+
+namespace BabySitter.Specs
+{
+    public class BabySitterFeature : Feature
+    {
+        public BabySitterFeature(ITestOutputHelper output) 
+            : base(output)
+        {
+        }
+
+        [Fact]
+        [Scenario("Baby sitter arrives at 5:00 PM and leaves before bedtime")]
+        public async Task SimpleBabySitterSchedule()
+        {
+            await Given("I arrive at 5:00 PM");
+            await Given("I charge $12 per hour");
+            await Given("bedtime is 9:00 PM");
+            await When("I leave at bedtime");
+            await Then("I should be paid $48");
+        }
+    }
+}

@@ -1,0 +1,42 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{21282ED6-1EB6-456E-9F6E-B838392E11FF}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "test", "test", "{4FED33F8-76DC-4488-A207-33EBDEBA8C73}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".docs", ".docs", "{E31FC060-5EE7-4EE4-8E6F-B33EFE74E37A}"
+ProjectSection(SolutionItems) = preProject
+	readme.md = readme.md
+EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabySitter.Core.Test", "test\BabySitter.Core.Test\BabySitter.Core.Test.csproj", "{E494B53D-E286-45FB-B56F-76FB8F40C3DB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabySitter.Core", "src\BabySitter.Core\BabySitter.Core.csproj", "{B2A77F7E-64DF-417A-8AA2-BDEF7BCC5436}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabySitter.Specs", "test\BabySitter.Specs\BabySitter.Specs.csproj", "{13BC6B8D-3740-443B-8E79-3757D4E93BE3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{E494B53D-E286-45FB-B56F-76FB8F40C3DB} = {4FED33F8-76DC-4488-A207-33EBDEBA8C73}
+		{B2A77F7E-64DF-417A-8AA2-BDEF7BCC5436} = {21282ED6-1EB6-456E-9F6E-B838392E11FF}
+		{13BC6B8D-3740-443B-8E79-3757D4E93BE3} = {4FED33F8-76DC-4488-A207-33EBDEBA8C73}
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E494B53D-E286-45FB-B56F-76FB8F40C3DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E494B53D-E286-45FB-B56F-76FB8F40C3DB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E494B53D-E286-45FB-B56F-76FB8F40C3DB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E494B53D-E286-45FB-B56F-76FB8F40C3DB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B2A77F7E-64DF-417A-8AA2-BDEF7BCC5436}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B2A77F7E-64DF-417A-8AA2-BDEF7BCC5436}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B2A77F7E-64DF-417A-8AA2-BDEF7BCC5436}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B2A77F7E-64DF-417A-8AA2-BDEF7BCC5436}.Release|Any CPU.Build.0 = Release|Any CPU
+		{13BC6B8D-3740-443B-8E79-3757D4E93BE3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{13BC6B8D-3740-443B-8E79-3757D4E93BE3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{13BC6B8D-3740-443B-8E79-3757D4E93BE3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{13BC6B8D-3740-443B-8E79-3757D4E93BE3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal
