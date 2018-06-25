@@ -21,14 +21,14 @@ namespace BabySitter.Specs.Steps
             return context.Get<LocalTime>(ArrivalTimeKey);
         }
 
-        public static void HourlyRate(this ScenarioContext context, int rate)
+        public static void HourlyRate(this ScenarioContext context, long rate)
         {
             context.Set(HourlyRateKey, rate);
         }
 
-        public static int HourlyRate(this ScenarioContext context)
+        public static long HourlyRate(this ScenarioContext context)
         {
-            return context.Get<int>(HourlyRateKey);
+            return context.Get<long>(HourlyRateKey);
         }
 
         public static void Bedtime(this ScenarioContext context, LocalTime time)
@@ -41,14 +41,14 @@ namespace BabySitter.Specs.Steps
             return context.Get<LocalTime>(BedtimeKey);
         }
 
-        public static void ChargeAmount(this ScenarioContext context, int chargeAmount)
+        public static void ChargeAmount(this ScenarioContext context, long chargeAmount)
         {
             context.Set(ChargeAmountKey, chargeAmount);
         }
         
-        public static int ChargeAmount(this ScenarioContext context)
+        public static long ChargeAmount(this ScenarioContext context)
         {
-            return context.Get<int>(ChargeAmountKey);
+            return context.Get<long>(ChargeAmountKey);
         }
     }
 }

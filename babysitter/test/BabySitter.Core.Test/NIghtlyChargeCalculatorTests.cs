@@ -17,5 +17,19 @@ namespace BabySitter.Core.Test
             var calculator = new NightlyChargeCalculator();
             Assert.Throws<InvalidOperationException>(() => calculator.Calculate(parameters));
         }
+        
+        [Fact]
+        public void ShouldCalculateChargeForThreeHoursAtNormalRate()
+        {
+            var parameters = new NightlyChargeParameters(
+                new LocalTime(17, 0),
+                new LocalTime(23, 0),
+                new LocalTime(20, 0),
+                12);
+            
+            var calculator = new NightlyChargeCalculator();
+            var chargeAmount = calculator.Calculate(parameters);
+            Assert.Equal(36, chargeAmount);
+        }
     }
 }

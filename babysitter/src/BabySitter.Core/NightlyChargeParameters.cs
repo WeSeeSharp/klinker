@@ -7,9 +7,9 @@ namespace BabySitter.Core
         public LocalTime ArrivalTime { get; }
         public LocalTime Bedtime { get; }
         public LocalTime LeaveTime { get; }
-        public int HourlyRate { get; }
+        public long HourlyRate { get; }
 
-        public NightlyChargeParameters(LocalTime arrivalTime, LocalTime bedtime, LocalTime leaveTime, int hourlyRate)
+        public NightlyChargeParameters(LocalTime arrivalTime, LocalTime bedtime, LocalTime leaveTime, long hourlyRate)
         {
             ArrivalTime = arrivalTime;
             Bedtime = bedtime;

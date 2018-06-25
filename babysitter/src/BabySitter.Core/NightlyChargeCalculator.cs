@@ -5,11 +5,13 @@ namespace BabySitter.Core
 {
     public class NightlyChargeCalculator
     {
-        public int Calculate(NightlyChargeParameters parameters)
+        public long Calculate(NightlyChargeParameters parameters)
         {
             if (IsArrivalTimeInvalid(parameters.ArrivalTime))
                 throw new InvalidOperationException();
-            throw new System.NotImplementedException();
+
+            var hours = parameters.LeaveTime - parameters.ArrivalTime;
+            return hours.Hours * parameters.HourlyRate;
         }
 
         private bool IsArrivalTimeInvalid(LocalTime arrivalTime)

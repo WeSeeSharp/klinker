@@ -14,7 +14,7 @@ namespace BabySitter.Specs.Steps
         }
 
         [Given("I charge \\$(\\d*) per hour")]
-        public void GivenICharge(int hourlyRate)
+        public void GivenICharge(long hourlyRate)
         {
             ScenarioContext.Current.HourlyRate(hourlyRate);
         }
@@ -39,7 +39,7 @@ namespace BabySitter.Specs.Steps
         }
 
         [Then("I should charge \\$(\\d*)")]
-        public void ThenIShouldBePaid(int chargeAmount)
+        public void ThenIShouldBePaid(long chargeAmount)
         {
             var actual = ScenarioContext.Current.ChargeAmount();
             Assert.Equal(chargeAmount, actual);
