@@ -12,22 +12,30 @@ namespace BabySitter.Web.BabySitters
     {
         private readonly IQueryHandler<GetAllBabySittersArgs, SitterModel[]> _getAllQuery;
         private readonly IQueryHandler<GetBabySitterByIdArgs, SitterModel> _getByIdQuery;
+        private readonly IQueryHandler<GetBabySitterShiftByIdArgs, ShiftModel> _getShiftByIdQuery;
         private readonly ICommandWithResult<AddBabySitterArgs, SitterModel> _addBabySitterCommand;
         private readonly ICommand<UpdateBabySitterArgs> _updateBabySitterCommand;
+        private readonly ICommand<EndShiftArgs> _endShiftCommand;
+        private readonly ICommandWithResult<StartShiftArgs, ShiftModel> _startShiftCommand;
         private readonly NightlyChargeCalculator _calculator;
 
-        public BabySittersController(
-            IQueryHandler<GetAllBabySittersArgs, SitterModel[]> getAllQuery,
+        public BabySittersController(IQueryHandler<GetAllBabySittersArgs, SitterModel[]> getAllQuery,
             IQueryHandler<GetBabySitterByIdArgs, SitterModel> getByIdQuery,
             ICommandWithResult<AddBabySitterArgs, SitterModel> addBabySitterCommand,
             ICommand<UpdateBabySitterArgs> updateBabySitterCommand,
+            ICommandWithResult<StartShiftArgs, ShiftModel> startShiftCommand,
+            IQueryHandler<GetBabySitterShiftByIdArgs, ShiftModel> getShiftByIdQuery,
+            ICommand<EndShiftArgs> endShiftCommand,
             NightlyChargeCalculator calculator)
         {
             _getAllQuery = getAllQuery;
             _getByIdQuery = getByIdQuery;
             _addBabySitterCommand = addBabySitterCommand;
-            _calculator = calculator;
+            _startShiftCommand = startShiftCommand;
             _updateBabySitterCommand = updateBabySitterCommand;
+            _getShiftByIdQuery = getShiftByIdQuery;
+            _endShiftCommand = endShiftCommand;
+            _calculator = calculator;
         }
 
         [HttpGet(Name = "GetAllBabySitters")]
@@ -56,7 +64,32 @@ namespace BabySitter.Web.BabySitters
         {
             args = UpdateBabySitterArgs.WithId(id, args);
             await _updateBabySitterCommand.Execute(args);
-            return Ok();
+            return NoContent();
+        }
+
+        [HttpGet("{babySitterId:int}/shifts/{shiftId:int}", Name = "GetBabySitterShift")]
+        public async Task<IActionResult> GetBabySitterShift(int babySitterId, int shiftId)
+        {
+            var args = new GetBabySitterShiftByIdArgs(babySitterId, shiftId);
+            var model = await _getShiftByIdQuery.Execute(args);
+            return Ok(model);
+        }
+
+        [HttpPost("{id:int}/startShift")]
+        public async Task<IActionResult> StartShift(int id, [FromBody] StartShiftArgs args)
+        {
+            args = StartShiftArgs.WithId(id, args);
+            var model = await _startShiftCommand.Execute(args);
+            return CreatedAtRoute("GetBabySitterShift", new {shiftId = model.Id, babySitterId = model.SitterId}, model);
+        }
+
+        [HttpPut("{babySitterId:int}/shifts/{shiftId:int}/endShift")]
+        public async Task<IActionResult> EndShift(int babySitterId, int shiftId, [FromBody] EndShiftArgs args)
+        {
+            args = EndShiftArgs.WithShiftId(shiftId, args);
+            args = EndShiftArgs.WithSitterId(babySitterId, args);
+            await _endShiftCommand.Execute(args);
+            return NoContent();
         }
 
         [HttpPost("nightlyCharge")]

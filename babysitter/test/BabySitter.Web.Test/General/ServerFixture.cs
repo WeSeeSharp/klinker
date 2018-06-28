@@ -28,6 +28,7 @@ namespace BabySitter.Web.Test.General
         
         public void Dispose()
         {
+            DeleteDatabase();
             _server.Dispose();
         }
 
@@ -53,6 +54,13 @@ namespace BabySitter.Web.Test.General
                     .ForEach(b => context.Remove(b));
                 context.SaveChanges();
             }
+        }
+
+        private void DeleteDatabase()
+        {
+            using (var scope = _server.CreateScope())
+            using (var context = scope.GetService<BabySitterContext>())
+                context.Database.EnsureDeleted();
         }
     }
 }

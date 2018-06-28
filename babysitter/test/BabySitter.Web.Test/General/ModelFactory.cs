@@ -1,15 +1,17 @@
 ﻿using System;
+using BabySitter.Core.Entities;
 
 namespace BabySitter.Web.Test.General
 {
     public static class ModelFactory
     {
-        public static Core.Entities.Sitter CreateBabySitter(string firstName = null, string lastName = null)
+        public static Sitter CreateBabySitter(string firstName = null, string lastName = null)
         {
-            return new Core.Entities.Sitter
+            return new Sitter
             {
                 FirstName = firstName ?? Guid.NewGuid().ToString(),
-                LastName = lastName ?? Guid.NewGuid().ToString()
+                LastName = lastName ?? Guid.NewGuid().ToString(),
+                HourlyRates = new HourlyRates()
             };
         }
     }

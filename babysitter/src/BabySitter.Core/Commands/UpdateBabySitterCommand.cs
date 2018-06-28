@@ -55,9 +55,9 @@ namespace BabySitter.Core.Commands
             var sitter = await _context.BabySitters.SingleAsync(b => b.Id == args.Id);
             sitter.FirstName = args.FirstName;
             sitter.LastName = args.LastName;
-            sitter.HourlyRate = args.HourlyRate;
-            sitter.HourlyRateAfterMidnight = args.HourlyRateAfterMidnight;
-            sitter.HourlyRateBetweenBedtimeAndMidnight = args.HourlyRateBetweenBedtimeAndMidnight;
+            sitter.HourlyRates.Standard = args.HourlyRate;
+            sitter.HourlyRates.AfterMidnight = args.HourlyRateAfterMidnight;
+            sitter.HourlyRates.BetweenBedtimeAndMidnight = args.HourlyRateBetweenBedtimeAndMidnight;
             await _context.SaveChangesAsync();
         }
     }

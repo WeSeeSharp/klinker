@@ -26,7 +26,11 @@ namespace BabySitter.Web
                 .AddJsonOptions(o => o.SerializerSettings.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb));
 
             services.AddBabySitterServices(o => 
-                o.UseNpgsql(_configuration.GetConnectionString("BabySitterDb"), s => s.MigrationsAssembly(typeof(Startup).Assembly.GetName().Name)));
+                o.UseNpgsql(
+                    _configuration.GetConnectionString("BabySitterDb"), 
+                    s => s.MigrationsAssembly(typeof(Startup).Assembly.GetName().Name).UseNodaTime()
+                )
+            );
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

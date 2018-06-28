@@ -3,6 +3,7 @@ using System;
 using BabySitter.Core.Storage;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NodaTime;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
@@ -10,9 +11,10 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace BabySitter.Web.Migrations
 {
     [DbContext(typeof(BabySitterContext))]
-    partial class BabySitterContextModelSnapshot : ModelSnapshot
+    [Migration("20180628053324_AddEndTimeToShift")]
+    partial class AddEndTimeToShift
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

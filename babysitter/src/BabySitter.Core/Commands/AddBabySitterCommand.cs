@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using System.Data.Common;
+using System.Threading.Tasks;
 using BabySitter.Core.Entities;
 using BabySitter.Core.Models;
 using BabySitter.Core.Storage;
@@ -42,13 +43,10 @@ namespace BabySitter.Core.Commands
             {
                 FirstName = args.FirstName,
                 LastName = args.LastName,
-                HourlyRate = args.HourlyRate.GetValueOrDefault(Sitter.StandardHourlyRate),
-                
-                HourlyRateAfterMidnight =
-                    args.HourlyRateAfterMidnight.GetValueOrDefault(Sitter.StandardHourlyRateAfterMidnight),
-                
-                HourlyRateBetweenBedtimeAndMidnight =
-                    args.HourlyRateBetweenBedtimeAndMidnight.GetValueOrDefault(Sitter.StandardHourlyRateBetweenBedtimeAndMidnight),
+                HourlyRates = HourlyRates.FromRates(
+                    args.HourlyRate.GetValueOrDefault(HourlyRates.StandardHourlyRate),
+                    args.HourlyRateBetweenBedtimeAndMidnight.GetValueOrDefault(HourlyRates.StandardHourlyRateBetweenBedtimeAndMidnight),
+                    args.HourlyRateAfterMidnight.GetValueOrDefault(HourlyRates.StandardHourlyRateAfterMidnight))
             };
             _context.Add(babySitter);
             await _context.SaveChangesAsync();
