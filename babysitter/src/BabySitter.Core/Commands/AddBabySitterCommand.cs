@@ -17,8 +17,8 @@ namespace BabySitter.Core.Commands
         public AddBabySitterArgs(string firstName,
             string lastName,
             int? hourlyRate = null,
-            int? hourlyRateAfterMidnight = null,
-            int? hourlyRateBetweenBedtimeAndMidnight = null)
+            int? hourlyRateBetweenBedtimeAndMidnight = null,
+            int? hourlyRateAfterMidnight = null)
         {
             FirstName = firstName;
             LastName = lastName;

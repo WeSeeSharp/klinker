@@ -19,31 +19,23 @@ namespace BabySitter.Web.Test
         [Fact]
         public async Task ShouldGetAllBabySitters()
         {
-            _fixture.Add(ModelFactory.CreateBabySitter());
-            _fixture.Add(ModelFactory.CreateBabySitter());
-            _fixture.Add(ModelFactory.CreateBabySitter());
-            
-            using (var client = _fixture.CreateClient())
-            {
-                var babySitters = await client.GetJsonAsync<SitterModel[]>("babysitters");
-                Assert.Equal(3, babySitters.Length);
-            }
+            await _fixture.AddBabySitter("one", "two");
+            await _fixture.AddBabySitter("three", "four");
+            await _fixture.AddBabySitter("Jack", "Jill");
+
+            var babySitters = await _fixture.GetBabySitters();
+            Assert.Equal(3, babySitters.Length);
         }
         
         [Fact]
         public async Task ShouldPopulateBabySitterItems()
         {
-            var babySitter = ModelFactory.CreateBabySitter();
-            _fixture.Add(babySitter);
+            var newSitter = await _fixture.AddBabySitter("hello", "bob");
 
-            using (var client = _fixture.CreateClient())
-            {
-                var babySitters = await client.GetJsonAsync<SitterModel[]>("babysitters");
-                var actual = babySitters[0];
-                Assert.Equal(babySitter.FirstName, actual.FirstName);
-                Assert.Equal(babySitter.LastName, actual.LastName);
-                Assert.Equal(babySitter.Id, actual.Id);
-            }
+            var actual = (await _fixture.GetBabySitters())[0];
+            Assert.Equal("hello", actual.FirstName);
+            Assert.Equal("bob", actual.LastName);
+            Assert.Equal(newSitter.Id, actual.Id);
         }
     }
 }

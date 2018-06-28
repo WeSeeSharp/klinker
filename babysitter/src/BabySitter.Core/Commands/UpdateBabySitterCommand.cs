@@ -13,13 +13,12 @@ namespace BabySitter.Core.Commands
         public int HourlyRateAfterMidnight { get; }
         public int HourlyRateBetweenBedtimeAndMidnight { get; }
 
-        public UpdateBabySitterArgs(
-            int id, 
-            string firstName, 
-            string lastName, 
+        public UpdateBabySitterArgs(int id,
+            string firstName,
+            string lastName,
             int hourlyRate,
-            int hourlyRateAfterMidnight, 
-            int hourlyRateBetweenBedtimeAndMidnight)
+            int hourlyRateBetweenBedtimeAndMidnight,
+            int hourlyRateAfterMidnight)
         {
             Id = id;
             FirstName = firstName;
@@ -36,8 +35,7 @@ namespace BabySitter.Core.Commands
                 args.FirstName,
                 args.LastName,
                 args.HourlyRate,
-                args.HourlyRateAfterMidnight,
-                args.HourlyRateBetweenBedtimeAndMidnight);
+                args.HourlyRateBetweenBedtimeAndMidnight, args.HourlyRateAfterMidnight);
         }
     }
 

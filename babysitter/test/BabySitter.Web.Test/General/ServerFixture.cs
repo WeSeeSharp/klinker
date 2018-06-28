@@ -1,13 +1,14 @@
 ﻿using System;
-using System.IO;
 using System.Linq;
 using System.Net.Http;
+using System.Threading.Tasks;
+using BabySitter.Core.Commands;
+using BabySitter.Core.Models;
 using BabySitter.Core.Storage;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
+using NodaTime;
 
 namespace BabySitter.Web.Test.General
 {
@@ -32,26 +33,90 @@ namespace BabySitter.Web.Test.General
             _server.Dispose();
         }
 
-        public T Add<T>(T entity)
-            where T : class
+        public async Task<SitterModel> AddBabySitter(
+            string firstName, 
+            string lastName, 
+            int? hourlyRate = null,
+            int? hourlyRateBetweenBedtimeAndMidnight = null, 
+            int? hourlyRateAfterMidnight = null)
         {
-            using (var scope = _server.CreateScope())
-            using (var context = scope.GetService<BabySitterContext>())
+            var addArgs = new AddBabySitterArgs(
+                firstName, 
+                lastName, 
+                hourlyRate, 
+                hourlyRateBetweenBedtimeAndMidnight,
+                hourlyRateAfterMidnight);
+            
+            using (var client = CreateClient())
             {
-                context.Add(entity);
-                context.SaveChanges();
-                return entity;
+                var response = await client.PostJsonAsync("babysitters", addArgs);
+                return await client.GetJsonAsync<SitterModel>(response.Headers.Location);
             }
         }
 
+        public async Task UpdateBabySitter(int sitterId, string firstName,
+            string lastName,
+            int hourlyRate,
+            int hourlyRateBetweenBedtimeAndMidnight,
+            int hourlyRateAfterMidnight)
+        {
+            var updateArgs = new UpdateBabySitterArgs(sitterId, firstName, lastName, hourlyRate, hourlyRateBetweenBedtimeAndMidnight, hourlyRateAfterMidnight);
+            using (var client = CreateClient())
+            {
+                await client.PutJsonAsync($"babysitters/{sitterId}", updateArgs);
+            }
+        }
+        
+        public async Task<SitterModel[]> GetBabySitters()
+        {
+            using (var client = CreateClient())
+            {
+                return await client.GetJsonAsync<SitterModel[]>("babysitters");
+            }
+        }
+        
+        public async Task<SitterModel> GetBabySitter(int id)
+        {
+            using (var client = CreateClient())
+            {
+                return await client.GetJsonAsync<SitterModel>($"babysitters/{id}");
+            }
+        }
+        
+        public async Task<ShiftModel> GetBabySitterShift(int sitterId, int shiftId)
+        {
+            using (var client = CreateClient())
+            {
+                return await client.GetJsonAsync<ShiftModel>($"babysitters/{sitterId}/shifts/{shiftId}");
+            }
+        }
+
+        public async Task EndShift(int sitterId, int shiftId, LocalDateTime endTime)
+        {
+            var endArgs = new EndShiftArgs(sitterId, shiftId, endTime);
+            using (var client = CreateClient())
+            {
+                await client.PutJsonAsync($"babysitters/{sitterId}/shifts/{shiftId}/endShift", endArgs);
+            }
+        }
+
+        public async Task<ShiftModel> StartShift(int sitterId, LocalDateTime startTime, LocalDateTime bedTime)
+        {
+            var startArgs = new StartShiftArgs(sitterId, startTime, bedTime);
+            using (var client = CreateClient())
+            {
+                var response = await client.PostJsonAsync($"babysitters/{sitterId}/startShift", startArgs);
+                return await client.GetJsonAsync<ShiftModel>(response.Headers.Location);
+            }
+        }
+        
         public void ClearDatabase()
         {
             using (var scope = _server.CreateScope())
             using (var context = scope.GetService<BabySitterContext>())
             {
-                context.BabySitters
-                    .ToList()
-                    .ForEach(b => context.Remove(b));
+                foreach (var sitter in context.BabySitters.ToList())
+                    context.Remove(sitter);
                 context.SaveChanges();
             }
         }
