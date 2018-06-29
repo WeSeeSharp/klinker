@@ -1,5 +1,6 @@
 ﻿using BabySitter.Core;
-using BabySitter.Core.Storage;
+using BabySitter.Core.BabySitters;
+using BabySitter.Core.General;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -39,7 +40,7 @@ namespace BabySitter.Web
                 app.UseDeveloperExceptionPage();
 
             using (var scope = app.ApplicationServices.CreateScope())
-            using (var context = scope.GetService<BabySitterContext>())
+            using (var context = scope.GetService<DatabaseContext>())
                 context.Database.Migrate();
             
             app.UseMvc();

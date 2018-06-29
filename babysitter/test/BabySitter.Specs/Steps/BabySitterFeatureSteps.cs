@@ -1,4 +1,5 @@
 ﻿using BabySitter.Core;
+using BabySitter.Core.BabySitters;
 using NodaTime;
 using Xunit;
 using Xunit.Gherkin.Scenarios;

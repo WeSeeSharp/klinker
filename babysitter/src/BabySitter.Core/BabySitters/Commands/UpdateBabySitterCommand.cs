@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using BabySitter.Core.Storage;
+using BabySitter.Core.General;
 using Microsoft.EntityFrameworkCore;
 
-namespace BabySitter.Core.Commands
+namespace BabySitter.Core.BabySitters.Commands
 {
     public class UpdateBabySitterArgs
     {
@@ -41,9 +41,9 @@ namespace BabySitter.Core.Commands
 
     public class UpdateBabySitterCommand : ICommand<UpdateBabySitterArgs>
     {
-        private readonly BabySitterContext _context;
+        private readonly DatabaseContext _context;
 
-        public UpdateBabySitterCommand(BabySitterContext context)
+        public UpdateBabySitterCommand(DatabaseContext context)
         {
             _context = context;
         }

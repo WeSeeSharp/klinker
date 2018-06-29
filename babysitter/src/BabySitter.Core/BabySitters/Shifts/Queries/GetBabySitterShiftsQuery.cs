@@ -1,11 +1,11 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using BabySitter.Core.Entities;
-using BabySitter.Core.Models;
-using BabySitter.Core.Storage;
+using BabySitter.Core.BabySitters.Shifts.Entities;
+using BabySitter.Core.BabySitters.Shifts.Models;
+using BabySitter.Core.General;
 using Microsoft.EntityFrameworkCore;
 
-namespace BabySitter.Core.Queries
+namespace BabySitter.Core.BabySitters.Shifts.Queries
 {
     public class GetBabySitterShiftsArgs
     {
@@ -19,9 +19,9 @@ namespace BabySitter.Core.Queries
 
     public class GetBabySitterShiftsQuery : IQueryHandler<GetBabySitterShiftsArgs, ShiftModel[]>
     {
-        private readonly BabySitterContext _context;
+        private readonly DatabaseContext _context;
 
-        public GetBabySitterShiftsQuery(BabySitterContext context)
+        public GetBabySitterShiftsQuery(DatabaseContext context)
         {
             _context = context;
         }

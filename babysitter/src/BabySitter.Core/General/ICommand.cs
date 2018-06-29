@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace BabySitter.Core.Commands
+namespace BabySitter.Core.General
 {
     public interface ICommand<in TArgs>
     {

@@ -1,6 +1,6 @@
 ﻿using NodaTime;
 
-namespace BabySitter.Core
+namespace BabySitter.Core.BabySitters
 {
     public class NightlyChargeParameters
     {

@@ -1,10 +1,11 @@
 ﻿using System.Threading.Tasks;
-using BabySitter.Core.Entities;
-using BabySitter.Core.Models;
-using BabySitter.Core.Storage;
+using BabySitter.Core.BabySitters.Entities;
+using BabySitter.Core.BabySitters.Shifts.Entities;
+using BabySitter.Core.BabySitters.Shifts.Models;
+using BabySitter.Core.General;
 using NodaTime;
 
-namespace BabySitter.Core.Commands
+namespace BabySitter.Core.BabySitters.Shifts.Commands
 {
     public class StartShiftArgs
     {
@@ -27,9 +28,9 @@ namespace BabySitter.Core.Commands
     
     public class StartShiftCommand : ICommandWithResult<StartShiftArgs, ShiftModel>
     {
-        private readonly BabySitterContext _context;
+        private readonly DatabaseContext _context;
 
-        public StartShiftCommand(BabySitterContext context)
+        public StartShiftCommand(DatabaseContext context)
         {
             _context = context;
         }

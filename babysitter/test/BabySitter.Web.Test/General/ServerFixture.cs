@@ -2,10 +2,12 @@
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
-using BabySitter.Core.Commands;
-using BabySitter.Core.Entities;
-using BabySitter.Core.Models;
-using BabySitter.Core.Storage;
+using BabySitter.Core.BabySitters.Commands;
+using BabySitter.Core.BabySitters.Models;
+using BabySitter.Core.BabySitters.Shifts;
+using BabySitter.Core.BabySitters.Shifts.Commands;
+using BabySitter.Core.BabySitters.Shifts.Models;
+using BabySitter.Core.General;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
@@ -122,7 +124,7 @@ namespace BabySitter.Web.Test.General
         public void ClearDatabase()
         {
             using (var scope = _server.CreateScope())
-            using (var context = scope.GetService<BabySitterContext>())
+            using (var context = scope.GetService<DatabaseContext>())
             {
                 foreach (var sitter in context.BabySitters.ToList())
                     context.Remove(sitter);
@@ -133,7 +135,7 @@ namespace BabySitter.Web.Test.General
         private void DeleteDatabase()
         {
             using (var scope = _server.CreateScope())
-            using (var context = scope.GetService<BabySitterContext>())
+            using (var context = scope.GetService<DatabaseContext>())
                 context.Database.EnsureDeleted();
         }
     }

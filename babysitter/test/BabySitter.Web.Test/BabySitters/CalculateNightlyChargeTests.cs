@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using System.Threading.Tasks;
 using BabySitter.Core;
+using BabySitter.Core.BabySitters;
 using BabySitter.Web.Test.General;
 using Newtonsoft.Json.Linq;
 using Xunit;

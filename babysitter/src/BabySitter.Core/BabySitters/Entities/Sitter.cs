@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
-using BabySitter.Core.Models;
+using BabySitter.Core.BabySitters.Models;
+using BabySitter.Core.BabySitters.Shifts.Entities;
 
-namespace BabySitter.Core.Entities
+namespace BabySitter.Core.BabySitters.Entities
 {
     public class Sitter
     {

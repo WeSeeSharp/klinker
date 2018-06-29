@@ -1,14 +1,15 @@
-﻿using BabySitter.Core.Entities;
+﻿using BabySitter.Core.BabySitters.Entities;
+using BabySitter.Core.BabySitters.Shifts.Entities;
 using Microsoft.EntityFrameworkCore;
 
-namespace BabySitter.Core.Storage
+namespace BabySitter.Core.General
 {
-    public class BabySitterContext : DbContext
+    public class DatabaseContext : DbContext
     {
         public DbSet<Sitter> BabySitters { get; set; }
         public DbSet<Shift> Shifts { get; set; }
         
-        public BabySitterContext(DbContextOptions<BabySitterContext> options)
+        public DatabaseContext(DbContextOptions<DatabaseContext> options)
             : base(options)
         {
         }

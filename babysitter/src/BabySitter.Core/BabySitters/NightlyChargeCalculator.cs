@@ -1,7 +1,7 @@
 ﻿using System;
 using NodaTime;
 
-namespace BabySitter.Core
+namespace BabySitter.Core.BabySitters
 {
     public class NightlyChargeCalculator
     {

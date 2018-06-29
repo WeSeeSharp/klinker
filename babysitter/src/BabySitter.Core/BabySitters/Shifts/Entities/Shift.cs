@@ -1,10 +1,11 @@
 ﻿using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
-using BabySitter.Core.Models;
+using BabySitter.Core.BabySitters.Entities;
+using BabySitter.Core.BabySitters.Shifts.Models;
 using NodaTime;
 
-namespace BabySitter.Core.Entities
+namespace BabySitter.Core.BabySitters.Shifts.Entities
 {
     public class Shift
     {

@@ -1,7 +1,9 @@
 ﻿using System.Threading.Tasks;
-using BabySitter.Core.Commands;
-using BabySitter.Core.Models;
-using BabySitter.Core.Queries;
+using BabySitter.Core.BabySitters.Shifts;
+using BabySitter.Core.BabySitters.Shifts.Commands;
+using BabySitter.Core.BabySitters.Shifts.Models;
+using BabySitter.Core.BabySitters.Shifts.Queries;
+using BabySitter.Core.General;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BabySitter.Web.BabySitters

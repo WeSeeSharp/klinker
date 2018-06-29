@@ -1,9 +1,9 @@
 ﻿using System.Threading.Tasks;
-using BabySitter.Core.Entities;
-using BabySitter.Core.Storage;
+using BabySitter.Core.BabySitters.Shifts.Entities;
+using BabySitter.Core.General;
 using NodaTime;
 
-namespace BabySitter.Core.Commands
+namespace BabySitter.Core.BabySitters.Shifts.Commands
 {
     public class EndShiftArgs
     {
@@ -31,9 +31,9 @@ namespace BabySitter.Core.Commands
     
     public class EndShiftCommand : ICommand<EndShiftArgs>
     {
-        private readonly BabySitterContext _context;
+        private readonly DatabaseContext _context;
 
-        public EndShiftCommand(BabySitterContext context)
+        public EndShiftCommand(DatabaseContext context)
         {
             _context = context;
         }

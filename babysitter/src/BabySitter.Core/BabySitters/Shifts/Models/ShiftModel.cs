@@ -1,6 +1,6 @@
 ﻿using NodaTime;
 
-namespace BabySitter.Core.Models
+namespace BabySitter.Core.BabySitters.Shifts.Models
 {
     public class ShiftModel
     {

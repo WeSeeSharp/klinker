@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace BabySitter.Core.Queries
+namespace BabySitter.Core.General
 {
     public interface IQueryHandler<in TArgs, TResult>
     {

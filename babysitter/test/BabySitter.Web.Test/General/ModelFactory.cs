@@ -1,5 +1,5 @@
 ﻿using System;
-using BabySitter.Core.Entities;
+using BabySitter.Core.BabySitters.Entities;
 
 namespace BabySitter.Web.Test.General
 {

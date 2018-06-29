@@ -1,8 +1,13 @@
 ﻿using System;
-using BabySitter.Core.Commands;
-using BabySitter.Core.Models;
-using BabySitter.Core.Queries;
-using BabySitter.Core.Storage;
+using BabySitter.Core.BabySitters;
+using BabySitter.Core.BabySitters.Commands;
+using BabySitter.Core.BabySitters.Models;
+using BabySitter.Core.BabySitters.Queries;
+using BabySitter.Core.BabySitters.Shifts;
+using BabySitter.Core.BabySitters.Shifts.Commands;
+using BabySitter.Core.BabySitters.Shifts.Models;
+using BabySitter.Core.BabySitters.Shifts.Queries;
+using BabySitter.Core.General;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -13,7 +18,7 @@ namespace BabySitter.Core
         public static IServiceCollection AddBabySitterServices(this IServiceCollection services,
             Action<DbContextOptionsBuilder> options)
         {
-            services.AddDbContext<BabySitterContext>(options);
+            services.AddDbContext<DatabaseContext>(options);
             services.AddTransient<NightlyChargeCalculator>();
             services.AddTransient<IQueryHandler<GetAllBabySittersArgs, SitterModel[]>, GetAllBabySittersQuery>();
             services.AddTransient<IQueryHandler<GetBabySitterByIdArgs, SitterModel>, GetBabySitterByIdQuery>();

@@ -1,10 +1,9 @@
-﻿using System.Data.Common;
-using System.Threading.Tasks;
-using BabySitter.Core.Entities;
-using BabySitter.Core.Models;
-using BabySitter.Core.Storage;
+﻿using System.Threading.Tasks;
+using BabySitter.Core.BabySitters.Entities;
+using BabySitter.Core.BabySitters.Models;
+using BabySitter.Core.General;
 
-namespace BabySitter.Core.Commands
+namespace BabySitter.Core.BabySitters.Commands
 {
     public class AddBabySitterArgs
     {
@@ -30,9 +29,9 @@ namespace BabySitter.Core.Commands
 
     public class AddBabySitterCommand : ICommandWithResult<AddBabySitterArgs, SitterModel>
     {
-        private readonly BabySitterContext _context;
+        private readonly DatabaseContext _context;
 
-        public AddBabySitterCommand(BabySitterContext context)
+        public AddBabySitterCommand(DatabaseContext context)
         {
             _context = context;
         }

@@ -1,4 +1,4 @@
-﻿namespace BabySitter.Core.Models
+﻿namespace BabySitter.Core.BabySitters.Models
 {
     public class TotalModel
     {

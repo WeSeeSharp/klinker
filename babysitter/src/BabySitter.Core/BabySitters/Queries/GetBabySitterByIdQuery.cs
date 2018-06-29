@@ -1,10 +1,11 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using BabySitter.Core.Models;
-using BabySitter.Core.Storage;
+using BabySitter.Core.BabySitters.Entities;
+using BabySitter.Core.BabySitters.Models;
+using BabySitter.Core.General;
 using Microsoft.EntityFrameworkCore;
 
-namespace BabySitter.Core.Queries
+namespace BabySitter.Core.BabySitters.Queries
 {
     public class GetBabySitterByIdArgs
     {
@@ -18,9 +19,9 @@ namespace BabySitter.Core.Queries
     
     public class GetBabySitterByIdQuery : IQueryHandler<GetBabySitterByIdArgs, SitterModel>
     {
-        private readonly BabySitterContext _context;
+        private readonly DatabaseContext _context;
 
-        public GetBabySitterByIdQuery(BabySitterContext context)
+        public GetBabySitterByIdQuery(DatabaseContext context)
         {
             _context = context;
         }
@@ -28,7 +29,7 @@ namespace BabySitter.Core.Queries
         public async Task<SitterModel> Execute(GetBabySitterByIdArgs args)
         {
             return await _context.BabySitters
-                .Select(Entities.Sitter.ToModelExpression())
+                .Select(Sitter.ToModelExpression())
                 .SingleAsync(b => b.Id == args.Id);
         }
     }

@@ -1,7 +1,6 @@
 ﻿using System.ComponentModel.DataAnnotations;
-using Microsoft.EntityFrameworkCore;
 
-namespace BabySitter.Core.Entities
+namespace BabySitter.Core.BabySitters.Entities
 {
     public class HourlyRates
     {
