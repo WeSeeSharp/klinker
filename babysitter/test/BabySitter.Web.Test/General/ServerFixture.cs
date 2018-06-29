@@ -3,6 +3,7 @@ using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
 using BabySitter.Core.Commands;
+using BabySitter.Core.Entities;
 using BabySitter.Core.Models;
 using BabySitter.Core.Storage;
 using Microsoft.AspNetCore;
@@ -109,7 +110,15 @@ namespace BabySitter.Web.Test.General
                 return await client.GetJsonAsync<ShiftModel>(response.Headers.Location);
             }
         }
-        
+
+        public async Task<ShiftModel[]> GetBabySitterShifts(int sitterId)
+        {
+            using (var client = CreateClient())
+            {
+                return await client.GetJsonAsync<ShiftModel[]>($"babysitters/{sitterId}/shifts");
+            }
+        }
+
         public void ClearDatabase()
         {
             using (var scope = _server.CreateScope())

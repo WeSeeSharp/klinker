@@ -19,9 +19,9 @@ namespace BabySitter.Core.Commands
             Bedtime = bedtime;
         }
         
-        public static StartShiftArgs WithId(int id, StartShiftArgs args)
+        public StartShiftArgs WithId(int id)
         {
-            return new StartShiftArgs(id, args.StartTime, args.Bedtime);
+            return new StartShiftArgs(id, StartTime, Bedtime);
         }
     }
     

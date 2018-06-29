@@ -17,6 +17,7 @@ namespace BabySitter.Core
             services.AddTransient<NightlyChargeCalculator>();
             services.AddTransient<IQueryHandler<GetAllBabySittersArgs, SitterModel[]>, GetAllBabySittersQuery>();
             services.AddTransient<IQueryHandler<GetBabySitterByIdArgs, SitterModel>, GetBabySitterByIdQuery>();
+            services.AddTransient<IQueryHandler<GetBabySitterShiftsArgs, ShiftModel[]>, GetBabySitterShiftsQuery>();
             services.AddTransient<IQueryHandler<GetBabySitterShiftByIdArgs, ShiftModel>, GetBabySitterShiftByIdQuery>();
             services.AddTransient<ICommandWithResult<AddBabySitterArgs, SitterModel>, AddBabySitterCommand>();
             services.AddTransient<ICommandWithResult<StartShiftArgs, ShiftModel>, StartShiftCommand>();

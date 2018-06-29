@@ -18,14 +18,14 @@ namespace BabySitter.Core.Commands
             EndTime = endTime;
         }
 
-        public static EndShiftArgs WithSitterId(int sitterId, EndShiftArgs args)
+        public EndShiftArgs WithSitterId(int sitterId)
         {
-            return new EndShiftArgs(sitterId, args.ShiftId, args.EndTime);
+            return new EndShiftArgs(sitterId, ShiftId, EndTime);
         }
 
-        public static EndShiftArgs WithShiftId(int shiftId, EndShiftArgs args)
+        public EndShiftArgs WithShiftId(int shiftId)
         {
-            return new EndShiftArgs(args.SitterId, shiftId, args.EndTime);
+            return new EndShiftArgs(SitterId, shiftId, EndTime);
         }
     }
     
