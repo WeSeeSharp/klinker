@@ -13,6 +13,7 @@ namespace BabySitter.Web.Test
         public GetBabySitterShiftsTests(ServerFixture fixture)
         {
             _fixture = fixture;
+            _fixture.ClearDatabase();
         }
 
         [Fact]

@@ -14,6 +14,7 @@ namespace BabySitter.Web.Test
         public AddBabySitterTests(ServerFixture fixture)
         {
             _fixture = fixture;
+            _fixture.ClearDatabase();
         }
         
         [Fact]

@@ -43,9 +43,9 @@ namespace BabySitter.Web.BabySitters
         }
 
         [HttpPost("startShift")]
-        public async Task<IActionResult> StartShift(int id, [FromBody] StartShiftArgs args)
+        public async Task<IActionResult> StartShift(int babySitterId, [FromBody] StartShiftArgs args)
         {
-            args = args.WithId(id);
+            args = args.WithId(babySitterId);
             var model = await _startShiftCommand.Execute(args);
             return CreatedAtRoute("GetBabySitterShift", new {shiftId = model.Id, babySitterId = model.SitterId}, model);
         }

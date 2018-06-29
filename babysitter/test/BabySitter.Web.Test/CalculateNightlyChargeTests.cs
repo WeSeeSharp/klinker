@@ -16,6 +16,7 @@ namespace BabySitter.Web.Test
         public CalculateNightlyChargeTests(ServerFixture fixture)
         {
             _fixture = fixture;
+            _fixture.ClearDatabase();
         }
         
         [Fact]
