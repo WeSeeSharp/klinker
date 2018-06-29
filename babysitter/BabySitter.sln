@@ -23,6 +23,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabySitter.Web", "src\BabyS
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabySitter.Web.Test", "test\BabySitter.Web.Test\BabySitter.Web.Test.csproj", "{67661E95-A026-465F-A204-DF674FE885B2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xunit.Gherkin", "test\Xunit.Gherkin\Xunit.Gherkin.csproj", "{3CBB35D5-E351-4CB6-B423-3D18C8F060BD}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,7 @@ Global
 		{C0799E27-E9F2-4471-B940-A18B93534047} = {21282ED6-1EB6-456E-9F6E-B838392E11FF}
 		{16DA665C-4307-4CE7-9775-4399DFE241D8} = {21282ED6-1EB6-456E-9F6E-B838392E11FF}
 		{67661E95-A026-465F-A204-DF674FE885B2} = {4FED33F8-76DC-4488-A207-33EBDEBA8C73}
+		{3CBB35D5-E351-4CB6-B423-3D18C8F060BD} = {4FED33F8-76DC-4488-A207-33EBDEBA8C73}
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
 		{E494B53D-E286-45FB-B56F-76FB8F40C3DB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -66,5 +69,9 @@ Global
 		{67661E95-A026-465F-A204-DF674FE885B2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{67661E95-A026-465F-A204-DF674FE885B2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{67661E95-A026-465F-A204-DF674FE885B2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3CBB35D5-E351-4CB6-B423-3D18C8F060BD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3CBB35D5-E351-4CB6-B423-3D18C8F060BD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3CBB35D5-E351-4CB6-B423-3D18C8F060BD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3CBB35D5-E351-4CB6-B423-3D18C8F060BD}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

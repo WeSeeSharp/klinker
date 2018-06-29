@@ -1,8 +1,8 @@
 ﻿using System.Threading.Tasks;
-using BabySitter.Specs.Support.Features;
-using BabySitter.Specs.Support.Scenarios;
 using Xunit;
 using Xunit.Abstractions;
+using Xunit.Gherkin.Features;
+using Xunit.Gherkin.Scenarios;
 
 namespace BabySitter.Specs
 {

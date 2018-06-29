@@ -1,12 +1,11 @@
 ﻿using System.Net;
-using System.Net.Http;
 using System.Threading.Tasks;
 using BabySitter.Core;
 using BabySitter.Web.Test.General;
 using Newtonsoft.Json.Linq;
 using Xunit;
 
-namespace BabySitter.Web.Test
+namespace BabySitter.Web.Test.BabySitters
 {
     [Collection(ServerFixtureCollection.Name)]
     public class CalculateNightlyChargeTests

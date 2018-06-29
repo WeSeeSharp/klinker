@@ -1,4 +1,4 @@
-﻿namespace BabySitter.Specs.Support.Steps
+﻿namespace Xunit.Gherkin.Steps
 {
     public class WhenAttribute : StepAttribute
     {

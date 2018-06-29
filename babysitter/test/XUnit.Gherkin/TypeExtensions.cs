@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using BabySitter.Specs.Support.Steps;
+using Xunit.Gherkin.Steps;
 
-namespace BabySitter.Specs.Support
+namespace Xunit.Gherkin
 {
     public static class TypeExtensions
     {

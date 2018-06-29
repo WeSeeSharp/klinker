@@ -5,7 +5,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using Xunit.Abstractions;
 
-namespace BabySitter.Specs.Support.Steps
+namespace Xunit.Gherkin.Steps
 {
     public class StepDefinition
     {

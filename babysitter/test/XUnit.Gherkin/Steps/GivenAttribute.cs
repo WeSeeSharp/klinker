@@ -1,6 +1,6 @@
 ﻿using System;
 
-namespace BabySitter.Specs.Support.Steps
+namespace Xunit.Gherkin.Steps
 {
     [AttributeUsage(AttributeTargets.Method)]
     public class GivenAttribute : StepAttribute

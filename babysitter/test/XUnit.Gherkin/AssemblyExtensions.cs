@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
-namespace BabySitter.Specs.Support
+namespace Xunit.Gherkin
 {
     public static class AssemblyExtensions
     {

@@ -1,10 +1,9 @@
 ﻿using System.Threading.Tasks;
-using BabySitter.Core.Models;
 using BabySitter.Web.Test.General;
 using NodaTime;
 using Xunit;
 
-namespace BabySitter.Web.Test
+namespace BabySitter.Web.Test.BabySitters.Shifts
 {
     [Collection(ServerFixtureCollection.Name)]
     public class EndBabySitterShiftTests

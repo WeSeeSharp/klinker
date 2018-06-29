@@ -1,8 +1,8 @@
 ﻿using BabySitter.Core;
-using BabySitter.Specs.Support.Scenarios;
-using BabySitter.Specs.Support.Steps;
 using NodaTime;
 using Xunit;
+using Xunit.Gherkin.Scenarios;
+using Xunit.Gherkin.Steps;
 
 namespace BabySitter.Specs.Steps
 {

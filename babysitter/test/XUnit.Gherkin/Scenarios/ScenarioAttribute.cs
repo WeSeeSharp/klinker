@@ -2,7 +2,7 @@
 using System.Reflection;
 using Xunit.Sdk;
 
-namespace BabySitter.Specs.Support.Scenarios
+namespace Xunit.Gherkin.Scenarios
 {
     [AttributeUsage(AttributeTargets.Method)]
     public class ScenarioAttribute : BeforeAfterTestAttribute

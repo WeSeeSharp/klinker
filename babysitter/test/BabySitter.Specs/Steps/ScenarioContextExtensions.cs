@@ -1,5 +1,5 @@
-﻿using BabySitter.Specs.Support.Scenarios;
-using NodaTime;
+﻿using NodaTime;
+using Xunit.Gherkin.Scenarios;
 
 namespace BabySitter.Specs.Steps
 {

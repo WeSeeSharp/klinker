@@ -1,9 +1,8 @@
 ﻿using System.Threading.Tasks;
-using BabySitter.Core.Models;
 using BabySitter.Web.Test.General;
 using Xunit;
 
-namespace BabySitter.Web.Test
+namespace BabySitter.Web.Test.BabySitters
 {
     [Collection(ServerFixtureCollection.Name)]
     public class GetBabySittersTests

@@ -1,10 +1,10 @@
 ﻿using System;
 using System.Linq;
 using System.Threading.Tasks;
-using BabySitter.Specs.Support.Steps;
 using Xunit.Abstractions;
+using Xunit.Gherkin.Steps;
 
-namespace BabySitter.Specs.Support.Features
+namespace Xunit.Gherkin.Features
 {
     public class Feature
     {

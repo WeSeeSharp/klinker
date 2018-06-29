@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Reflection;
 
-namespace BabySitter.Specs.Support.Steps
+namespace Xunit.Gherkin.Steps
 {
     public class StepDefinitionLocator
     {
@@ -21,8 +21,7 @@ namespace BabySitter.Specs.Support.Steps
             var definitions = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(a => a.GetPublicTypes())
                 .SelectMany(t => t.GetMethodsWithStepAttributes())
-                .SelectMany(m =>
-                    m.GetCustomAttributes<StepAttribute>().Select(a => new StepDefinition(m.DeclaringType, m, a)))
+                .SelectMany(m => m.GetCustomAttributes<StepAttribute>().Select(a => new StepDefinition(m.DeclaringType, m, a)))
                 .ToArray();
 
             return _steps = definitions;

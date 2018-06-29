@@ -1,20 +1,16 @@
-﻿using System;
-using System.Threading.Tasks;
-using BabySitter.Core.Entities;
-using BabySitter.Core.Models;
+﻿using System.Threading.Tasks;
 using BabySitter.Web.Test.General;
-using Microsoft.Win32.SafeHandles;
 using NodaTime;
 using Xunit;
 
-namespace BabySitter.Web.Test
+namespace BabySitter.Web.Test.BabySitters.Shifts
 {
     [Collection(ServerFixtureCollection.Name)]
-    public class BabySitterShiftsTests
+    public class StartBabySitterShiftTests
     {
         private readonly ServerFixture _fixture;
 
-        public BabySitterShiftsTests(ServerFixture fixture)
+        public StartBabySitterShiftTests(ServerFixture fixture)
         {
             _fixture = fixture;
             _fixture.ClearDatabase();

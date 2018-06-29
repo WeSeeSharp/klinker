@@ -1,7 +1,7 @@
 ﻿using System.Reflection;
 using System.Threading.Tasks;
 
-namespace BabySitter.Specs.Support
+namespace Xunit.Gherkin
 {
     public static class MethodInfoExtensions
     {

@@ -2,7 +2,7 @@
 using System.Collections.Concurrent;
 using System.Linq;
 
-namespace BabySitter.Specs.Support.Scenarios
+namespace Xunit.Gherkin.Scenarios
 {
     public class ScenarioContext : IDisposable
     {

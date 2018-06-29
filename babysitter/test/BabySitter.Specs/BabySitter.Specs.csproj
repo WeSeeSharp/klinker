@@ -11,5 +11,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\BabySitter.Core\BabySitter.Core.csproj" />
+    <ProjectReference Include="..\XUnit.Gherkin\XUnit.Gherkin.csproj" />
   </ItemGroup>
 </Project>

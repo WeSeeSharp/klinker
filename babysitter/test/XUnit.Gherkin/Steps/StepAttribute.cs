@@ -2,7 +2,7 @@
 using System.Linq;
 using System.Text.RegularExpressions;
 
-namespace BabySitter.Specs.Support.Steps
+namespace Xunit.Gherkin.Steps
 {
     [AttributeUsage(AttributeTargets.Method)]
     public class StepAttribute : Attribute
@@ -23,7 +23,8 @@ namespace BabySitter.Specs.Support.Steps
         {
             var matches = Regex.Matches(text);
             return matches
-                .SelectMany(m => m.Groups)
+                .Cast<Match>()
+                .SelectMany(m => m.Groups.Cast<Group>())
                 .Skip(1)
                 .Select(g => g.Value)
                 .ToArray();
