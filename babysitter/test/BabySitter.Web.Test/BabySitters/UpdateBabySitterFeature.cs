@@ -3,6 +3,7 @@ using BabySitter.Web.Test.General;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Gherkin.Features;
+using Xunit.Gherkin.Scenarios;
 
 namespace BabySitter.Web.Test.BabySitters
 {
@@ -15,6 +16,7 @@ namespace BabySitter.Web.Test.BabySitters
         }
         
         [Fact]
+        [Scenario("Update baby sitter rates")]
         public async Task ShouldUpdateBabySitterRates()
         {
             await Given("I have no baby sitters");

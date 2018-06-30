@@ -1,5 +1,4 @@
-﻿using System.IO;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using BabySitter.Web.Test.General;
 using Xunit;
 using Xunit.Abstractions;

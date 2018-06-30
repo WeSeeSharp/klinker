@@ -20,6 +20,7 @@ namespace BabySitter.Web.Test.BabySitters.Shifts.Steps
         }
 
         [Given("baby sitter (.*) (.*) starts at (.*) with a bedtime of (.*)$")]
+        [When("baby sitter (.*) (.*) starts at (.*) with a bedtime of (.*)$")]
         public async Task BabySitterStartsWithBedtime(
             string firstName,
             string lastName,
