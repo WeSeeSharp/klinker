@@ -8,10 +8,10 @@ using Xunit.Gherkin.Scenarios;
 namespace BabySitter.Web.Test.BabySitters
 {
     [Collection(ServerFixtureCollection.Name)]
-    public class GetBabySittersTests : Feature
+    public class GetBabySittersFeature : Feature
     {
 
-        public GetBabySittersTests(ITestOutputHelper output, ServerFixture fixture)
+        public GetBabySittersFeature(ITestOutputHelper output, ServerFixture fixture)
             : base(output, fixture)
         {
         }
