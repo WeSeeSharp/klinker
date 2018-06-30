@@ -24,8 +24,9 @@ namespace BabySitter.Web.Test.BabySitters.Steps
             _fixture.ClearDatabase();
         }
 
+        [Given("I add baby sitter (.*) (.*) with default rates$")]
         [When("I add baby sitter (.*) (.*) with default rates$")]
-        public async Task WhenIAddBabySitter(string firstName, string lastName)
+        public async Task IAddBabySitter(string firstName, string lastName)
         {
             await _fixture.AddBabySitter(firstName, lastName);
         }

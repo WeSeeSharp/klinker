@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
 
@@ -21,10 +22,15 @@ namespace Xunit.Gherkin.Steps
             var definitions = AppDomain.CurrentDomain.GetAssemblies()
                 .SelectMany(a => a.GetPublicTypes())
                 .SelectMany(t => t.GetMethodsWithStepAttributes())
-                .SelectMany(m => m.GetCustomAttributes<StepAttribute>().Select(a => new StepDefinition(m.DeclaringType, m, a)))
+                .SelectMany(GetStepDefinitions)
                 .ToArray();
-
             return _steps = definitions;
+        }
+
+        private static IEnumerable<StepDefinition> GetStepDefinitions(MethodInfo method)
+        {
+            return method.GetStepAttributes()
+                .Select(a => new StepDefinition(method.DeclaringType, method, a));
         }
     }
 }

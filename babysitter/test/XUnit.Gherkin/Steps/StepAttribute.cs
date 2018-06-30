@@ -4,7 +4,7 @@ using System.Text.RegularExpressions;
 
 namespace Xunit.Gherkin.Steps
 {
-    [AttributeUsage(AttributeTargets.Method)]
+    [AttributeUsage(AttributeTargets.Method, AllowMultiple = true)]
     public class StepAttribute : Attribute
     {
         public StepAttribute(string regex)

@@ -11,7 +11,7 @@ namespace Xunit.Gherkin
         public static IEnumerable<MethodInfo> GetMethodsWithStepAttributes(this Type type)
         {
             return type.GetMethods()
-                .Where(m => m.GetCustomAttribute<StepAttribute>() != null);
+                .Where(m => m.HasStepAttributes());
         }
     }
 }
