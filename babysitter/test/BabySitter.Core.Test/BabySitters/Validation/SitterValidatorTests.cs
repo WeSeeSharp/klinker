@@ -21,7 +21,7 @@ namespace BabySitter.Core.Test.BabySitters.Validation
             sitter.FirstName = null;
 
             var result = await _validator.Validate(sitter);
-            Assert.False(result.IsValid);
+            Assert.True(result.Invalid);
         }
         
         [Fact]
@@ -31,7 +31,7 @@ namespace BabySitter.Core.Test.BabySitters.Validation
             sitter.FirstName = string.Empty;
 
             var result = await _validator.Validate(sitter);
-            Assert.False(result.IsValid);
+            Assert.True(result.Invalid);
         }
         
         [Fact]
@@ -41,7 +41,7 @@ namespace BabySitter.Core.Test.BabySitters.Validation
             sitter.LastName = null;
 
             var result = await _validator.Validate(sitter);
-            Assert.False(result.IsValid);
+            Assert.True(result.Invalid);
         }
         
         [Fact]
@@ -51,7 +51,7 @@ namespace BabySitter.Core.Test.BabySitters.Validation
             sitter.LastName = string.Empty;
 
             var result = await _validator.Validate(sitter);
-            Assert.False(result.IsValid);
+            Assert.True(result.Invalid);
         }
         
         [Fact]
@@ -61,7 +61,7 @@ namespace BabySitter.Core.Test.BabySitters.Validation
             sitter.HourlyRates = null;
 
             var result = await _validator.Validate(sitter);
-            Assert.False(result.IsValid);
+            Assert.True(result.Invalid);
         }
         
         [Fact]
@@ -70,7 +70,7 @@ namespace BabySitter.Core.Test.BabySitters.Validation
             var sitter = ModelFactory.CreateSitter();
 
             var result = await _validator.Validate(sitter);
-            Assert.True(result.IsValid);
+            Assert.False(result.Invalid);
         }
     }
 }

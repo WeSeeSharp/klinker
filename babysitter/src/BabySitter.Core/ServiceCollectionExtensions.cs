@@ -5,8 +5,10 @@ using BabySitter.Core.BabySitters.Entities;
 using BabySitter.Core.BabySitters.Models;
 using BabySitter.Core.BabySitters.Queries;
 using BabySitter.Core.BabySitters.Shifts.Commands;
+using BabySitter.Core.BabySitters.Shifts.Entities;
 using BabySitter.Core.BabySitters.Shifts.Models;
 using BabySitter.Core.BabySitters.Shifts.Queries;
+using BabySitter.Core.BabySitters.Shifts.Validation;
 using BabySitter.Core.BabySitters.Validation;
 using BabySitter.Core.General;
 using BabySitter.Core.General.Validation;
@@ -31,6 +33,7 @@ namespace BabySitter.Core
             services.AddTransient<ICommand<UpdateBabySitterArgs>, UpdateBabySitterCommand>();
             services.AddTransient<ICommand<EndShiftArgs>, EndShiftCommand>();
             services.AddTransient<IValidator<Sitter>, SitterValidator>();
+            services.AddTransient<IValidator<Shift>, ShiftValidator>();
             return services;
         }
     }

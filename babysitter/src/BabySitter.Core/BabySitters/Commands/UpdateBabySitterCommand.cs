@@ -66,7 +66,7 @@ namespace BabySitter.Core.BabySitters.Commands
             sitter.HourlyRates.BetweenBedtimeAndMidnight = args.HourlyRateBetweenBedtimeAndMidnight;
 
             var result = await _validator.Validate(sitter);
-            if (!result.IsValid)
+            if (result.Invalid)
                 throw new ValidationException(result);
             
             await _context.SaveChangesAsync();

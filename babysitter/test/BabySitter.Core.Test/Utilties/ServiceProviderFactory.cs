@@ -9,7 +9,7 @@ namespace BabySitter.Core.Test.Utilties
         public static IServiceProvider Create()
         {
             var services = new ServiceCollection()
-                .AddBabySitterServices(o => o.UseInMemoryDatabase(Guid.NewGuid().ToString()));
+                .AddBabySitterServices(o => o.UseInMemoryDatabase("BabySitters"));
             return services.BuildServiceProvider();
         }
     }

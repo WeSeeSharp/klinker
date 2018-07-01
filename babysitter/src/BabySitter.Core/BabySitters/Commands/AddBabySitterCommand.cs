@@ -43,7 +43,7 @@ namespace BabySitter.Core.BabySitters.Commands
         {
             var sitter = CreateSitter(args);
             var result = await _validator.Validate(sitter);
-            if (!result.IsValid)
+            if (result.Invalid)
                 throw new ValidationException(result);
             
             _context.Add(sitter);

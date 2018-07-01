@@ -1,35 +1,30 @@
 ﻿using System;
+using BabySitter.Core.BabySitters.Shifts.Entities;
+using BabySitter.Core.BabySitters.Shifts.Validation;
+using BabySitter.Core.General.Validation;
 using NodaTime;
 
 namespace BabySitter.Core.BabySitters
 {
     public class NightlyChargeCalculator
     {
-        private const int EarliestStartTime = 17;
-        private const int MaximumNumberOfHours = 11;
+        private readonly IValidator<Shift> _validator;
 
+        public NightlyChargeCalculator()
+        {
+            _validator = new ShiftValidator();
+        }
+        
         public long Calculate(NightlyChargeParameters parameters)
         {
-            if (IsStartTimeInvalid(parameters.StartTime))
+            var shift = parameters.ToShift();
+            var result = _validator.Validate(shift).Result;
+            if (result.Invalid)
                 throw new InvalidOperationException();
-
-            if (IsLeaveTimeInvalid(parameters.StartTime, parameters.LeaveTime))
-                throw new InvalidOperationException();
-
+            
             return GetNormalCharge(parameters)
                    + GetBedtimeToMidnightCharge(parameters)
                    + GetAfterMidnightCharge(parameters);
-        }
-
-        private static bool IsLeaveTimeInvalid(LocalDateTime arrivalTime, LocalDateTime leaveTime)
-        {
-            var totalTime = leaveTime - arrivalTime;
-            return totalTime.Hours >= MaximumNumberOfHours;
-        }
-
-        private static bool IsStartTimeInvalid(LocalDateTime arrivalTime)
-        {
-            return arrivalTime.Hour < EarliestStartTime;
         }
 
         private static long GetNormalCharge(NightlyChargeParameters parameters)

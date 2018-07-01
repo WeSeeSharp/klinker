@@ -1,4 +1,6 @@
-﻿using NodaTime;
+﻿using BabySitter.Core.BabySitters.Entities;
+using BabySitter.Core.BabySitters.Shifts.Entities;
+using NodaTime;
 
 namespace BabySitter.Core.BabySitters
 {
@@ -25,6 +27,17 @@ namespace BabySitter.Core.BabySitters
             HourlyRate = hourlyRate;
             HourlyRateBetweenBedtimeAndMidnight = hourlyRateBetweenBedtimeAndMidnight;
             HourlyRateAfterMidnight = hourlyRateAfterMidnight;
+        }
+
+        public Shift ToShift()
+        {
+            return new Shift
+            {
+                Bedtime = Bedtime,
+                EndTime = LeaveTime,
+                StartTime = StartTime,
+                HourlyRates = HourlyRates.FromRates(HourlyRate, HourlyRateBetweenBedtimeAndMidnight, HourlyRateAfterMidnight)
+            };
         }
     }
 }

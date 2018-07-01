@@ -13,7 +13,4 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\BabySitter.Core\BabySitter.Core.csproj" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="BabySitters\Shifts" />
-  </ItemGroup>
 </Project>
