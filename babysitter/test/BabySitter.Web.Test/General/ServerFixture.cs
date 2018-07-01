@@ -2,9 +2,9 @@
 using System.Linq;
 using System.Net.Http;
 using System.Threading.Tasks;
+using BabySitter.Core.BabySitters;
 using BabySitter.Core.BabySitters.Commands;
 using BabySitter.Core.BabySitters.Models;
-using BabySitter.Core.BabySitters.Shifts;
 using BabySitter.Core.BabySitters.Shifts.Commands;
 using BabySitter.Core.BabySitters.Shifts.Models;
 using BabySitter.Core.General;
@@ -121,6 +121,19 @@ namespace BabySitter.Web.Test.General
             }
         }
 
+        public async Task<TotalModel> CalculateNightlyCharge(
+            LocalDateTime startTime, 
+            LocalDateTime bedtime,
+            LocalDateTime leaveTime)
+        {
+            using (var client = CreateClient())
+            {
+                var args = new NightlyChargeParameters(startTime, bedtime, leaveTime);
+                var response = await client.PostJsonAsync("babysitters/nightlycharge", args);
+                return await response.ReadAsJsonAsync<TotalModel>();
+            }
+        }
+        
         public void ClearDatabase()
         {
             using (var scope = _server.CreateScope())

@@ -55,7 +55,7 @@ namespace BabySitter.Web.BabySitters
         [HttpPut("{id:int}")]
         public async Task<IActionResult> UpdateBabySitter(int id, [FromBody] UpdateBabySitterArgs args)
         {
-            args = UpdateBabySitterArgs.WithId(id, args);
+            args = args.WithId(id);
             await _updateBabySitterCommand.Execute(args);
             return NoContent();
         }

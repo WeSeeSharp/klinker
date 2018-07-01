@@ -1,13 +1,15 @@
 ﻿using System;
 using BabySitter.Core.BabySitters;
 using BabySitter.Core.BabySitters.Commands;
+using BabySitter.Core.BabySitters.Entities;
 using BabySitter.Core.BabySitters.Models;
 using BabySitter.Core.BabySitters.Queries;
-using BabySitter.Core.BabySitters.Shifts;
 using BabySitter.Core.BabySitters.Shifts.Commands;
 using BabySitter.Core.BabySitters.Shifts.Models;
 using BabySitter.Core.BabySitters.Shifts.Queries;
+using BabySitter.Core.BabySitters.Validation;
 using BabySitter.Core.General;
+using BabySitter.Core.General.Validation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -28,6 +30,7 @@ namespace BabySitter.Core
             services.AddTransient<ICommandWithResult<StartShiftArgs, ShiftModel>, StartShiftCommand>();
             services.AddTransient<ICommand<UpdateBabySitterArgs>, UpdateBabySitterCommand>();
             services.AddTransient<ICommand<EndShiftArgs>, EndShiftCommand>();
+            services.AddTransient<IValidator<Sitter>, SitterValidator>();
             return services;
         }
     }

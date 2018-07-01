@@ -30,7 +30,7 @@ namespace BabySitter.Core.BabySitters.Queries
         {
             return await _context.BabySitters
                 .Select(Sitter.ToModelExpression())
-                .SingleAsync(b => b.Id == args.Id);
+                .SingleOrDefaultAsync(b => b.Id == args.Id);
         }
     }
 }

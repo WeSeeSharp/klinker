@@ -4,17 +4,25 @@ namespace BabySitter.Core.BabySitters.Entities
 {
     public class HourlyRates
     {
-        public const int StandardHourlyRate = 12;
-        public const int StandardHourlyRateBetweenBedtimeAndMidnight = 8;
-        public const int StandardHourlyRateAfterMidnight = 16;
+        public const long StandardHourlyRate = 12;
+        public const long StandardHourlyRateBetweenBedtimeAndMidnight = 8;
+        public const long StandardHourlyRateAfterMidnight = 16;
 
-        [Required] public int Standard { get; set; } = StandardHourlyRate;
+        [Required] public long Standard { get; set; } = StandardHourlyRate;
 
-        [Required] public int BetweenBedtimeAndMidnight { get; set; } = StandardHourlyRateBetweenBedtimeAndMidnight;
+        [Required] public long BetweenBedtimeAndMidnight { get; set; } = StandardHourlyRateBetweenBedtimeAndMidnight;
 
-        [Required] public int AfterMidnight { get; set; } = StandardHourlyRateAfterMidnight;
+        [Required] public long AfterMidnight { get; set; } = StandardHourlyRateAfterMidnight;
 
-        public static HourlyRates FromRates(int standard, int betweenBedtimeAndMidnight, int afterMidnight)
+        public static HourlyRates FromStandardRates()
+        {
+            return FromRates(
+                StandardHourlyRate, 
+                StandardHourlyRateBetweenBedtimeAndMidnight,
+                StandardHourlyRateAfterMidnight);
+        }
+        
+        public static HourlyRates FromRates(long standard, long betweenBedtimeAndMidnight, long afterMidnight)
         {
             return new HourlyRates
             {
