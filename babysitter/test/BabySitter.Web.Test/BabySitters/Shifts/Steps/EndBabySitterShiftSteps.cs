@@ -35,6 +35,7 @@ namespace BabySitter.Web.Test.BabySitters.Shifts.Steps
             await _fixture.StartShift(sitter.Id, startDateTime, bedtimeDateTime);
         }
 
+        [Given("baby sitter (.*) (.*) leaves at (.*)$")]
         [When("baby sitter (.*) (.*) leaves at (.*)$")]
         public async Task WhenBabySitterLeaves(string firstName, string lastName, string endTime)
         {
@@ -44,7 +45,10 @@ namespace BabySitter.Web.Test.BabySitters.Shifts.Steps
             var shifts = await _fixture.GetBabySitterShifts(sitter.Id);
             var currentShift = shifts.Single(s => s.EndTime == null);
             
-            var endDateTime = endTime.ToLocalDateTime();
+            var endDateTime = endTime.ToLowerInvariant().Contains("am") 
+                ? endTime.ToLocalDateTime().PlusDays(1)
+                : endTime.ToLocalDateTime();
+            
             await _fixture.EndShift(sitter.Id, currentShift.Id, endDateTime);
         }
 

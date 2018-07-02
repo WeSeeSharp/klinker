@@ -23,7 +23,9 @@ namespace BabySitter.Web.Test.BabySitters.Shifts
             await Given("I have no baby sitters");
             await Given("I add baby sitter one two with default rates");
             await Given("baby sitter one two starts at 5:00 PM with a bedtime of 9:00 PM");
+            await Given("baby sitter one two leaves at 12:00 AM");
             await Given("baby sitter one two starts at 5:00 PM with a bedtime of 9:00 PM");
+            await Given("baby sitter one two leaves at 12:00 AM");
             await Given("baby sitter one two starts at 5:00 PM with a bedtime of 9:00 PM");
             await When("I get shifts for baby sitter one two");
             await Then("I should see 3 shifts for baby sitter one two");

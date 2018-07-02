@@ -49,7 +49,7 @@ namespace BabySitter.Core.Test.BabySitters.Shifts.Validation
         }
         
         [Fact]
-        public async Task ShouldBeInvalidWhenStartTimeIsBefore5PM()
+        public async Task ShouldBeInvalidWhenStartTimeIsBefore5Pm()
         {
             var shift = ModelFactory.CreateShift(
                 startTime: new LocalDateTime(2018, 7, 1, 16, 0));
@@ -69,7 +69,7 @@ namespace BabySitter.Core.Test.BabySitters.Shifts.Validation
         }
         
         [Fact]
-        public async Task ShouldBeInvalidWhenEndTimeIsAfter4AM()
+        public async Task ShouldBeInvalidWhenEndTimeIsAfter4Am()
         {
             var shift = ModelFactory.CreateShift(
                 startTime: new LocalDateTime(2018, 7, 1, 17, 0),
@@ -77,7 +77,21 @@ namespace BabySitter.Core.Test.BabySitters.Shifts.Validation
 
             var result = await _validator.Validate(shift);
             Assert.True(result.Invalid);
+        }
+        
+        [Fact]
+        public async Task ShouldOnlyAllowOneActiveShiftForSitter()
+        {
+            var sitter = ModelFactory.CreateSitter();
+            var firstShift = ModelFactory.CreateShift();
+            firstShift.EndTime = null;
+            sitter.Shifts.Add(firstShift);
+            
+            var secondShift = ModelFactory.CreateShift(sitter);
+            secondShift.EndTime = null;
 
+            var result = await _validator.Validate(secondShift);
+            Assert.True(result.Invalid);
         }
     }
 }

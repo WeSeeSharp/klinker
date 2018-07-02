@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq.Expressions;
 using BabySitter.Core.BabySitters.Entities;
@@ -24,6 +25,11 @@ namespace BabySitter.Core.BabySitters.Shifts.Entities
 
         public LocalDateTime? EndTime { get; set; }
 
+        public List<Shift> GetShiftsForSitter()
+        {
+            return (Sitter?.Shifts ?? new List<Shift>());
+        }
+        
         public static Expression<Func<Shift, ShiftModel>> ToModelExpression()
         {
             return s => new ShiftModel

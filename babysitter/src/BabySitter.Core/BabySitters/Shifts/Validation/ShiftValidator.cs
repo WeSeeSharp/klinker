@@ -10,6 +10,7 @@ namespace BabySitter.Core.BabySitters.Shifts.Validation
         {
             AddRule(new EndTimeRule());
             AddRule(new StartTimeRule());
+            AddRule(new ActiveShiftLimitRule());
             AddRule(new PropertyRequiredRule<Shift, HourlyRates>(s => s.HourlyRates, "Hourly rates are required"));
         }
     }

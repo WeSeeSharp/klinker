@@ -21,6 +21,11 @@ namespace BabySitter.Core.BabySitters.Entities
         public HourlyRates HourlyRates { get; set; }
         
         public List<Shift> Shifts { get; set; }
+
+        public Sitter()
+        {
+            Shifts = new List<Shift>();
+        }
         
         public SitterModel ToModel()
         {

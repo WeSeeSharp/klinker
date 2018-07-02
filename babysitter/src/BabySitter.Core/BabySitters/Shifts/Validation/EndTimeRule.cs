@@ -17,16 +17,14 @@ namespace BabySitter.Core.BabySitters.Shifts.Validation
             var isValid = model.EndTime == null
                           || model.EndTime.Value > model.StartTime;
 
-            if (model.EndTime.HasValue 
-                && !IsEndTimeBefore4AM(model.EndTime.Value, model.StartTime))
-            {
+            if (model.EndTime.HasValue
+                && !IsEndTimeBefore4Am(model.EndTime.Value, model.StartTime))
                 isValid = false;
-            }
-            
+
             return Task.FromResult(isValid);
         }
 
-        private static bool IsEndTimeBefore4AM(LocalDateTime endTime, LocalDateTime startTime)
+        private static bool IsEndTimeBefore4Am(LocalDateTime endTime, LocalDateTime startTime)
         {
             if (endTime.Date > startTime.Date)
                 return endTime.Hour <= 4;
