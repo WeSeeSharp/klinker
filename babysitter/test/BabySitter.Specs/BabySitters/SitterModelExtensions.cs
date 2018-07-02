@@ -2,7 +2,7 @@
 using System.Linq;
 using BabySitter.Core.BabySitters.Models;
 
-namespace BabySitter.Web.Test.BabySitters
+namespace BabySitter.Specs.BabySitters
 {
     public static class SitterModelExtensions
     {

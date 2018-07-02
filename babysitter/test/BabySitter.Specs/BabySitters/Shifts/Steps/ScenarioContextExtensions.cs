@@ -1,7 +1,7 @@
 ﻿using BabySitter.Core.BabySitters.Shifts.Models;
 using Xunit.Gherkin.Scenarios;
 
-namespace BabySitter.Web.Test.BabySitters.Shifts.Steps
+namespace BabySitter.Specs.BabySitters.Shifts.Steps
 {
     public static class ScenarioContextExtensions
     {

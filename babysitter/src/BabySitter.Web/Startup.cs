@@ -1,6 +1,7 @@
 ﻿using BabySitter.Core;
 using BabySitter.Core.BabySitters;
 using BabySitter.Core.General;
+using BabySitter.Web.General;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -23,7 +24,11 @@ namespace BabySitter.Web
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<NightlyChargeCalculator>();
-            services.AddMvc()
+            services.AddMvc(o =>
+                {
+                    o.Filters.Add<NullToNotFoundFilter>();
+                    o.Filters.Add<ValidationExceptionFilterAttribute>();
+                })
                 .AddJsonOptions(o => o.SerializerSettings.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb));
 
             services.AddBabySitterServices(o => 

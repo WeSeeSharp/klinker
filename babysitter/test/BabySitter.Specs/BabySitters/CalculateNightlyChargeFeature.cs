@@ -1,14 +1,10 @@
-﻿using System.Net;
-using System.Threading.Tasks;
-using BabySitter.Core;
-using BabySitter.Core.BabySitters;
-using BabySitter.Web.Test.General;
-using Newtonsoft.Json.Linq;
+﻿using System.Threading.Tasks;
+using BabySitter.Specs.General;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Gherkin.Features;
 
-namespace BabySitter.Web.Test.BabySitters
+namespace BabySitter.Specs.BabySitters
 {
     [Collection(ServerFixtureCollection.Name)]
     public class CalculateNightlyChargeFeature : Feature

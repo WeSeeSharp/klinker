@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
-using BabySitter.Web.Test.General;
+using BabySitter.Specs.General;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Gherkin.Features;
 using Xunit.Gherkin.Scenarios;
 
-namespace BabySitter.Web.Test.BabySitters.Shifts
+namespace BabySitter.Specs.BabySitters.Shifts
 {
     [Collection(ServerFixtureCollection.Name)]
     public class StartBabySitterShiftFeature : Feature

@@ -12,7 +12,6 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\BabySitter.Web\BabySitter.Web.csproj" />
-    <ProjectReference Include="..\Xunit.Gherkin\Xunit.Gherkin.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="appsettings.json">

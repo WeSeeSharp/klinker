@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
-using BabySitter.Web.Test.General;
+using BabySitter.Specs.General;
 using Xunit;
 using Xunit.Abstractions;
 using Xunit.Gherkin.Scenarios;
 using Xunit.Gherkin.Steps;
 
-namespace BabySitter.Web.Test.BabySitters.Shifts.Steps
+namespace BabySitter.Specs.BabySitters.Shifts.Steps
 {
     public class GetBabySitterShiftsSteps
     {
