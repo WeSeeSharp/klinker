@@ -28,6 +28,7 @@ namespace BabySitter.Web
                 {
                     o.Filters.Add<NullToNotFoundFilter>();
                     o.Filters.Add<ValidationExceptionFilterAttribute>();
+                    o.Filters.Add<EntityNotFoundExceptionFilterAttribute>();
                 })
                 .AddJsonOptions(o => o.SerializerSettings.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb));
 
