@@ -1,5 +1,4 @@
-﻿using System.Reflection;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using BabySitter.Core.BabySitters.Shifts.Queries;
 using BabySitter.Core.General;
 using BabySitter.Core.Test.Utilties;
@@ -42,11 +41,28 @@ namespace BabySitter.Core.Test.BabySitters.Shifts.Queries
         }
         
         [Fact]
-        public async Task ShouldReturnNullShift()
+        public async Task ShouldReturnNullWhenSitterIdDoesNotMatch()
         {
-            var args = new GetBabySitterShiftByIdArgs(int.MaxValue, int.MaxValue);
+            var sitter = _context.Add(ModelFactory.CreateSitter()).Entity;
+            var shift = _context.Add(ModelFactory.CreateShift(sitter)).Entity;
+            _context.SaveChanges();
+            
+            var args = new GetBabySitterShiftByIdArgs(int.MaxValue, shift.Id);
             var model = await _query.Execute(args);
             Assert.Null(model);
+        }
+        
+        [Fact]
+        public async Task ShouldReturnNullWhenShiftIdDoesNotMatch()
+        {
+            var sitter = _context.Add(ModelFactory.CreateSitter()).Entity;
+            var shift = _context.Add(ModelFactory.CreateShift(sitter)).Entity;
+            _context.SaveChanges();
+            
+            var args = new GetBabySitterShiftByIdArgs(sitter.Id, int.MaxValue);
+            var model = await _query.Execute(args);
+            Assert.Null(model);
+            
         }
     }
 }

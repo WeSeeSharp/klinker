@@ -13,4 +13,8 @@
     <ProjectReference Include="..\..\src\BabySitter.Core\BabySitter.Core.csproj" />
     <ProjectReference Include="..\XUnit.Gherkin\XUnit.Gherkin.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="BabySitters" />
+    <Folder Include="General" />
+  </ItemGroup>
 </Project>

@@ -9,11 +9,11 @@ namespace BabySitter.Core.BabySitters.Shifts.Queries
 {
     public class GetBabySitterShiftsArgs
     {
-        public int BabySitterId { get; }
+        public int SitterId { get; }
 
-        public GetBabySitterShiftsArgs(int babySitterId)
+        public GetBabySitterShiftsArgs(int sitterId)
         {
-            BabySitterId = babySitterId;
+            SitterId = sitterId;
         }
     }
 
@@ -29,7 +29,7 @@ namespace BabySitter.Core.BabySitters.Shifts.Queries
         public async Task<ShiftModel[]> Execute(GetBabySitterShiftsArgs args)
         {
             return await _context.Shifts
-                .Where(s => s.Sitter.Id == args.BabySitterId)
+                .Where(s => s.Sitter.Id == args.SitterId)
                 .Select(Shift.ToModelExpression())
                 .ToArrayAsync();
         }
