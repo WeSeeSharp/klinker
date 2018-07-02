@@ -9,12 +9,12 @@ namespace BabySitter.Core.BabySitters.Shifts.Queries
 {
     public class GetBabySitterShiftByIdArgs
     {
-        public int BabySitterId { get; }
+        public int SitterId { get; }
         public int ShiftId { get; }
 
-        public GetBabySitterShiftByIdArgs(int babySitterId, int shiftId)
+        public GetBabySitterShiftByIdArgs(int sitterId, int shiftId)
         {
-            BabySitterId = babySitterId;
+            SitterId = sitterId;
             ShiftId = shiftId;
         }
     }
@@ -32,9 +32,9 @@ namespace BabySitter.Core.BabySitters.Shifts.Queries
         {
             return await _context.Shifts
                 .Where(s => s.Id == args.ShiftId)
-                .Where(s => s.Sitter.Id == args.BabySitterId)
+                .Where(s => s.Sitter.Id == args.SitterId)
                 .Select(Shift.ToModelExpression())
-                .SingleAsync();
+                .SingleOrDefaultAsync();
         }
     }
 }
