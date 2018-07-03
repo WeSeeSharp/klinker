@@ -5,10 +5,6 @@ $testDirectories = Get-ChildItem -Path .\test -Directory
 foreach($folder in $testDirectories) {
     Write-Host $folder.FullName
     
-    if ($folder.FullName -notcontains "Test" -or $folder.FullName -notcontains "Specs") {
-        continue
-    }
-    
     dotnet test $folder.FullName
     
     if ($hasErrors -or $lastExitCode -ne 0) {
