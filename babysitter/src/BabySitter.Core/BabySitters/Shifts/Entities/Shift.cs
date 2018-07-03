@@ -12,19 +12,18 @@ namespace BabySitter.Core.BabySitters.Shifts.Entities
     public class Shift
     {
         private static readonly Func<Shift, ShiftModel> ToModelFunc = ToModelExpression().Compile();
-        
+
         [Key] public int Id { get; set; }
 
         [Required] public LocalDateTime StartTime { get; set; }
 
         [Required] public LocalDateTime Bedtime { get; set; }
-        
+
         public HourlyRates HourlyRates { get; set; }
 
         public long? AmountCharged { get; set; }
-        
-        [Required]
-        public Sitter Sitter { get; set; }
+
+        [Required] public Sitter Sitter { get; set; }
 
         public LocalDateTime? EndTime { get; set; }
 
@@ -37,12 +36,12 @@ namespace BabySitter.Core.BabySitters.Shifts.Entities
         {
             if (!EndTime.HasValue)
                 return null;
-            
+
             return GetNormalCharge()
                    + GetBedtimeToMidnightCharge()
                    + GetAfterMidnightCharge();
         }
-        
+
         public static Expression<Func<Shift, ShiftModel>> ToModelExpression()
         {
             return s => new ShiftModel
@@ -63,7 +62,7 @@ namespace BabySitter.Core.BabySitters.Shifts.Entities
         {
             return ToModelFunc(this);
         }
-        
+
         private long GetNormalCharge()
         {
             var hours = EndTime.Value < Bedtime
@@ -72,7 +71,7 @@ namespace BabySitter.Core.BabySitters.Shifts.Entities
 
             return hours * HourlyRates.Standard;
         }
-        
+
         private long GetBedtimeToMidnightCharge()
         {
             var midnight = GetMidnight(StartTime);
@@ -86,7 +85,7 @@ namespace BabySitter.Core.BabySitters.Shifts.Entities
 
             return hours * HourlyRates.BetweenBedtimeAndMidnight;
         }
-        
+
         private long GetAfterMidnightCharge()
         {
             var midnight = GetMidnight(StartTime);
@@ -96,7 +95,7 @@ namespace BabySitter.Core.BabySitters.Shifts.Entities
 
             return EndTime.Value.Hour * HourlyRates.AfterMidnight;
         }
-        
+
         private static LocalDateTime GetMidnight(LocalDateTime arrivalTime)
         {
             return arrivalTime
