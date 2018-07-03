@@ -5,9 +5,9 @@ services:
 platform: Any CPU
 configuration: Release
 before_build:
-  - ps: cd .\babysitter && dotnet restore
+  - ps: .\babysitter\before_build.ps1
 build_script:
-  - ps: cd .\babysitter & & dotnet build --configuration Release
+  - ps: .\babsitter\build_script.ps1
 test_script:
   - ps: .\babysitter\test_script.ps1
   
