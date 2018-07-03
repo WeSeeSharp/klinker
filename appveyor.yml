@@ -4,7 +4,11 @@ services:
   - postgresql
 platform: Any CPU
 configuration: Release
-build:
-  parallel: true
-  project: babysitter/BabySitter.sln
+before_build:
+  - ps: cd .\babysitter && dotnet restore
+build_script:
+  - ps: cd .\babysitter & & dotnet build --configuration Release
+test_script:
+  - ps: 
+  
   
