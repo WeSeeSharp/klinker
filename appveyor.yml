@@ -7,7 +7,7 @@ configuration: Release
 before_build:
   - ps: .\babysitter\before_build.ps1
 build_script:
-  - ps: .\babsitter\build_script.ps1
+  - ps: .\babysitter\build_script.ps1
 test_script:
   - ps: .\babysitter\test_script.ps1
   
