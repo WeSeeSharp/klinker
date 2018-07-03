@@ -7,6 +7,7 @@ using BabySitter.Core.BabySitters.Commands;
 using BabySitter.Core.BabySitters.Models;
 using BabySitter.Core.BabySitters.Shifts.Commands;
 using BabySitter.Core.BabySitters.Shifts.Models;
+using BabySitter.Core.BabySitters.Shifts.Services;
 using BabySitter.Core.General;
 using BabySitter.Web;
 using Microsoft.AspNetCore;
@@ -129,7 +130,7 @@ namespace BabySitter.Specs.General
         {
             using (var client = CreateClient())
             {
-                var args = new NightlyChargeParameters(startTime, bedtime, leaveTime);
+                var args = new NightlyChargeArgs(startTime, bedtime, leaveTime);
                 var response = await client.PostJsonAsync("babysitters/nightlycharge", args);
                 return await response.ReadAsJsonAsync<TotalModel>();
             }

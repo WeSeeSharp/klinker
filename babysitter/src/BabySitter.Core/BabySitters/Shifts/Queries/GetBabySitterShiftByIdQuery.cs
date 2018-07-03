@@ -31,6 +31,7 @@ namespace BabySitter.Core.BabySitters.Shifts.Queries
         public async Task<ShiftModel> Execute(GetBabySitterShiftByIdArgs args)
         {
             return await _context.Shifts
+                    .Include(s => s.HourlyRates)
                 .Where(s => s.Id == args.ShiftId)
                 .Where(s => s.Sitter.Id == args.SitterId)
                 .Select(Shift.ToModelExpression())

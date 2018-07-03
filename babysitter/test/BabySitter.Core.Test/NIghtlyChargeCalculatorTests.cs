@@ -1,5 +1,6 @@
 ﻿using System;
 using BabySitter.Core.BabySitters;
+using BabySitter.Core.BabySitters.Shifts.Services;
 using NodaTime;
 using Xunit;
 
@@ -17,7 +18,7 @@ namespace BabySitter.Core.Test
         [Fact]
         public void ShouldCalculateChargeForFullHourOfArrival()
         {
-            var parameters = new NightlyChargeParameters(
+            var parameters = new NightlyChargeArgs(
                 new LocalDateTime(1, 1, 1, 17, 45),
                 new LocalDateTime(1, 1, 1, 21, 0),
                 new LocalDateTime(1, 1, 1, 19, 45));
@@ -29,7 +30,7 @@ namespace BabySitter.Core.Test
         [Fact]
         public void ShouldCalculateChargeForFullHourOfBedtime()
         {
-            var parameters = new NightlyChargeParameters(
+            var parameters = new NightlyChargeArgs(
                 new LocalDateTime(1, 1, 1, 17, 45),
                 new LocalDateTime(1, 1, 1, 21, 30),
                 new LocalDateTime(1, 1, 1, 22, 45));
@@ -41,7 +42,7 @@ namespace BabySitter.Core.Test
         [Fact]
         public void ShouldCalculateChargeForFullHoursNoPartialHours()
         {
-            var parameters = new NightlyChargeParameters(
+            var parameters = new NightlyChargeArgs(
                 new LocalDateTime(1, 1, 1, 17, 0),
                 new LocalDateTime(1, 1, 1, 21, 0),
                 new LocalDateTime(1, 1, 1, 19, 45));
@@ -53,7 +54,7 @@ namespace BabySitter.Core.Test
         [Fact]
         public void ShouldCalculateChargeForThreeHoursAtNormalRate()
         {
-            var parameters = new NightlyChargeParameters(
+            var parameters = new NightlyChargeArgs(
                 new LocalDateTime(1, 1, 1, 17, 0),
                 new LocalDateTime(1, 1, 1, 23, 0),
                 new LocalDateTime(1, 1, 1, 20, 0));
@@ -65,7 +66,7 @@ namespace BabySitter.Core.Test
         [Fact]
         public void ShouldCalculateChargeForTimeAfterMidnight()
         {
-            var parameters = new NightlyChargeParameters(
+            var parameters = new NightlyChargeArgs(
                 new LocalDateTime(1, 1, 1, 21, 0),
                 new LocalDateTime(1, 1, 1, 21, 0),
                 new LocalDateTime(1, 1, 2, 4, 0));
@@ -77,7 +78,7 @@ namespace BabySitter.Core.Test
         [Fact]
         public void ShouldCalculateChargeForTimeBetweenBedtimeAndMidnight()
         {
-            var parameters = new NightlyChargeParameters(
+            var parameters = new NightlyChargeArgs(
                 new LocalDateTime(1, 1, 1, 21, 0),
                 new LocalDateTime(1, 1, 1, 21, 0),
                 new LocalDateTime(1, 1, 2, 0, 0));
@@ -89,7 +90,7 @@ namespace BabySitter.Core.Test
         [Fact]
         public void ShouldThrowInvalidOperationWhenArrivalIsBefore1700Hours()
         {
-            var parameters = new NightlyChargeParameters(
+            var parameters = new NightlyChargeArgs(
                 new LocalDateTime(1, 1, 1, 16, 59),
                 new LocalDateTime(1, 1, 1, 0, 0),
                 new LocalDateTime(1, 1, 1, 0, 0));
@@ -100,7 +101,7 @@ namespace BabySitter.Core.Test
         [Fact]
         public void ShouldThrowInvalidOperationWhenLeavetimeIsAfter400Hours()
         {
-            var parameters = new NightlyChargeParameters(
+            var parameters = new NightlyChargeArgs(
                 new LocalDateTime(1, 1, 1, 17, 0, 0),
                 new LocalDateTime(1, 1, 1, 9, 0, 0),
                 new LocalDateTime(1, 1, 2, 4, 1, 0));

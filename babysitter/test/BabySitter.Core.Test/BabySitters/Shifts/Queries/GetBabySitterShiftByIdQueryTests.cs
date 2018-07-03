@@ -35,6 +35,7 @@ namespace BabySitter.Core.Test.BabySitters.Shifts.Queries
             Assert.Equal(shift.Bedtime, model.Bedtime);
             Assert.Equal(shift.EndTime, model.EndTime);
             Assert.Equal(shift.StartTime, model.StartTime);
+            Assert.Equal(shift.AmountCharged, model.AmountCharged);
             Assert.Equal(shift.HourlyRates.Standard, model.HourlyRate);
             Assert.Equal(shift.HourlyRates.BetweenBedtimeAndMidnight, model.HourlyRateBetweenBedtimeAndMidnight);
             Assert.Equal(shift.HourlyRates.AfterMidnight, model.HourlyRateAfterMidnight);
@@ -56,13 +57,12 @@ namespace BabySitter.Core.Test.BabySitters.Shifts.Queries
         public async Task ShouldReturnNullWhenShiftIdDoesNotMatch()
         {
             var sitter = _context.Add(ModelFactory.CreateSitter()).Entity;
-            var shift = _context.Add(ModelFactory.CreateShift(sitter)).Entity;
+            _context.Add(ModelFactory.CreateShift(sitter));
             _context.SaveChanges();
             
             var args = new GetBabySitterShiftByIdArgs(sitter.Id, int.MaxValue);
             var model = await _query.Execute(args);
             Assert.Null(model);
-            
         }
     }
 }

@@ -41,6 +41,26 @@ namespace BabySitter.Core.Test.BabySitters.Shifts.Commands
         }
         
         [Fact]
+        public async Task ShouldHaveAmountCharged()
+        {
+            var sitter = _context.Add(ModelFactory.CreateSitter()).Entity;
+            var shift = _context.Add(ModelFactory.CreateShift(
+                sitter, 
+                startTime: "7:00 PM".ToLocalDateTime(), 
+                bedtime: "9:00 PM".ToLocalDateTime())
+            ).Entity;
+            
+            shift.EndTime = null;
+            _context.SaveChanges();
+
+            var endTime = "12:00 AM".ToLocalDateTime().PlusDays(1);
+            var args = new EndShiftArgs(sitter.Id, shift.Id, endTime);
+            await _command.Execute(args);
+
+            Assert.Equal(48, shift.AmountCharged);
+        }
+        
+        [Fact]
         public async Task ShouldThrowEntityNotFoundWhenSitterIsNotFound()
         {
             var sitter = _context.Add(ModelFactory.CreateSitter()).Entity;

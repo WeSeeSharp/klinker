@@ -4,6 +4,7 @@ using BabySitter.Core.BabySitters;
 using BabySitter.Core.BabySitters.Commands;
 using BabySitter.Core.BabySitters.Models;
 using BabySitter.Core.BabySitters.Queries;
+using BabySitter.Core.BabySitters.Shifts.Services;
 using BabySitter.Core.General;
 using Microsoft.AspNetCore.Mvc;
 
@@ -63,9 +64,9 @@ namespace BabySitter.Web.BabySitters
         
 
         [HttpPost("nightlyCharge")]
-        public IActionResult NightlyCharge([FromBody] NightlyChargeParameters parameters)
+        public IActionResult NightlyCharge([FromBody] NightlyChargeArgs args)
         {
-            var total = _calculator.Calculate(parameters);
+            var total = _calculator.Calculate(args);
             return Ok(new TotalModel(total));
         }
     }

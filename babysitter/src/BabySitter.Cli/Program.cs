@@ -2,6 +2,7 @@
 using BabySitter.Cli.General;
 using BabySitter.Core;
 using BabySitter.Core.BabySitters;
+using BabySitter.Core.BabySitters.Shifts.Services;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace BabySitter.Cli
@@ -60,7 +61,7 @@ namespace BabySitter.Cli
             _output.WriteLine("Please enter bedtime:");
             var bedTime = _input.ReadLine().ToLocalDateTime();
 
-            var parameters = new NightlyChargeParameters(startTime, bedTime, leaveTime);
+            var parameters = new NightlyChargeArgs(startTime, bedTime, leaveTime);
             var total = _calculator.Calculate(parameters);
             _output.WriteLine($"Total: ${total}");
         }

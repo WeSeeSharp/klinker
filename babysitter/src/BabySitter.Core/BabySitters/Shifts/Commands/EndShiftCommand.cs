@@ -53,6 +53,7 @@ namespace BabySitter.Core.BabySitters.Shifts.Commands
                 throw new EntityNotFoundException<Shift>();
 
             shift.EndTime = args.EndTime;
+            shift.AmountCharged = shift.CalculateCharge();
             var result = await _validator.Validate(shift);
             if (result.Invalid)
                 throw new ValidationException(result);

@@ -24,6 +24,7 @@ namespace BabySitter.Specs.BabySitters.Shifts
             await Given("baby sitter Bob Jack starts at 5:00 PM with a bedtime of 9:00 PM");
             await When("baby sitter Bob Jack leaves at 10:00 PM");
             await Then("I should see baby sitter Bob Jack left at 10:00 PM");
+            await Then("baby sitter Bob Jack should have charged $56");
         }
     }
 }

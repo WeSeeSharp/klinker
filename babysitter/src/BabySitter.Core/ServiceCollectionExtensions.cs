@@ -8,6 +8,7 @@ using BabySitter.Core.BabySitters.Shifts.Commands;
 using BabySitter.Core.BabySitters.Shifts.Entities;
 using BabySitter.Core.BabySitters.Shifts.Models;
 using BabySitter.Core.BabySitters.Shifts.Queries;
+using BabySitter.Core.BabySitters.Shifts.Services;
 using BabySitter.Core.BabySitters.Shifts.Validation;
 using BabySitter.Core.BabySitters.Validation;
 using BabySitter.Core.General;

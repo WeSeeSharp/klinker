@@ -12,5 +12,6 @@ namespace BabySitter.Core.BabySitters.Shifts.Models
         public long HourlyRate { get; set; }
         public long HourlyRateBetweenBedtimeAndMidnight { get; set; }
         public long HourlyRateAfterMidnight { get; set; }
+        public long? AmountCharged { get; set; }
     }
 }

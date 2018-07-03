@@ -2,9 +2,9 @@
 using BabySitter.Core.BabySitters.Shifts.Entities;
 using NodaTime;
 
-namespace BabySitter.Core.BabySitters
+namespace BabySitter.Core.BabySitters.Shifts.Services
 {
-    public class NightlyChargeParameters
+    public class NightlyChargeArgs
     {
         public LocalDateTime StartTime { get; }
         public LocalDateTime Bedtime { get; }
@@ -13,7 +13,7 @@ namespace BabySitter.Core.BabySitters
         public long HourlyRateBetweenBedtimeAndMidnight { get; }
         public long HourlyRateAfterMidnight { get; }
 
-        public NightlyChargeParameters(
+        public NightlyChargeArgs(
             LocalDateTime startTime, 
             LocalDateTime bedtime, 
             LocalDateTime leaveTime,

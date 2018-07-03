@@ -4,6 +4,7 @@ using BabySitter.Core;
 using BabySitter.Specs.General;
 using Xunit;
 using Xunit.Abstractions;
+using Xunit.Gherkin.Scenarios;
 using Xunit.Gherkin.Steps;
 
 namespace BabySitter.Specs.BabySitters.Shifts.Steps
@@ -50,6 +51,7 @@ namespace BabySitter.Specs.BabySitters.Shifts.Steps
                 : endTime.ToLocalDateTime();
             
             await _fixture.EndShift(sitter.Id, currentShift.Id, endDateTime);
+            ScenarioContext.Current.EndedShiftId(currentShift.Id);
         }
 
         [Then("I should see baby sitter (.*) (.*) left at (.*)$")]
@@ -62,6 +64,16 @@ namespace BabySitter.Specs.BabySitters.Shifts.Steps
             var endDateTime = endTime.ToLocalDateTime();
 
             Assert.True(shifts.Any(s => s.EndTime == endDateTime));
+        }
+
+        [Then("baby sitter (.*) (.*) should have charged \\$(.*)$")]
+        public async Task ThenBabySitterShouldHaveCharged(string firstName, string lastName, long charge)
+        {
+            var sitters = await _fixture.GetBabySitters();
+            var sitter = sitters.FindByName(firstName, lastName);
+
+            var shift = await _fixture.GetBabySitterShift(sitter.Id, ScenarioContext.Current.EndedShiftId());
+            Assert.Equal(charge, shift.AmountCharged);
         }
     }
 }

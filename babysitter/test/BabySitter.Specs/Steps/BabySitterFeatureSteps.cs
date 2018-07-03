@@ -1,5 +1,6 @@
 ﻿using BabySitter.Core;
 using BabySitter.Core.BabySitters;
+using BabySitter.Core.BabySitters.Shifts.Services;
 using NodaTime;
 using Xunit;
 using Xunit.Gherkin.Scenarios;
@@ -82,9 +83,9 @@ namespace BabySitter.Specs.Steps
             Assert.Equal(chargeAmount, actual);
         }
 
-        private static NightlyChargeParameters CreateParameters(LocalDateTime leaveTime)
+        private static NightlyChargeArgs CreateParameters(LocalDateTime leaveTime)
         {
-            return new NightlyChargeParameters(
+            return new NightlyChargeArgs(
                 ScenarioContext.Current.ArrivalTime(),
                 ScenarioContext.Current.Bedtime(),
                 leaveTime,
