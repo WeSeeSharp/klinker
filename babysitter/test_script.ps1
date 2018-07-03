@@ -3,8 +3,9 @@ pushd .\babysitter
 $hasErrors = $false
 $testDirectories = Get-ChildItem -Path .\test\* -Directory
 foreach($folder in $testDirectories) {
-    if ($folder.FullName -notcontains "Test" -or $folder.FullName -notcontains "Specs")
+    if ($folder.FullName -notcontains "Test" -or $folder.FullName -notcontains "Specs") {
         continue
+    }
     
     dotnet test $folder.FullName
     
