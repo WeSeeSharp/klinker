@@ -1,3 +1,6 @@
+[![Build status](https://ci.appveyor.com/api/projects/status/bwdlestcykb6vrkq/branch/master?svg=true)](https://ci.appveyor.com/project/bryce-klinker/klinker/branch/master)
+
+
 # Babysitter Kata
 
 ## Background
