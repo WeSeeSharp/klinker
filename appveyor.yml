@@ -1,0 +1,10 @@
+version: 1.0.{build}
+image: Visual Studio 2017
+services:
+  - postgresql
+platform: Any CPU
+configuration: Release
+build:
+  parallel: true
+  project: babysitter/BabySitter.sln
+  
