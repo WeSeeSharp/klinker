@@ -1,5 +1,7 @@
 version: 1.0.{build}
 image: Visual Studio 2017
+environment:
+  ASPNETCORE_ENVIRONMENT: ci
 services:
   - postgresql
 platform: Any CPU

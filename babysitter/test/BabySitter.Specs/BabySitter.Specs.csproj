@@ -17,6 +17,9 @@
     <ProjectReference Include="..\XUnit.Gherkin\XUnit.Gherkin.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="appsettings.ci.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

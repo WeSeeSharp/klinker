@@ -14,6 +14,9 @@
     <ProjectReference Include="..\..\src\BabySitter.Web\BabySitter.Web.csproj" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="appsettings.ci.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="appsettings.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
