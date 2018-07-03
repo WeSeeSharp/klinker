@@ -4,8 +4,8 @@ $hasErrors = $false
 $testDirectories = Get-ChildItem -Path .\test -Directory
 foreach($folder in $testDirectories) {
     Write-Host $folder.FullName
-
-    if ($folder.FullName -Match "Test" -or $folder.FullName -Match "Specs") {
+    $directoryName = [System.IO.Path]::GetDirectoryName($folder.FullName)
+    if ($directoryName -Match "Test" -or $directoryName -Match "Specs") {
         dotnet test $folder.FullName    
     }
     
