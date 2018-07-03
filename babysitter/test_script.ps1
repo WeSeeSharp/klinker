@@ -1,8 +1,10 @@
 pushd .\babysitter
 
 $hasErrors = $false
-$testDirectories = Get-ChildItem -Path .\test\* -Directory
+$testDirectories = Get-ChildItem -Path .\test -Directory
 foreach($folder in $testDirectories) {
+    Write-Host $folder.FullName
+    
     if ($folder.FullName -notcontains "Test" -or $folder.FullName -notcontains "Specs") {
         continue
     }
