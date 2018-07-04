@@ -5,6 +5,7 @@ using BabySitter.Core.General;
 using BabySitter.Web.General;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.SpaServices.ReactDevelopmentServer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -39,18 +40,31 @@ namespace BabySitter.Web
                     s => s.MigrationsAssembly(typeof(Startup).Assembly.GetName().Name).UseNodaTime()
                 )
             );
+            services.AddSpaStaticFiles(config => config.RootPath = "client-app/build");
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
                 app.UseDeveloperExceptionPage();
+            else
+                app.UseHsts();
 
-            using (var scope = app.ApplicationServices.CreateScope())
-            using (var context = scope.GetService<DatabaseContext>())
-                context.Database.Migrate();
+            app.UseHttpsRedirection()
+                .UseStaticFiles()
+                .UseSpaStaticFiles();
             
             app.UseMvc();
+            app.UseSpa(spa =>
+            {
+                spa.Options.SourcePath = "client-app";
+                if (env.IsDevelopment())
+                    spa.UseReactDevelopmentServer("start");
+            });
+            
+            using (var scope = app.ApplicationServices.CreateScope())
+            using (var context = scope.GetService<DatabaseContext>())
+                context.Database.Migrate();            
         }
     }
 }
