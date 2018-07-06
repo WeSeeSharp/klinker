@@ -1,5 +1,18 @@
 {
-  "extends": ["tslint:recommended", "tslint-react", "tslint-config-prettier"],
+  "extends": [
+    "tslint:recommended",
+    "tslint-react",
+    "tslint-config-prettier"
+  ],
+  "constants": {
+    "tests": "**/*.spec.ts*"
+  },
+  "rules": {
+    "semicolon": true,
+    "jsx-no-lambda": [
+      { "exclude": "tests" }
+    ]
+  },
   "linterOptions": {
     "exclude": [
       "config/**/*.js",
