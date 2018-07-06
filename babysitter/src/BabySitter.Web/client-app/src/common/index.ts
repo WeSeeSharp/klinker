@@ -5,3 +5,4 @@ export * from './rootReducer';
 export * from './navigation';
 export * from './main-content';
 export * from './toolbar';
+export * from './routing';

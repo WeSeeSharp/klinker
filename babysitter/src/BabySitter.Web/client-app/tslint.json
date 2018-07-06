@@ -9,6 +9,7 @@
   },
   "rules": {
     "semicolon": true,
+    "no-empty-interface": false,
     "jsx-no-lambda": [
       { "exclude": "tests" }
     ]

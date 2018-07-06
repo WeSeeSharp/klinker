@@ -1,4 +1,7 @@
 import { combineReducers } from "redux";
 import { IAppState } from "./AppState";
 
-export const rootReducer = combineReducers<IAppState>({});
+const fakeReducer = (state: boolean = false) => state;
+export const rootReducer = combineReducers<IAppState>({
+  isOpen: fakeReducer
+});
