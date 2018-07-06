@@ -18,6 +18,7 @@ export class Root extends React.Component<IRootProps> {
   constructor(props: IRootProps) {
     super(props);
     this.onToggleDrawer = this.onToggleDrawer.bind(this);
+    this.onCloseDrawer = this.onCloseDrawer.bind(this);
   }
 
   public render() {
@@ -29,7 +30,7 @@ export class Root extends React.Component<IRootProps> {
         <ConnectedRouter history={history}>
           <MainContent>
             <MainToolbar onToggleDrawer={this.onToggleDrawer}/>
-            <NavigationDrawer open={isDrawerOpen}/>
+            <NavigationDrawer open={isDrawerOpen} onClose={this.onCloseDrawer}/>
             {routing}
           </MainContent>
         </ConnectedRouter>
@@ -37,8 +38,12 @@ export class Root extends React.Component<IRootProps> {
     );
   }
 
-  private readonly onToggleDrawer = () => {
+  private onToggleDrawer() {
     const { isDrawerOpen } = this.state;
     this.setState({ isDrawerOpen: !isDrawerOpen });
+  }
+
+  private onCloseDrawer() {
+    this.setState({ isDrawerOpen: false });
   }
 }

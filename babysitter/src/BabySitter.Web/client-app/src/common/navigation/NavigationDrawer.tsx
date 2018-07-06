@@ -4,14 +4,15 @@ import { Link } from "react-router-dom";
 
 interface INavigationDrawerProps {
   open?: boolean;
+  onClose?: () => void;
 }
 
-export const NavigationDrawer = ({ open }: INavigationDrawerProps) => {
+export const NavigationDrawer = ({ open, onClose }: INavigationDrawerProps) => {
   return (
-    <Drawer open={open}>
-      <Link to={"/"}>Home</Link>
-      <Link to={"/sitters"}>Sitters</Link>
-      <Link to={"/shifts"}>Shifts</Link>
+    <Drawer open={open} onClose={onClose}>
+      <Link to={"/"} onClick={onClose}>Home</Link>
+      <Link to={"/sitters"} onClick={onClose}>Sitters</Link>
+      <Link to={"/shifts"} onClick={onClose}>Shifts</Link>
     </Drawer>
   );
 };
