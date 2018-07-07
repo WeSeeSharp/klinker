@@ -3,7 +3,9 @@ import { History } from "history";
 import * as React from "react";
 import { Provider } from "react-redux";
 import { Store } from "redux";
-import { MainContent, MainToolbar, NavigationDrawer, routes, RouteWithSubRoutes } from "./common";
+import { MainContent, MainToolbar, NavigationDrawer, RouteWithSubRoutes } from "./common";
+import { welcomeRoutes } from "./welcome";
+import { sittersRoutes } from "./sitters";
 
 interface IRootProps {
   store: Store;
@@ -12,7 +14,11 @@ interface IRootProps {
 
 export class Root extends React.Component<IRootProps> {
   public state = {
-    isDrawerOpen: false
+    isDrawerOpen: false,
+    routes: [
+      ...welcomeRoutes,
+      ...sittersRoutes
+    ]
   };
 
   constructor(props: IRootProps) {
@@ -22,7 +28,7 @@ export class Root extends React.Component<IRootProps> {
   }
 
   public render() {
-    const { isDrawerOpen } = this.state;
+    const { isDrawerOpen, routes } = this.state;
     const { store, history } = this.props;
     const routing = routes.map(r => (<RouteWithSubRoutes key={r.path} {...r}/>));
     return (
