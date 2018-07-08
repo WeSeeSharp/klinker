@@ -1,4 +1,3 @@
-export * from './epic-dependencies'
 export * from './rootReducer'
 export * from './rootEpic'
 export * from './configureStore'

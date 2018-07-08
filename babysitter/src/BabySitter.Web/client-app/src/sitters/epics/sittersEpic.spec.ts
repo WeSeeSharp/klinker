@@ -3,8 +3,8 @@ import { StateObservable } from "redux-observable";
 import { SitterActionCreators } from "../actions";
 import { getSittersEpic } from "./sittersEpic";
 import { Action } from "redux";
-import { IAppState } from "../../common";
-import { IEpicDependencies } from "../../epic-dependencies";
+import { IAppState } from "../../AppState";
+import { IEpicDependencies } from "../../common";
 import { Subject } from "rxjs";
 
 let fakeAjax: FakeRxJSAjax;

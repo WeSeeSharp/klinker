@@ -1,5 +1,5 @@
-import { IAppState } from "../../common";
-import { SitterModel } from "../models/sitter.model";
+import { IAppState } from "../../AppState";
+import { SitterModel } from "../models";
 
 export const getSitters = (state: IAppState): SitterModel[] => {
   const sittersState = state.sitters || {};
