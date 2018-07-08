@@ -2,9 +2,9 @@ import * as React from "react";
 import { SitterActionCreators } from "./actions";
 import { connect } from "react-redux";
 import { bindActionCreators, Dispatch } from "redux";
-import { IAppState } from "../common";
+import { IAppState } from "../AppState";
 import { getSitters } from "./reducers";
-import { SittersList } from "./list/SittersList";
+import { SittersList } from "./list";
 
 class Container extends React.Component<any> {
   componentDidMount() {

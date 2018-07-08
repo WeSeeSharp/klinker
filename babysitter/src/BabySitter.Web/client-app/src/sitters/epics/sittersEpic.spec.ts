@@ -4,7 +4,7 @@ import { SitterActionCreators } from "../actions";
 import { getSittersEpic } from "./sittersEpic";
 import { Action } from "redux";
 import { IAppState } from "../../common";
-import { IEpicDependencies } from "../../common/epic-dependencies";
+import { IEpicDependencies } from "../../epic-dependencies";
 import { Subject } from "rxjs";
 
 let fakeAjax: FakeRxJSAjax;

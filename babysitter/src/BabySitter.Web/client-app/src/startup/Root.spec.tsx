@@ -5,9 +5,9 @@ import { createMemoryHistory, History } from "history";
 import * as React from "react";
 import { Link } from "react-router-dom";
 import { createStore } from "redux";
-import { rootReducer } from "./common";
+import { rootReducer } from "./rootReducer";
 import { Root } from "./Root";
-import { Welcome } from "./welcome";
+import { Welcome } from "../welcome";
 
 let root: ReactWrapper;
 

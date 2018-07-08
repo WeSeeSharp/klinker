@@ -1,4 +1,4 @@
-import { ISittersState } from "../sitters";
+import { ISittersState } from "./sitters";
 
 export interface IAppState {
   isOpen?: boolean;

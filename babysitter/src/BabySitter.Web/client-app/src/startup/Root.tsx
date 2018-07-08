@@ -3,9 +3,9 @@ import { History } from "history";
 import * as React from "react";
 import { Provider } from "react-redux";
 import { Store } from "redux";
-import { MainContent, MainToolbar, NavigationDrawer, RouteWithSubRoutes } from "./common";
-import { welcomeRoutes } from "./welcome";
-import { sittersRoutes } from "./sitters";
+import { MainContent, MainToolbar, NavigationDrawer, RouteWithSubRoutes } from "../common";
+import { welcomeRoutes } from "../welcome";
+import { sittersRoutes } from "../sitters";
 
 interface IRootProps {
   store: Store;

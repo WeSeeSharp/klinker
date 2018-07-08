@@ -1,10 +1,9 @@
 import { createBrowserHistory } from "history";
 import * as React from "react";
 import { render } from "react-dom";
-import { configureStore, rootReducer } from "./common";
+import { configureStore, rootReducer, Root } from "./startup";
 import "./index.css";
 import registerServiceWorker from "./registerServiceWorker";
-import { Root } from "./Root";
 
 const history = createBrowserHistory();
 const store = configureStore(rootReducer, history);
