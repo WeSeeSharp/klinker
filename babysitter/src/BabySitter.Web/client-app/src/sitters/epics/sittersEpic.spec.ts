@@ -31,3 +31,13 @@ it("should get sitters from api", done => {
     });
   action$.next(SitterActionCreators.loadSitters());
 });
+
+it("should fail to get sitters from api", done => {
+  fakeAjax.setupFailure(`${fakeAjax.baseUrl}/babysitters`, "nope");
+  getSittersEpic(action$, state$, dependencies)
+    .subscribe(a => {
+      expect(a).toEqual(SitterActionCreators.loadSittersFailed("nope"));
+      done();
+    });
+  action$.next(SitterActionCreators.loadSitters());
+});

@@ -7,6 +7,8 @@ import { rootEpic } from "./rootEpic";
 import { ajax } from "rxjs/ajax";
 import { IEpicDependencies } from "../common";
 
+const composeEnhancers = (<any>window).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
+
 export const configureStore = (reducer: Reducer, history: History, initialState: DeepPartial<any> = {}): Store<IAppState> => {
   const epicMiddleware = createEpicMiddleware<Action, Action, IAppState, IEpicDependencies>({
     dependencies: {
@@ -18,7 +20,7 @@ export const configureStore = (reducer: Reducer, history: History, initialState:
   const store = createStore(
     connectRouter(history)(reducer),
     initialState,
-    compose(
+    composeEnhancers(
       applyMiddleware(
         routerMiddleware(history),
         epicMiddleware
