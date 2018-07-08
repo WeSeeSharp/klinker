@@ -1,6 +1,6 @@
 import * as React from "react";
 import { List, ListItem, ListItemText } from '@material-ui/core';
-import { SitterModel } from "../models/sitter.model";
+import { SitterModel } from "../models";
 
 interface SittersListProps {
   sitters: SitterModel[];

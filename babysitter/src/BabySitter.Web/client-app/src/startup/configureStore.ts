@@ -10,7 +10,7 @@ import { IEpicDependencies } from "../common";
 export const configureStore = (reducer: Reducer, history: History, initialState: DeepPartial<any> = {}): Store<IAppState> => {
   const epicMiddleware = createEpicMiddleware<Action, Action, IAppState, IEpicDependencies>({
     dependencies: {
-      baseUrl: 'http://localhost:5000',
+      baseUrl: 'https://localhost:5001',
       getJSON: ajax.getJSON
     }
   });

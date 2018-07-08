@@ -3,7 +3,7 @@ import * as React from "react";
 import { render } from "react-dom";
 import { configureStore, rootReducer, Root } from "./startup";
 import "./index.css";
-import registerServiceWorker from "./registerServiceWorker";
+import registerServiceWorker from "./startup/registerServiceWorker";
 
 const history = createBrowserHistory();
 const store = configureStore(rootReducer, history);

@@ -23,7 +23,7 @@ beforeEach(() => {
 });
 
 it("should get sitters from api", done => {
-  fakeAjax.setupJSON(`${fakeAjax.baseUrl}/sitters`, []);
+  fakeAjax.setupJSON(`${fakeAjax.baseUrl}/babysitters`, []);
   getSittersEpic(action$, state$, dependencies)
     .subscribe(a => {
       expect(a).toEqual(SitterActionCreators.loadSittersSuccess([]));

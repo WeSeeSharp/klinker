@@ -10,6 +10,6 @@ import { SitterModel } from "../models";
 export const getSittersEpic = (action$: Observable<Action>, state$: StateObservable<IAppState>, { baseUrl, getJSON }: IEpicDependencies): Observable<Action> =>
   action$.pipe(
     ofType(SITTERS.LOAD),
-    mergeMap(() => getJSON<SitterModel[]>(`${baseUrl}/sitters`)),
+    mergeMap(() => getJSON<SitterModel[]>(`${baseUrl}/babysitters`)),
     map(sitters => SitterActionCreators.loadSittersSuccess(sitters))
   );

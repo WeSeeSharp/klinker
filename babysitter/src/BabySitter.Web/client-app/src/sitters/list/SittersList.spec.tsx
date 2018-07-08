@@ -1,7 +1,7 @@
 import { mount } from "enzyme";
 import { SittersList } from "./SittersList";
 import * as React from "react";
-import { SitterModel } from "../models/sitter.model";
+import { SitterModel } from "../models";
 
 it("should show sitter name", () => {
   const sitters: SitterModel[] = [
