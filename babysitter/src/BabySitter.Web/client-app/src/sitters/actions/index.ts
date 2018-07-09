@@ -6,7 +6,7 @@ export const SITTERS = {
 
 export const loadSitters = () => ({ type: SITTERS.LOAD });
 export const loadSittersSuccess = (sitters: any[]) => ({ type: SITTERS.LOAD_SUCCESS, payload: sitters });
-export const loadSittersFailed = (error: any) => ({ type: SITTERS.LOAD_SUCCESS, payload: error });
+export const loadSittersFailed = (error: any) => ({ type: SITTERS.LOAD_FAILED, payload: error });
 
 export const SitterActionCreators = {
   loadSitters,

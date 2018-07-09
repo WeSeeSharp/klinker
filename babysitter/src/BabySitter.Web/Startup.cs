@@ -25,7 +25,8 @@ namespace BabySitter.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddTransient<NightlyChargeCalculator>();
+            services.AddCors(o =>
+                o.AddDefaultPolicy(b => b.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials()));
             services.AddMvc(o =>
                 {
                     o.Filters.Add<NullToNotFoundFilter>();
@@ -50,7 +51,8 @@ namespace BabySitter.Web
             else
                 app.UseHsts();
 
-            app.UseHttpsRedirection()
+            app.UseCors()
+                .UseHttpsRedirection()
                 .UseStaticFiles()
                 .UseSpaStaticFiles();
             

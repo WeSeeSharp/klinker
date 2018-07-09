@@ -1,6 +1,6 @@
 import { SitterActionCreators } from "../actions";
 import { sittersReducer } from "./sitters.reducer";
-import { SitterModel } from "../models/sitter.model";
+import { SitterModel } from "../models";
 
 it("should create hash of sitters", () => {
   const sitters: SitterModel[] = [
