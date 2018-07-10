@@ -10,3 +10,7 @@ export const createDefaultTheme = () => {
     }
   });
 };
+
+export interface ClassesProps {
+  classes: Record<string, string>;
+}

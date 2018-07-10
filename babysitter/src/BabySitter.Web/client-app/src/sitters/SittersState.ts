@@ -1,4 +1,4 @@
-import { SitterModel } from "./models/sitter.model";
+import { SitterModel } from "./models";
 
 export interface ISittersState {
   [id: number]: SitterModel;

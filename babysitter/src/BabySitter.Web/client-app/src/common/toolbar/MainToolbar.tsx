@@ -1,14 +1,16 @@
-import { AppBar, IconButton, Toolbar } from "@material-ui/core";
+import { AppBar, IconButton, Theme, Toolbar, withStyles } from "@material-ui/core";
+import { StyleRules } from '@material-ui/core/styles/withStyles'
 import MenuIcon from '@material-ui/icons/Menu';
 import * as React from "react";
+import { ClassesProps } from "../theming";
 
 interface IMainToolbarProps {
   onToggleDrawer: () => void;
 }
 
-export const MainToolbar = ({onToggleDrawer}: IMainToolbarProps) => {
+const Component = ({onToggleDrawer, classes}: IMainToolbarProps & ClassesProps) => {
   return (
-    <AppBar>
+    <AppBar position="absolute" className={classes.toolbar}>
       <Toolbar>
         <IconButton className="drawer-toggle" onClick={onToggleDrawer}>
           <MenuIcon />
@@ -17,3 +19,11 @@ export const MainToolbar = ({onToggleDrawer}: IMainToolbarProps) => {
     </AppBar>
   );
 };
+
+const styles = (theme: Theme): StyleRules<string> => ({
+  toolbar: {
+    zIndex: theme.zIndex.drawer + 1
+  }
+});
+
+export const MainToolbar = withStyles(styles)(Component);

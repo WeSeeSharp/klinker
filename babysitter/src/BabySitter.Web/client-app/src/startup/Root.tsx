@@ -3,7 +3,8 @@ import { History } from "history";
 import * as React from "react";
 import { Provider } from "react-redux";
 import { Store } from "redux";
-import { MuiThemeProvider } from "@material-ui/core";
+import { StyleRules } from '@material-ui/core/styles/withStyles'
+import { MuiThemeProvider, Theme, withStyles, WithTheme } from "@material-ui/core";
 import { createDefaultTheme, MainContent, MainToolbar, NavigationDrawer, RouteWithSubRoutes } from "../common";
 import { welcomeRoutes } from "../welcome";
 import { sittersRoutes } from "../sitters";
@@ -13,7 +14,7 @@ interface IRootProps {
   history: History;
 }
 
-export class Root extends React.Component<IRootProps> {
+class Component extends React.Component<IRootProps & Partial<WithTheme> & { classes: Record<never, string> }> {
   public state = {
     isDrawerOpen: false,
     theme: createDefaultTheme(),
@@ -23,7 +24,7 @@ export class Root extends React.Component<IRootProps> {
     ]
   };
 
-  constructor(props: IRootProps) {
+  constructor(props: IRootProps & Partial<WithTheme> & { classes: Record<never, string> }) {
     super(props);
     this.onToggleDrawer = this.onToggleDrawer.bind(this);
     this.onCloseDrawer = this.onCloseDrawer.bind(this);
@@ -37,11 +38,13 @@ export class Root extends React.Component<IRootProps> {
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <MuiThemeProvider theme={theme}>
-            <MainContent>
+            <div className="root">
               <MainToolbar onToggleDrawer={this.onToggleDrawer}/>
               <NavigationDrawer open={isDrawerOpen} onClose={this.onCloseDrawer}/>
-              {routing}
-            </MainContent>
+              <MainContent>
+                {routing}
+              </MainContent>
+            </div>
           </MuiThemeProvider>
         </ConnectedRouter>
       </Provider>
@@ -57,3 +60,15 @@ export class Root extends React.Component<IRootProps> {
     this.setState({ isDrawerOpen: false });
   }
 }
+
+const styles = (theme: Theme): StyleRules<string> => ({
+  root: {
+    flexGrow: 1,
+    display: 'flex',
+    overflow: 'hidden',
+    position: 'relative',
+    zIndex: 1
+  },
+});
+
+export const Root = withStyles(styles)(Component);

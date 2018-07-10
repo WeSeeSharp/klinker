@@ -1,8 +1,8 @@
-import { shallow } from "enzyme";
+import { mount } from "enzyme";
 import * as React from "react";
 import { MainContent } from "./MainContent";
 
 it("should show children", () => {
-  const content = shallow(<MainContent>hello</MainContent>);
+  const content = mount(<MainContent>hello</MainContent>);
   expect(content.text()).toContain("hello");
 });

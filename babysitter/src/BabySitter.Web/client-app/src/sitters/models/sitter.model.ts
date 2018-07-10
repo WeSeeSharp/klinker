@@ -1,8 +1,5 @@
-export interface SitterModel {
+import { AddSitterModel } from "./add-sitter.model";
+
+export interface SitterModel extends AddSitterModel {
   id: number;
-  firstName?: string;
-  lastName?: string;
-  hourlyRate?: number;
-  hourlyRateBetweenBedtimeAndMidnight?: number;
-  hourlyRateAfterMidnight?: number;
 }
