@@ -10,10 +10,8 @@ interface IMainContentProps {
 const Component = ({ children, classes }: IMainContentProps & ClassesProps) => {
   return (
     <main className={classes.main}>
-      <div className={classes.toolbar} />
-      <div>
-        {children}
-      </div>
+      <div className={classes.toolbar}/>
+      {children}
     </main>
   );
 };
@@ -22,7 +20,8 @@ const styles = (theme: Theme): StyleRules<string> => ({
   main: {
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
-    minWidth: 0
+    minWidth: 0,
+    flex: 1
   },
   toolbar: theme.mixins.toolbar
 });

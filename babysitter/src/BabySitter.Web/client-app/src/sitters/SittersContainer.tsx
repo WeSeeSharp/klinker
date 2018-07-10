@@ -5,7 +5,9 @@ import { bindActionCreators, Dispatch } from "redux";
 import { IAppState } from "../AppState";
 import { getSitters } from "./reducers";
 import { SittersList } from "./list";
-import { AddSitterDialog } from "./add-sitter/AddSitterDialog";
+import { AddSitterDialog } from "./add-sitter";
+import { Theme, withStyles } from "@material-ui/core";
+import { StyleRules } from "@material-ui/core/styles";
 
 class Container extends React.Component<any> {
   state = {
@@ -18,10 +20,10 @@ class Container extends React.Component<any> {
   }
 
   render() {
-    const { sitters, addSitter } = this.props;
+    const { sitters, addSitter, classes } = this.props;
     const { isAdding } = this.state;
     return (
-      <div>
+      <div className={classes.main}>
         <SittersList sitters={sitters} onAddSitter={this.onAddSitter}/>
         <AddSitterDialog open={isAdding} onSave={s => addSitter(s)} onCancel={this.onCancelAddSitter}/>
       </div>
@@ -37,6 +39,17 @@ class Container extends React.Component<any> {
   };
 }
 
+const styles = (theme: Theme): StyleRules<string> => ({
+  main: {
+    flexGrow: 1,
+    display: "flex",
+    flex: 1,
+    height: "100%"
+  }
+});
+
+const StyledContainer = withStyles(styles)(Container);
+
 const mapStateToProps = (state: IAppState) => {
   return {
     sitters: getSitters(state)
@@ -45,4 +58,4 @@ const mapStateToProps = (state: IAppState) => {
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({ ...bindActionCreators(SitterActionCreators, dispatch) });
 
-export const SittersContainer = connect(mapStateToProps, mapDispatchToProps)(Container);
+export const SittersContainer = connect(mapStateToProps, mapDispatchToProps)(StyledContainer);

@@ -5,7 +5,14 @@ import { Provider } from "react-redux";
 import { Store } from "redux";
 import { StyleRules } from '@material-ui/core/styles/withStyles'
 import { MuiThemeProvider, Theme, withStyles, WithTheme } from "@material-ui/core";
-import { createDefaultTheme, MainContent, MainToolbar, NavigationDrawer, RouteWithSubRoutes } from "../common";
+import {
+  ClassesProps,
+  createDefaultTheme,
+  MainContent,
+  MainToolbar,
+  NavigationDrawer,
+  RouteWithSubRoutes
+} from "../common";
 import { welcomeRoutes } from "../welcome";
 import { sittersRoutes } from "../sitters";
 
@@ -14,7 +21,7 @@ interface IRootProps {
   history: History;
 }
 
-class Component extends React.Component<IRootProps & Partial<WithTheme> & { classes: Record<never, string> }> {
+class Component extends React.Component<IRootProps & Partial<WithTheme> & ClassesProps> {
   public state = {
     isDrawerOpen: false,
     theme: createDefaultTheme(),
@@ -24,7 +31,7 @@ class Component extends React.Component<IRootProps & Partial<WithTheme> & { clas
     ]
   };
 
-  constructor(props: IRootProps & Partial<WithTheme> & { classes: Record<never, string> }) {
+  constructor(props: IRootProps & Partial<WithTheme> & ClassesProps) {
     super(props);
     this.onToggleDrawer = this.onToggleDrawer.bind(this);
     this.onCloseDrawer = this.onCloseDrawer.bind(this);
@@ -32,13 +39,13 @@ class Component extends React.Component<IRootProps & Partial<WithTheme> & { clas
 
   public render() {
     const { isDrawerOpen, routes, theme } = this.state;
-    const { store, history } = this.props;
+    const { store, history, classes } = this.props;
     const routing = routes.map(r => (<RouteWithSubRoutes key={r.path} {...r}/>));
     return (
       <Provider store={store}>
         <ConnectedRouter history={history}>
           <MuiThemeProvider theme={theme}>
-            <div className="root">
+            <div className={classes.root}>
               <MainToolbar onToggleDrawer={this.onToggleDrawer}/>
               <NavigationDrawer open={isDrawerOpen} onClose={this.onCloseDrawer}/>
               <MainContent>
@@ -67,6 +74,8 @@ const styles = (theme: Theme): StyleRules<string> => ({
     display: 'flex',
     overflow: 'hidden',
     position: 'relative',
+    flexDirection: 'column',
+    height: '100%',
     zIndex: 1
   },
 });
