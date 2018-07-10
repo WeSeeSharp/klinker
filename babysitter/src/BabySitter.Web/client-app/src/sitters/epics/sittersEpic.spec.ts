@@ -6,7 +6,7 @@ import { Action } from "redux";
 import { IAppState } from "../../AppState";
 import { ActionWithPayload, IEpicDependencies } from "../../common";
 import { Subject } from "rxjs";
-import { baseUrl } from "../../../testing";
+import { baseUrl, mockHttpGet } from "../../../testing";
 import MockRequest from "xhr-mock/lib/MockRequest";
 import MockResponse from "xhr-mock/lib/MockResponse";
 
@@ -26,9 +26,7 @@ afterEach(() => {
 })
 
 it("should get sitters from api", done => {
-  xhrMock.get(`${baseUrl}/babysitters`, {
-    body: JSON.stringify([])
-  });
+  mockHttpGet(`${baseUrl}/babysitters`, []);
   getSittersEpic(action$, state$, dependencies)
     .subscribe(a => {
       expect(a).toEqual(SitterActionCreators.loadSittersSuccess([]));
@@ -56,15 +54,12 @@ it('should post sitter to api', done => {
     res.status(201);
     res.headers({
       ...res.headers(),
-      'location': `${baseUrl}/babysitters`
+      'location': `${baseUrl}/babysitters/5`
     });
     requestBody = req.body();
     return res;
   });
-
-  xhrMock.get(`${baseUrl}/babysitters`, {
-    body: JSON.stringify({ id: 5, firstName: 'bob', lastName: 'jack' })
-  });
+  mockHttpGet(`${baseUrl}/babysitters/5`, { id: 5, firstName: 'bob', lastName: 'jack' });
   addSitterEpic(action$.asObservable(), state$, dependencies)
     .subscribe(a => {
       expect(requestBody).toEqual(JSON.stringify({ firstName: 'bob', lastName: 'jack' }));
