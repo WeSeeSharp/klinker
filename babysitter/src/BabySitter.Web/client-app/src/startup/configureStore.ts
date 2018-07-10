@@ -4,7 +4,6 @@ import { Action, applyMiddleware, compose, createStore, DeepPartial, Reducer, St
 import { createEpicMiddleware } from "redux-observable";
 import { IAppState } from "../AppState";
 import { rootEpic } from "./rootEpic";
-import { ajax } from "rxjs/ajax";
 import { IEpicDependencies } from "../common";
 
 const composeEnhancers = (<any>window).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
@@ -12,8 +11,7 @@ const composeEnhancers = (<any>window).__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || c
 export const configureStore = (reducer: Reducer, history: History, initialState: DeepPartial<any> = {}): Store<IAppState> => {
   const epicMiddleware = createEpicMiddleware<Action, Action, IAppState, IEpicDependencies>({
     dependencies: {
-      baseUrl: 'https://localhost:5001',
-      getJSON: ajax.getJSON
+      baseUrl: 'https://localhost:5001'
     }
   });
 
