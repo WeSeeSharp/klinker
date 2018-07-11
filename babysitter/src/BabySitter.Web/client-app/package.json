@@ -123,7 +123,7 @@
     ],
     "globals": {
       "ts-jest": {
-        "tsConfigFile": "/Users/bryceklinker/pillar/klinker/babysitter/src/BabySitter.Web/client-app/tsconfig.test.json"
+        "tsConfigFile": "./tsconfig.test.json"
       }
     }
   },
