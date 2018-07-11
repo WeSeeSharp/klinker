@@ -15,6 +15,16 @@ foreach($folder in $testDirectories) {
 
 popd
 
+pushd .\babysitter\src\BabySitter.Web
+
+yarn test:ci
+
+if ($hasErrors -o $lastExitCode -ne 0) {
+    $hasErrors = $true
+}
+
+popd
+
 if ($hasErrors) {
     $host.setshouldexit(1);
 }

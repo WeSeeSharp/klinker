@@ -53,7 +53,8 @@
   "scripts": {
     "start": "node scripts/start.js",
     "build": "node scripts/build.js",
-    "test": "node scripts/test.js --env=jsdom --setupTestFrameworkScriptFile=./testing/setup.ts"
+    "test": "node scripts/test.js --env=jsdom --setupTestFrameworkScriptFile=./testing/setup.ts",
+    "test:ci": "cross-env CI=true yarn test"
   },
   "devDependencies": {
     "@types/enzyme": "3.1.11",
