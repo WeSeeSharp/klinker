@@ -25,8 +25,14 @@ namespace BabySitter.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(o =>
-                o.AddDefaultPolicy(b => b.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin().AllowCredentials()));
+            services.AddCors(o => 
+                o.AddDefaultPolicy(b => b.AllowAnyHeader()
+                    .AllowAnyMethod()
+                    .AllowAnyOrigin()
+                    .AllowCredentials()
+                    .WithExposedHeaders("Location")
+                )
+            );
             services.AddMvc(o =>
                 {
                     o.Filters.Add<NullToNotFoundFilter>();
