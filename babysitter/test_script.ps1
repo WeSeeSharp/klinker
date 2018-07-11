@@ -16,7 +16,7 @@ foreach($folder in $testDirectories) {
 
 popd
 
-pushd .\babysitter\src\BabySitter.Web
+pushd .\babysitter\src\BabySitter.Web\client-app
 
 yarn test:ci
 
