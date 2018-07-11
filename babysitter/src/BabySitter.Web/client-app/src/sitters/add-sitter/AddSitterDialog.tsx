@@ -35,8 +35,7 @@ export class AddSitterDialog extends React.Component<IAddSitterDialogProps, IAdd
                        value={firstName}
                        onChange={this.handleChange("firstName")}/>
 
-            <TextField autoFocus
-                       id="lastName"
+            <TextField id="lastName"
                        label="Last Name"
                        fullWidth
                        value={lastName}

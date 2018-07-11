@@ -21,7 +21,8 @@ const styles = (theme: Theme): StyleRules<string> => ({
     flexGrow: 1,
     padding: theme.spacing.unit * 3,
     minWidth: 0,
-    flex: 1
+    flex: 1,
+    height: "95%"
   },
   toolbar: theme.mixins.toolbar
 });

@@ -1,4 +1,4 @@
-import xhrMock from 'xhr-mock';
+import xhrMock from "xhr-mock";
 import { StateObservable } from "redux-observable";
 import { SitterActionCreators } from "../actions";
 import { addSitterEpic, getSittersEpic } from "./sittersEpic";
@@ -10,61 +10,70 @@ import { baseUrl, mockHttpGet } from "../../../testing";
 import MockRequest from "xhr-mock/lib/MockRequest";
 import MockResponse from "xhr-mock/lib/MockResponse";
 
-let action$: Subject<Action>;
-let state$: StateObservable<IAppState>;
-let dependencies: IEpicDependencies;
+describe("SittersEpic", () => {
+  let action$: Subject<Action>;
+  let state$: StateObservable<IAppState>;
+  let dependencies: IEpicDependencies;
 
-beforeEach(() => {
-  xhrMock.setup();
-  action$ = new Subject<ActionWithPayload<any>>();
-  state$ = new StateObservable<IAppState>(new Subject<IAppState>(), {});
-  dependencies = { baseUrl };
-});
-
-afterEach(() => {
-  xhrMock.teardown();
-})
-
-it("should get sitters from api", done => {
-  mockHttpGet(`${baseUrl}/babysitters`, []);
-  getSittersEpic(action$, state$, dependencies)
-    .subscribe(a => {
-      expect(a).toEqual(SitterActionCreators.loadSittersSuccess([]));
-      done();
-    });
-  action$.next(SitterActionCreators.loadSitters());
-});
-
-it("should fail to get sitters from api", done => {
-  xhrMock.get(`${baseUrl}/babysitters`, {
-    status: 400,
-    body: 'nope'
+  beforeEach(() => {
+    xhrMock.setup();
+    action$ = new Subject<ActionWithPayload<any>>();
+    state$ = new StateObservable<IAppState>(new Subject<IAppState>(), {});
+    dependencies = { baseUrl };
   });
-  getSittersEpic(action$, state$, dependencies)
-    .subscribe(a => {
-      expect(a).toEqual(SitterActionCreators.loadSittersFailed("nope"));
-      done();
-    });
-  action$.next(SitterActionCreators.loadSitters());
-});
 
-it('should post sitter to api', done => {
-  let requestBody: any;
-  xhrMock.post(`${baseUrl}/babysitters`, (req:MockRequest, res: MockResponse) => {
-    res.status(201);
-    res.headers({
-      ...res.headers(),
-      'location': `${baseUrl}/babysitters/5`
-    });
-    requestBody = req.body();
-    return res;
+  afterEach(() => {
+    xhrMock.teardown();
   });
-  mockHttpGet(`${baseUrl}/babysitters/5`, { id: 5, firstName: 'bob', lastName: 'jack' });
-  addSitterEpic(action$.asObservable(), state$, dependencies)
-    .subscribe(a => {
-      expect(requestBody).toEqual(JSON.stringify({ firstName: 'bob', lastName: 'jack' }));
-      expect(a).toEqual(SitterActionCreators.addSitterSuccess({ id: 5, firstName: 'bob', lastName: 'jack' }))
-      done();
+
+  it("should get sitters from api", done => {
+    mockHttpGet(`${baseUrl}/babysitters`, []);
+    getSittersEpic(action$, state$, dependencies)
+      .subscribe(a => {
+        expect(a).toEqual(SitterActionCreators.loadSittersSuccess([]));
+        done();
+      });
+    action$.next(SitterActionCreators.loadSitters());
+  });
+
+  it("should fail to get sitters from api", done => {
+    xhrMock.get(`${baseUrl}/babysitters`, {
+      status: 400,
+      body: "nope"
     });
-  action$.next(SitterActionCreators.addSitter({ firstName: 'bob', lastName: 'jack' }))
+    getSittersEpic(action$, state$, dependencies)
+      .subscribe(a => {
+        expect(a).toEqual(SitterActionCreators.loadSittersFailed("nope"));
+        done();
+      });
+    action$.next(SitterActionCreators.loadSitters());
+  });
+
+  it("should post sitter to api", done => {
+    let requestBody: any;
+    mockPostBabySitter((req: MockRequest) => {
+      requestBody = req.body();
+    });
+
+    mockHttpGet(`${baseUrl}/babysitters/5`, { id: 5, firstName: "bob", lastName: "jack" });
+    addSitterEpic(action$.asObservable(), state$, dependencies)
+      .subscribe(a => {
+        expect(requestBody).toEqual(JSON.stringify({ firstName: "bob", lastName: "jack" }));
+        expect(a).toEqual(SitterActionCreators.addSitterSuccess({ id: 5, firstName: "bob", lastName: "jack" }));
+        done();
+      });
+    action$.next(SitterActionCreators.addSitter({ firstName: "bob", lastName: "jack" }));
+  });
+
+  function mockPostBabySitter(callback: (req: MockRequest, res: MockResponse) => void) {
+    xhrMock.post(`${baseUrl}/babysitters`, (req: MockRequest, res: MockResponse) => {
+      res.status(201);
+      res.headers({
+        ...res.headers(),
+        "Location": `${baseUrl}/babysitters/5`
+      });
+      callback(req, res);
+      return res;
+    });
+  }
 });

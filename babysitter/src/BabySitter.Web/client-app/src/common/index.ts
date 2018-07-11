@@ -6,3 +6,4 @@ export * from './routing';
 export * from './action-with-payload';
 export * from './epic-dependencies';
 export * from './theming';
+export * from './http';
