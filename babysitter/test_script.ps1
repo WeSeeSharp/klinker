@@ -1,6 +1,7 @@
+$hasErrors = $false
+
 pushd .\babysitter
 
-$hasErrors = $false
 $testDirectories = Get-ChildItem -Path .\test -Directory
 foreach($folder in $testDirectories) {
     Write-Host $folder.FullName
@@ -19,7 +20,7 @@ pushd .\babysitter\src\BabySitter.Web
 
 yarn test:ci
 
-if ($hasErrors -o $lastExitCode -ne 0) {
+if ($hasErrors -or $lastExitCode -ne 0) {
     $hasErrors = $true
 }
 
