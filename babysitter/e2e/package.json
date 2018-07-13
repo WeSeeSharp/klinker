@@ -6,6 +6,7 @@
   "license": "MIT",
   "private": true,
   "scripts": {
+    "precommit": "pretty-quick --staged",
     "test": "jest --config ./jest.config.json"
   },
   "devDependencies": {
