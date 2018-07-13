@@ -1,5 +1,11 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Root } from './root';
+import { createBrowserHistory } from 'history';
+import { Root, configureStore } from './root';
 
-render(<Root />, document.getElementById('root'));
+const history = createBrowserHistory();
+const store = configureStore(history);
+render(
+  <Root store={store} history={history} />,
+  document.getElementById('root')
+);
