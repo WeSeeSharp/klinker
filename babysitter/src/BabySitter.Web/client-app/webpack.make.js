@@ -7,6 +7,7 @@ module.exports = function(env) {
   return {
     mode: isDev(env) ? 'development' : 'production',
     devtool: isDev(env) ? 'source-map' : 'cheap-module-source-map',
+    optimization: getOptimization(env),
     entry: {
       main: path.resolve(__dirname, 'src', 'index.tsx'),
     },
@@ -54,17 +55,18 @@ function isDev(env) {
   return env === 'dev';
 }
 
+function getOptimization(env) {
+  return {
+    minimize: !isDev(env),
+  };
+}
+
 function getDevPlugins(env) {
   return [...getBasePlugins(env), new webpack.HotModuleReplacementPlugin()];
 }
 
 function getProductionPlugins(env) {
-  return [
-    ...getBasePlugins(env),
-    new webpack.optimize.UglifyJsPlugin({
-      sourceMap: true,
-    }),
-  ];
+  return [...getBasePlugins(env)];
 }
 
 function getBasePlugins(env) {

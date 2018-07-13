@@ -47,7 +47,7 @@ namespace BabySitter.Web
                     s => s.MigrationsAssembly(typeof(Startup).Assembly.GetName().Name).UseNodaTime()
                 )
             );
-            services.AddSpaStaticFiles(config => config.RootPath = "client-app/build");
+            services.AddSpaStaticFiles(config => config.RootPath = "client-app/dist");
         }
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)

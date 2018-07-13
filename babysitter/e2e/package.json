@@ -7,6 +7,9 @@
   "private": true,
   "scripts": {
     "precommit": "pretty-quick --staged",
+    "build:front-end": "cd ../src/BabySitter.Web/client-app && yarn build:prod",
+    "build:server": "cd ../ && dotnet build",
+    "pretest": "concurrently \"yarn build:server\" \"yarn build:front-end\"",
     "test": "jest --config ./jest.config.json"
   },
   "devDependencies": {
@@ -17,6 +20,7 @@
     "@types/jest-environment-puppeteer": "2.2.1",
     "@types/puppeteer": "1.5.0",
     "babel-jest": "23.4.0",
+    "concurrently": "3.6.0",
     "expect-puppeteer": "3.2.0",
     "husky": "0.14.3",
     "jest": "23.4.0",
