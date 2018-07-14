@@ -1,5 +1,3 @@
-const { Browser } = require('puppeteer');
-
 describe('Welcome Page', () => {
   it('should say welcome', async () => {
     const page = await browser.newPage();

@@ -5,19 +5,35 @@ import {
   createStyles,
   WithStyles,
   Typography,
+  List,
+  ListItem,
+  ListItemText,
   Theme,
 } from '@material-ui/core';
+import { Link } from 'react-router-dom';
 
 interface IRootNavigationProps extends WithStyles<typeof styles> {
   isOpen: boolean;
   onClosed: () => any;
 }
 
+const NavItem = ({ to, text, onClick }) => (
+  <Link to={to} onClick={onClick}>
+    <ListItem>
+      <ListItemText primary={text} />
+    </ListItem>
+  </Link>
+);
+
 const Component = ({ isOpen, onClosed, classes }: IRootNavigationProps) => (
   <Drawer classes={{ paper: classes.drawer }} open={isOpen} onClose={onClosed}>
     <div className={classes.toolbar} />
     <div className={classes.root}>
       <Typography variant="headline">Baby Sitters</Typography>
+      <List>
+        <NavItem to="/" text="Welcome" onClick={onClosed} />
+        <NavItem to="/sitters" text="Sitters" onClick={onClosed} />
+      </List>
     </div>
   </Drawer>
 );

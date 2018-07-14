@@ -2,6 +2,7 @@ import { createMockStore, mountWithStore } from '../../../testing';
 import { RootNavigationContainer } from './RootNavigationContainer';
 import { Drawer } from '@material-ui/core';
 import { navigationActionCreators } from './actions';
+import { Link } from 'react-router-dom';
 
 describe('RootNavigationContainer', () => {
   it('should show main navigation', () => {
@@ -17,6 +18,20 @@ describe('RootNavigationContainer', () => {
       .find(Drawer)
       .props()
       .onClose();
+
+    expect(store.getActions()).toContainEqual(
+      navigationActionCreators.closed()
+    );
+  });
+
+  it('should close main navigation when link clicked', () => {
+    const store = createMockStore({ navigation: { isOpen: true } });
+    const container = mountWithStore(RootNavigationContainer, store);
+    container
+      .find(Link)
+      .first()
+      .props()
+      .onClick(null);
 
     expect(store.getActions()).toContainEqual(
       navigationActionCreators.closed()

@@ -1,4 +1,5 @@
 {
+  "verbose": true,
   "setupTestFrameworkScriptFile": "<rootDir>/testing/setup.ts",
   "moduleFileExtensions": ["ts", "tsx", "js", "jsx"],
   "moduleDirectories": ["<rootDir>/node_modules", "<rootDir>/src"],

@@ -7,6 +7,7 @@ import { Switch, Route } from 'react-router-dom';
 import { ConnectedRouter } from 'connected-react-router';
 import { Shell } from './Shell';
 import { Welcome } from '../welcome/Welcome';
+import { Sitters } from '../sitters/SittersComponent';
 
 interface IRootProps {
   store: Store<IRootState>;
@@ -19,6 +20,7 @@ export const Root = ({ store, history }: IRootProps) => (
       <Shell>
         <Switch>
           <Route exact path="/" component={Welcome} />
+          <Route path="/sitters" component={Sitters} />
         </Switch>
       </Shell>
     </ConnectedRouter>
