@@ -9,14 +9,11 @@ export const initialState: ISittersState = {
   error: null,
 };
 
-const loadReducer = (state: ISittersState): ISittersState => ({
+const startLoadingReducer = (state: ISittersState): ISittersState => ({
   ...state,
   isLoading: true,
 });
-const loadSuccessReducer = (
-  state: ISittersState,
-  action: AnyAction
-): ISittersState => ({
+const loadSuccessReducer = (state: ISittersState, action: AnyAction): ISittersState => ({
   ...state,
   isLoading: false,
   sitters: {
@@ -28,10 +25,25 @@ const loadSuccessReducer = (
   },
 });
 
-const loadFailedReducer = (
-  state: ISittersState,
-  action: AnyAction
-): ISittersState => ({
+const loadFailedReducer = (state: ISittersState, action: AnyAction): ISittersState => ({
+  ...state,
+  isLoading: false,
+  error: action.payload,
+});
+
+const saveSuccessReducer = (state: ISittersState, action: AnyAction): ISittersState => ({
+  ...state,
+  isLoading: false,
+  sitters: {
+    ...state.sitters,
+    [action.payload.id]: {
+      ...state.sitters[action.payload.id],
+      ...action.payload,
+    },
+  },
+});
+
+const saveFailedReducer = (state: ISittersState, action: AnyAction): ISittersState => ({
   ...state,
   isLoading: false,
   error: action.payload,
@@ -39,9 +51,12 @@ const loadFailedReducer = (
 
 export const sittersReducer = createReducerHash(
   {
-    [SITTERS.LOAD]: loadReducer,
+    [SITTERS.LOAD]: startLoadingReducer,
     [SITTERS.LOAD_SUCCESS]: loadSuccessReducer,
     [SITTERS.LOAD_FAILED]: loadFailedReducer,
+    [SITTERS.SAVE]: startLoadingReducer,
+    [SITTERS.SAVE_SUCCESS]: saveSuccessReducer,
+    [SITTERS.SAVE_FAILED]: saveFailedReducer,
   },
   initialState
 );
