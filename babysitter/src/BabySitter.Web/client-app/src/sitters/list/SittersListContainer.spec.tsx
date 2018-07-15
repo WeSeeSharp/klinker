@@ -23,7 +23,7 @@ describe('SittersListContainer', () => {
   it('should load sitters', () => {
     const store = createMockStore();
 
-    const container = mountWithStore(SittersListContainer, store);
+    mountWithStore(SittersListContainer, store);
     expect(store.getActions()).toContainEqual(sittersActionCreators.load());
   });
 });

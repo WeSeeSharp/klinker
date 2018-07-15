@@ -1,6 +1,6 @@
 import { Sitters } from './SittersComponent';
 import { SittersListContainer } from './list/SittersListContainer';
-import { createMockStore, mountWithStore } from '../../testing';
+import { createMockStore, mountWithStore, wrapWithRoute } from '../../testing';
 import { SelectASitter } from './detail/SelectASitterComponent';
 import { SitterDetailContainer } from './detail/SitterDetailContainer';
 
@@ -16,7 +16,13 @@ describe('SittersComponent', () => {
   });
 
   it('should show sitter detail', () => {
-    const sitters = mountWithStore(Sitters, createMockStore(), '/45');
+    const store = createMockStore({
+      sitters: {
+        sitters: { 45: { id: 45 } },
+      },
+    });
+
+    const sitters = mountWithStore(Sitters, store, '/45');
     expect(sitters.find(SitterDetailContainer)).toHaveLength(1);
   });
 });

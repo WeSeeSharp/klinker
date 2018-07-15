@@ -7,8 +7,8 @@ import { SitterDetailContainer } from './detail/SitterDetailContainer';
 
 interface SittersProps extends WithStyles<typeof styles> {}
 
-const Component = ({  }: SittersProps) => (
-  <div>
+const Component = ({ classes }: SittersProps) => (
+  <div className={classes.container}>
     <SittersListContainer />
     <Switch>
       <Route exact path="/" component={SelectASitter} />
@@ -17,5 +17,9 @@ const Component = ({  }: SittersProps) => (
   </div>
 );
 
-const styles = createStyles({});
+const styles = createStyles({
+  container: {
+    flexGrow: 1,
+  },
+});
 export const Sitters = withStyles(styles)(Component);
