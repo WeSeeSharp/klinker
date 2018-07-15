@@ -7,14 +7,6 @@ interface ISitterDetailProps extends WithStyles<typeof styles> {
   onUpdate: (sitter: SitterModel) => any;
 }
 
-interface ISitterDetailState {
-  firstName?: string;
-  lastName?: string;
-  hourlyRate?: number;
-  hourlyRateAfterMidnight?: number;
-  hourlyRateBetweenBedtimeAndMidnight?: number;
-}
-
 class Component extends React.Component<ISitterDetailProps, any> {
   state: any = {};
 
