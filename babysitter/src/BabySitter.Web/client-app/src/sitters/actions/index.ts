@@ -10,15 +10,15 @@ export const SITTERS = {
 };
 
 const load = () => ({ type: SITTERS.LOAD });
-const loadSuccess = (sitters: SitterModel[]) => ({
+const loadSuccess = (payload: SitterModel[]) => ({
   type: SITTERS.LOAD_SUCCESS,
-  payload: sitters,
+  payload,
 });
-const loadFailed = (err: any) => ({ type: SITTERS.LOAD_FAILED, payload: err });
+const loadFailed = (payload: any) => ({ type: SITTERS.LOAD_FAILED, payload });
 
-const save = (sitter: SitterModel) => ({ type: SITTERS.SAVE, payload: sitter });
-const saveSuccess = (sitter: SitterModel) => ({ type: SITTERS.SAVE_SUCCESS, payload: sitter });
-const saveFailed = (err: any) => ({ type: SITTERS.SAVE_FAILED, payload: err });
+const save = (payload: SitterModel) => ({ type: SITTERS.SAVE, payload });
+const saveSuccess = (payload: SitterModel) => ({ type: SITTERS.SAVE_SUCCESS, payload });
+const saveFailed = (payload: any) => ({ type: SITTERS.SAVE_FAILED, payload });
 
 export const sittersActionCreators = {
   load,

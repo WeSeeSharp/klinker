@@ -8,16 +8,9 @@ import { IRootState } from '../../root';
 import { IEpicDependencies } from '../../common';
 import { SitterModel } from '../models';
 
-export const getSittersEpic: Epic<
-  Action,
-  Action,
-  IRootState,
-  IEpicDependencies
-> = (action$, state$, { baseUrl }) =>
+export const getSittersEpic: Epic<Action, Action, IRootState, IEpicDependencies> = (action$, state$, { baseUrl }) =>
   action$.ofType(SITTERS.LOAD).pipe(
     mergeMap(() => ajax.getJSON<SitterModel[]>(`${baseUrl}/babysitters`)),
     map(sitters => sittersActionCreators.loadSuccess(sitters)),
-    catchError(() =>
-      of(sittersActionCreators.loadFailed('Failed to get sitters'))
-    )
+    catchError(() => of(sittersActionCreators.loadFailed('Failed to get sitters')))
   );

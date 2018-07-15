@@ -26,9 +26,7 @@ describe('getSittersEpic', () => {
 
     store.subscribe(() => {
       if (store.getActions().length <= 1) return;
-      expect(store.getActions()).toContainEqual(
-        sittersActionCreators.loadSuccess(sitters)
-      );
+      expect(store.getActions()).toContainEqual(sittersActionCreators.loadSuccess(sitters));
       done();
     });
     store.dispatch(sittersActionCreators.load());
@@ -44,9 +42,7 @@ describe('getSittersEpic', () => {
         return;
       }
 
-      expect(store.getActions()).toContainEqual(
-        sittersActionCreators.loadFailed('Failed to get sitters')
-      );
+      expect(store.getActions()).toContainEqual(sittersActionCreators.loadFailed('Failed to get sitters'));
       done();
     });
     store.dispatch(sittersActionCreators.load());
