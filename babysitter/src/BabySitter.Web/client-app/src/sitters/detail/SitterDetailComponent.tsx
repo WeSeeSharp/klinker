@@ -34,7 +34,7 @@ class Component extends React.Component<ISitterDetailProps, any> {
   };
 
   private onFieldChanged = (fieldName, value) => {
-    this.state[fieldName] = value;
+    this.setState({ [fieldName]: value });
   };
 }
 

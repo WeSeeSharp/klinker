@@ -7,9 +7,7 @@ import {
   Button,
   DialogActions,
   DialogContent,
-  TextField,
   DialogTitle,
-  Typography,
 } from '@material-ui/core';
 import { AddSitterModel } from '../models';
 import { SitterForm } from '../common';
@@ -44,7 +42,7 @@ class Component extends React.Component<IAddSitterDialogProps> {
   }
 
   private onFieldChanged = (fieldName, value) => {
-    this.state[fieldName] = value;
+    this.setState({ [fieldName]: value });
   };
 }
 
