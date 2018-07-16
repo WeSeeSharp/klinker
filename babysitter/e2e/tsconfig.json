@@ -2,8 +2,6 @@
   "compilerOptions": {
     "allowJs": true,
     "allowSyntheticDefaultImports": true,
-    "baseUrl": "./",
-    "rootDir": "./",
     "jsx": "react",
     "module": "es2015",
     "moduleResolution": "node",
@@ -12,7 +10,8 @@
     "noUnusedParameters": true,
     "pretty": true,
     "lib": ["es2015"],
-    "sourceMap": true
+    "sourceMap": true,
+    "typeRoots": ["node_modules/@types"]
   },
   "exclude": ["node_modules", "dist"]
 }

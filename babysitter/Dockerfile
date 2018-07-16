@@ -1,4 +1,5 @@
 FROM microsoft/dotnet:2.1-sdk AS build
+
 RUN curl -sL https://deb.nodesource.com/setup_8.x | bash -
 RUN apt-get install -y nodejs
 RUN npm install --global yarn@1.7.0

@@ -1,15 +1,14 @@
 {
   "name": "babysitter-e2e",
   "version": "0.0.1",
-  "main": "index.js",
   "author": "Bryce Klinker",
   "license": "MIT",
   "private": true,
   "scripts": {
     "precommit": "pretty-quick --staged",
-    "build:front-end": "cd ../src/BabySitter.Web/client-app && yarn build:prod",
-    "build:server": "cd ../ && dotnet build",
-    "pretest": "concurrently \"yarn build:server\" \"yarn build:front-end\"",
+    "start:app": "cd ../ && docker-compose build && docker-compose up -d",
+    "pretest": "concurrently \"yarn start:app\"",
+    "posttest": "cd ../ && docker-compose down",
     "test": "jest --config ./jest.config.json"
   },
   "devDependencies": {

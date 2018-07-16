@@ -19,8 +19,10 @@ describe('addSitterEpic', () => {
 
   it('should post sitter to api and output new sitter', done => {
     let requestBody: any = null;
+    let contentType: string = null;
     mock.post(`${defaultBaseUrl}/babysitters`, (req, res) => {
       requestBody = req.body();
+      contentType = req.header('Content-Type');
       res.header('Location', `${defaultBaseUrl}/babysitters/6`);
       res.status(201);
       return res;
@@ -35,6 +37,7 @@ describe('addSitterEpic', () => {
 
       expect(requestBody).toBe(JSON.stringify({ firstName: 'bob' }));
       expect(store.getActions()).toContainEqual(sittersActionCreators.addSuccess({ id: 6, firstName: 'bob' }));
+      expect(contentType).toBe('application/json');
       done();
     });
     store.dispatch(sittersActionCreators.add({ firstName: 'bob' }));
