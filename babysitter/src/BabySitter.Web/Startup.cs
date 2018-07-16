@@ -25,7 +25,7 @@ namespace BabySitter.Web
 
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddCors(o => 
+            services.AddCors(o =>
                 o.AddDefaultPolicy(b => b.AllowAnyHeader()
                     .AllowAnyMethod()
                     .AllowAnyOrigin()
@@ -41,9 +41,8 @@ namespace BabySitter.Web
                 })
                 .AddJsonOptions(o => o.SerializerSettings.ConfigureForNodaTime(DateTimeZoneProviders.Tzdb));
 
-            services.AddBabySitterServices(o => 
-                o.UseNpgsql(
-                    _configuration.GetConnectionString("BabySitterDb"), 
+            services.AddBabySitterServices(o =>
+                o.UseNpgsql(_configuration.GetConnectionString("BabySitterDb"),
                     s => s.MigrationsAssembly(typeof(Startup).Assembly.GetName().Name).UseNodaTime()
                 )
             );
@@ -61,7 +60,7 @@ namespace BabySitter.Web
                 .UseHttpsRedirection()
                 .UseStaticFiles()
                 .UseSpaStaticFiles();
-            
+
             app.UseMvc();
             app.UseSpa(spa =>
             {
@@ -69,10 +68,10 @@ namespace BabySitter.Web
                 if (env.IsDevelopment())
                     spa.UseReactDevelopmentServer("start");
             });
-            
+
             using (var scope = app.ApplicationServices.CreateScope())
             using (var context = scope.GetService<DatabaseContext>())
-                context.Database.Migrate();            
+                context.Database.Migrate();
         }
     }
 }

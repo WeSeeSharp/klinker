@@ -14,7 +14,7 @@
   <ItemGroup>
     <ProjectReference Include="..\..\src\BabySitter.Core\BabySitter.Core.csproj" />
     <ProjectReference Include="..\..\src\BabySitter.Web\BabySitter.Web.csproj" />
-    <ProjectReference Include="..\XUnit.Gherkin\XUnit.Gherkin.csproj" />
+    <ProjectReference Include="..\Xunit.Gherkin\Xunit.Gherkin.csproj" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="appsettings.ci.json">
