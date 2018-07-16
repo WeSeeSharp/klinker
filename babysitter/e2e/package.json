@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "precommit": "pretty-quick --staged",
-    "start:app": "cd ../ && docker-compose build && docker-compose up -d",
+    "start:app": "cd ../ && docker-compose up --build -d",
     "pretest": "concurrently \"yarn start:app\"",
     "posttest": "cd ../ && docker-compose down",
     "test": "jest --config ./jest.config.json"

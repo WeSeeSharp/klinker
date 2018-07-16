@@ -15,6 +15,6 @@ describe('Sitters', () => {
 
     await page.waitFor('li');
 
-    // await expect(page).toMatch('idk, bob');
+    await expect(page).toMatch('idk, bob');
   });
 });
