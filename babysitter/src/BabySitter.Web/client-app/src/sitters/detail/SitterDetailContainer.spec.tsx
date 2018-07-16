@@ -1,4 +1,4 @@
-import { createMockStore, mountWithStore, wrapWithRoute } from '../../../testing';
+import { createMockStore, mountWithStore, wrapWithRoute, updateField } from '../../../testing';
 import { SitterDetailContainer } from './SitterDetailContainer';
 import { ReactWrapper } from 'enzyme';
 import { sittersActionCreators } from '../actions';
@@ -62,13 +62,6 @@ describe('SitterDetailContainer', () => {
       })
     );
   });
-
-  function updateField(container: ReactWrapper, fieldName: string, value: any) {
-    const input: any = container.find(`input#${fieldName}`).getDOMNode();
-    input.value = value;
-    container.find(`input#${fieldName}`).simulate('change', { currentTarget: { value } });
-    container.update();
-  }
 
   function clickUpdate(container: ReactWrapper) {
     container.find('button#update').simulate('click');

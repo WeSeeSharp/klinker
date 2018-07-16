@@ -26,4 +26,11 @@ describe('SittersListContainer', () => {
     mountWithStore(SittersListContainer, store);
     expect(store.getActions()).toContainEqual(sittersActionCreators.load());
   });
+
+  it('should begin adding sitter', () => {
+    const store = createMockStore();
+    const container = mountWithStore(SittersListContainer, store);
+    container.find('button#addSitter').simulate('click');
+    expect(store.getActions()).toContainEqual(sittersActionCreators.addBegin());
+  });
 });

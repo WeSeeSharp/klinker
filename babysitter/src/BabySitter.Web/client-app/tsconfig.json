@@ -10,7 +10,8 @@
     "noUnusedParameters": true,
     "pretty": true,
     "skipLibCheck": true,
-    "sourceMap": true
+    "sourceMap": true,
+    "target": "es6"
   },
   "exclude": ["node_modules", "dist"]
 }

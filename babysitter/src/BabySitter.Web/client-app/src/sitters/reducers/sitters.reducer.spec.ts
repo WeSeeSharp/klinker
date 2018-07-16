@@ -60,4 +60,40 @@ describe('sittersReducer', () => {
     state = sittersReducer(state, sittersActionCreators.saveFailed('Failed'));
     expect(state.error).toBe('Failed');
   });
+
+  it('should be adding sitter', () => {
+    const state = sittersReducer(undefined, sittersActionCreators.addBegin());
+    expect(state.isAdding).toBe(true);
+  });
+
+  it('should not be adding sitter after cancelling add', () => {
+    let state = sittersReducer(undefined, sittersActionCreators.addBegin());
+    state = sittersReducer(state, sittersActionCreators.addCancelled());
+    expect(state.isAdding).toBe(false);
+  });
+
+  it('should be loading when sitter added', () => {
+    const state = sittersReducer(undefined, sittersActionCreators.add({}));
+    expect(state.isLoading).toBe(true);
+  });
+
+  it('should not be loading or adding when sitter added successfully', () => {
+    let state = sittersReducer(undefined, sittersActionCreators.addBegin());
+    state = sittersReducer(state, sittersActionCreators.add({}));
+
+    state = sittersReducer(state, sittersActionCreators.addSuccess({ id: 7 }));
+    expect(state.isAdding).toBe(false);
+    expect(state.isLoading).toBe(false);
+    expect(state.sitters[7]).toEqual({ id: 7 });
+  });
+
+  it('should not be loading when add sitter failed', () => {
+    let state = sittersReducer(undefined, sittersActionCreators.addBegin());
+    state = sittersReducer(state, sittersActionCreators.add({}));
+
+    state = sittersReducer(state, sittersActionCreators.addFailed('Not good'));
+    expect(state.isLoading).toBe(false);
+    expect(state.isAdding).toBe(true);
+    expect(state.error).toBe('Not good');
+  });
 });

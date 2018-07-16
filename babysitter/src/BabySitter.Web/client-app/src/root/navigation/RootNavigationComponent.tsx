@@ -26,7 +26,7 @@ const NavItem = ({ to, text, onClick }) => (
 );
 
 const Component = ({ isOpen, onClosed, classes }: IRootNavigationProps) => (
-  <Drawer classes={{ paper: classes.drawer }} open={isOpen} onClose={onClosed}>
+  <Drawer style={{ display: 'block' }} classes={{ paper: classes.drawer }} open={isOpen} onClose={onClosed}>
     <div className={classes.toolbar} />
     <div className={classes.root}>
       <Typography variant="headline">Baby Sitters</Typography>
@@ -41,9 +41,11 @@ const Component = ({ isOpen, onClosed, classes }: IRootNavigationProps) => (
 const styles = (theme: Theme) =>
   createStyles({
     root: {
+      flexDirection: 'column',
       width: 250,
     },
     drawer: {
+      display: 'block',
       position: 'relative',
       width: 250,
     },

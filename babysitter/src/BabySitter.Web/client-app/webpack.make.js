@@ -41,6 +41,7 @@ module.exports = function(env) {
     },
     plugins: [...(isDev(env) ? getDevPlugins(env) : getProductionPlugins(env))],
     devServer: {
+      publicPath: '/',
       contentBase: path.resolve(__dirname, 'dist'),
       compress: true,
       historyApiFallback: true,

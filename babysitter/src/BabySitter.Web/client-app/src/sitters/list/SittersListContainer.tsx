@@ -11,6 +11,7 @@ const mapStateToProps = (state: IRootState) => ({
 
 const mapDispatchToProps = (dispatch: Dispatch) => ({
   onLoad: () => dispatch(sittersActionCreators.load()),
+  onAdd: () => dispatch(sittersActionCreators.addBegin()),
 });
 
 export const SittersListContainer = connect(
