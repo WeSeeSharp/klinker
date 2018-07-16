@@ -65,6 +65,5 @@ describe('SitterDetailContainer', () => {
 
   function clickUpdate(container: ReactWrapper) {
     container.find('button#update').simulate('click');
-    container.update();
   }
 });
