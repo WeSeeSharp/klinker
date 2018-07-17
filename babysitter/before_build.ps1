@@ -10,7 +10,7 @@ yarn install
 
 popd
 
-pushd .\e2e
+pushd .\babysitter\e2e
 
 yarn install
 
