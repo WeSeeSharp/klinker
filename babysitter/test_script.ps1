@@ -26,6 +26,16 @@ if ($hasErrors -or $lastExitCode -ne 0) {
 
 popd
 
+pushd .\babysitter\e2e
+
+yarn test
+
+if ($hasErrors -or $lastExitCode -ne 0) {
+    $hasErrors = $true
+}
+
+popd
+
 if ($hasErrors) {
     $host.setshouldexit(1);
 }

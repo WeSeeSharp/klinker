@@ -2,6 +2,8 @@ version: 1.0.{build}
 image: Visual Studio 2017
 environment:
   ASPNETCORE_ENVIRONMENT: ci
+install:
+  - choco install docker-compose
 services:
   - postgresql
 platform: Any CPU
