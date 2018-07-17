@@ -18,7 +18,7 @@ popd
 
 pushd .\babysitter\src\BabySitter.Web\client-app
 
-yarn test:ci
+yarn test
 
 if ($hasErrors -or $lastExitCode -ne 0) {
     $hasErrors = $true
