@@ -19,11 +19,10 @@ const Component = ({ classes }: SittersProps) => (
   </div>
 );
 
-const styles = (theme: Theme) =>
-  createStyles({
-    container: {
-      flexGrow: 1,
-      flexDirection: 'row',
-    },
-  });
+const styles = createStyles({
+  container: {
+    flexGrow: 1,
+    flexDirection: 'row',
+  },
+});
 export const Sitters = withStyles(styles)(Component);

@@ -13,7 +13,7 @@ module.exports = function(env) {
     },
     output: {
       path: path.resolve(__dirname, 'dist'),
-      filename: isDev(env) ? '[name].js' : '[name].min.js',
+      filename: isDev(env) ? '[name].js' : '[name].[hash].min.js',
     },
     resolve: {
       extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
@@ -59,6 +59,30 @@ function isDev(env) {
 function getOptimization(env) {
   return {
     minimize: !isDev(env),
+    splitChunks: isDev(env) ? undefined : getSplitChunks(),
+  };
+}
+
+function getSplitChunks() {
+  return {
+    minSize: 30000,
+    maxSize: 0,
+    minChunks: 2,
+    maxAsyncRequests: 5,
+    maxInitialRequests: 3,
+    automaticNameDelimiter: '.',
+    name: true,
+    cacheGroups: {
+      vendors: {
+        test: /[\\/]node_modules[\\/]/,
+        priority: -10,
+      },
+      default: {
+        minChunks: 2,
+        priority: -20,
+        reuseExistingChunk: true,
+      },
+    },
   };
 }
 

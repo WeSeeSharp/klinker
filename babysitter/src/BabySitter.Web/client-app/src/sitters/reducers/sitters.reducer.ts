@@ -64,6 +64,7 @@ const addSuccessReducer = (state: ISittersState, action: AnyAction) => ({
   isAdding: false,
   isLoading: false,
   sitters: {
+    ...state.sitters,
     [action.payload.id]: action.payload,
   },
 });

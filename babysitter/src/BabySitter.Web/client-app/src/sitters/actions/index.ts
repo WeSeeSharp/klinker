@@ -1,4 +1,5 @@
 import { SitterModel, AddSitterModel } from '../models';
+import { push } from 'connected-react-router';
 
 export const SITTERS = {
   LOAD: '[Sitters] Load',
@@ -30,6 +31,7 @@ const addCancelled = () => ({ type: SITTERS.ADD_CANCELLED });
 const add = (payload: AddSitterModel) => ({ type: SITTERS.ADD, payload });
 const addSuccess = (payload: SitterModel) => ({ type: SITTERS.ADD_SUCCESS, payload });
 const addFailed = (payload: any) => ({ type: SITTERS.ADD_FAILED, payload });
+const goTo = (id: number) => push(`/sitters/${id}`);
 
 export const sittersActionCreators = {
   load,
@@ -43,4 +45,5 @@ export const sittersActionCreators = {
   add,
   addSuccess,
   addFailed,
+  goTo,
 };

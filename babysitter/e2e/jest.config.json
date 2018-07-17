@@ -1,15 +1,16 @@
 {
-    "preset": "jest-puppeteer",
-    "moduleFileExtensions": ["ts", "js", "json"],
-    "setupTestFrameworkScriptFile": "expect-puppeteer",
-    "testMatch": ["<rootDir>/specs/**/*.spec.+(ts|js)"],
-    "transform": {
-        "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
-      },
-    "globals": {
-        "ts-jest": {
-          "tsConfigFile": "<rootDir>/tsconfig.json",
-          "useBabelrc": true
-        }
-      }
+  "preset": "jest-puppeteer",
+  "moduleFileExtensions": ["ts", "js", "json"],
+  "setupTestFrameworkScriptFile": "expect-puppeteer",
+  "testMatch": ["<rootDir>/specs/**/*.spec.+(ts|js)"],
+  "transform": {
+    "^.+\\.(js|jsx|ts|tsx)$": "babel-jest"
+  },
+  "globals": {
+    "ts-jest": {
+      "tsConfigFile": "<rootDir>/tsconfig.json",
+      "useBabelrc": true
+    }
+  },
+  "reporters": ["jest-spec-reporter"]
 }

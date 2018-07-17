@@ -78,13 +78,15 @@ describe('sittersReducer', () => {
   });
 
   it('should not be loading or adding when sitter added successfully', () => {
-    let state = sittersReducer(undefined, sittersActionCreators.addBegin());
+    let state = sittersReducer(undefined, sittersActionCreators.loadSuccess([{ id: 8 }]));
+    state = sittersReducer(state, sittersActionCreators.addBegin());
     state = sittersReducer(state, sittersActionCreators.add({}));
 
     state = sittersReducer(state, sittersActionCreators.addSuccess({ id: 7 }));
     expect(state.isAdding).toBe(false);
     expect(state.isLoading).toBe(false);
     expect(state.sitters[7]).toEqual({ id: 7 });
+    expect(state.sitters[8]).toEqual({ id: 8 });
   });
 
   it('should not be loading when add sitter failed', () => {
