@@ -1,12 +1,13 @@
 ﻿using System.Threading.Tasks;
 using BabySitter.Core.BabySitters.Entities;
 using BabySitter.Core.General;
+using BabySitter.Core.General.Cqrs;
 using BabySitter.Core.General.Validation;
 using Microsoft.EntityFrameworkCore;
 
 namespace BabySitter.Core.BabySitters.Commands
 {
-    public class UpdateBabySitterArgs
+    public class UpdateBabySitterArgs : ICommandArgs
     {
         public int Id { get; }
         public string FirstName { get; }
@@ -42,7 +43,7 @@ namespace BabySitter.Core.BabySitters.Commands
         }
     }
 
-    public class UpdateBabySitterCommand : ICommand<UpdateBabySitterArgs>
+    public class UpdateBabySitterCommand : ICommandHandler<UpdateBabySitterArgs>
     {
         private readonly DatabaseContext _context;
         private readonly IValidator<Sitter> _validator;

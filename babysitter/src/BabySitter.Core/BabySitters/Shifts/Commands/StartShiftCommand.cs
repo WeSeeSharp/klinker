@@ -1,16 +1,16 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using BabySitter.Core.BabySitters.Entities;
 using BabySitter.Core.BabySitters.Shifts.Entities;
 using BabySitter.Core.BabySitters.Shifts.Models;
 using BabySitter.Core.General;
+using BabySitter.Core.General.Cqrs;
 using BabySitter.Core.General.Validation;
 using Microsoft.EntityFrameworkCore;
 using NodaTime;
 
 namespace BabySitter.Core.BabySitters.Shifts.Commands
 {
-    public class StartShiftArgs
+    public class StartShiftArgs : ICommandWithResultArgs<ShiftModel>
     {
         public int SitterId { get; }
         public LocalDateTime StartTime { get; }
@@ -29,7 +29,7 @@ namespace BabySitter.Core.BabySitters.Shifts.Commands
         }
     }
     
-    public class StartShiftCommand : ICommandWithResult<StartShiftArgs, ShiftModel>
+    public class StartShiftCommand : ICommandHandlerWithResult<StartShiftArgs, ShiftModel>
     {
         private readonly DatabaseContext _context;
         private readonly IValidator<Shift> _validator;

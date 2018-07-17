@@ -3,11 +3,12 @@ using System.Threading.Tasks;
 using BabySitter.Core.BabySitters.Entities;
 using BabySitter.Core.BabySitters.Models;
 using BabySitter.Core.General;
+using BabySitter.Core.General.Cqrs;
 using Microsoft.EntityFrameworkCore;
 
 namespace BabySitter.Core.BabySitters.Queries
 {
-    public class GetBabySitterByIdArgs
+    public class GetBabySitterByIdArgs : IQueryArgs<SitterModel>
     {
         public int Id { get; }
 

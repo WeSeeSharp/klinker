@@ -2,11 +2,12 @@
 using BabySitter.Core.BabySitters.Entities;
 using BabySitter.Core.BabySitters.Models;
 using BabySitter.Core.General;
+using BabySitter.Core.General.Cqrs;
 using BabySitter.Core.General.Validation;
 
 namespace BabySitter.Core.BabySitters.Commands
 {
-    public class AddBabySitterArgs
+    public class AddBabySitterArgs : ICommandWithResultArgs<SitterModel>
     {
         public string FirstName { get; }
         public string LastName { get; }
@@ -28,7 +29,7 @@ namespace BabySitter.Core.BabySitters.Commands
         }
     }
 
-    public class AddBabySitterCommand : ICommandWithResult<AddBabySitterArgs, SitterModel>
+    public class AddBabySitterCommand : ICommandHandlerWithResult<AddBabySitterArgs, SitterModel>
     {
         private readonly DatabaseContext _context;
         private readonly IValidator<Sitter> _validator;

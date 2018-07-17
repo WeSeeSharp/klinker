@@ -12,6 +12,7 @@ using BabySitter.Core.BabySitters.Shifts.Services;
 using BabySitter.Core.BabySitters.Shifts.Validation;
 using BabySitter.Core.BabySitters.Validation;
 using BabySitter.Core.General;
+using BabySitter.Core.General.Cqrs;
 using BabySitter.Core.General.Validation;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -29,12 +30,15 @@ namespace BabySitter.Core
             services.AddTransient<IQueryHandler<GetBabySitterByIdArgs, SitterModel>, GetBabySitterByIdQuery>();
             services.AddTransient<IQueryHandler<GetBabySitterShiftsArgs, ShiftModel[]>, GetBabySitterShiftsQuery>();
             services.AddTransient<IQueryHandler<GetBabySitterShiftByIdArgs, ShiftModel>, GetBabySitterShiftByIdQuery>();
-            services.AddTransient<ICommandWithResult<AddBabySitterArgs, SitterModel>, AddBabySitterCommand>();
-            services.AddTransient<ICommandWithResult<StartShiftArgs, ShiftModel>, StartShiftCommand>();
-            services.AddTransient<ICommand<UpdateBabySitterArgs>, UpdateBabySitterCommand>();
-            services.AddTransient<ICommand<EndShiftArgs>, EndShiftCommand>();
+            services.AddTransient<ICommandHandlerWithResult<AddBabySitterArgs, SitterModel>, AddBabySitterCommand>();
+            services.AddTransient<ICommandHandlerWithResult<StartShiftArgs, ShiftModel>, StartShiftCommand>();
+            services.AddTransient<ICommandHandler<UpdateBabySitterArgs>, UpdateBabySitterCommand>();
+            services.AddTransient<ICommandHandler<EndShiftArgs>, EndShiftCommand>();
             services.AddTransient<IValidator<Sitter>, SitterValidator>();
             services.AddTransient<IValidator<Shift>, ShiftValidator>();
+            services.AddTransient<IQueryBus, QueryBus>();
+            services.AddTransient<ICommandBus, CommandBus>();
+            services.AddLogging();
             return services;
         }
     }

@@ -3,11 +3,12 @@ using System.Threading.Tasks;
 using BabySitter.Core.BabySitters.Shifts.Entities;
 using BabySitter.Core.BabySitters.Shifts.Models;
 using BabySitter.Core.General;
+using BabySitter.Core.General.Cqrs;
 using Microsoft.EntityFrameworkCore;
 
 namespace BabySitter.Core.BabySitters.Shifts.Queries
 {
-    public class GetBabySitterShiftByIdArgs
+    public class GetBabySitterShiftByIdArgs : IQueryArgs<ShiftModel>
     {
         public int SitterId { get; }
         public int ShiftId { get; }

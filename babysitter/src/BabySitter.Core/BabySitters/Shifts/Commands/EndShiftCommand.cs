@@ -3,12 +3,13 @@ using BabySitter.Core.BabySitters.Entities;
 using BabySitter.Core.BabySitters.Shifts.Entities;
 using BabySitter.Core.BabySitters.Shifts.Validation;
 using BabySitter.Core.General;
+using BabySitter.Core.General.Cqrs;
 using BabySitter.Core.General.Validation;
 using NodaTime;
 
 namespace BabySitter.Core.BabySitters.Shifts.Commands
 {
-    public class EndShiftArgs
+    public class EndShiftArgs : ICommandArgs
     {
         public int SitterId { get; }
         public int ShiftId { get; }
@@ -32,7 +33,7 @@ namespace BabySitter.Core.BabySitters.Shifts.Commands
         }
     }
     
-    public class EndShiftCommand : ICommand<EndShiftArgs>
+    public class EndShiftCommand : ICommandHandler<EndShiftArgs>
     {
         private readonly DatabaseContext _context;
         private readonly IValidator<Shift> _validator;

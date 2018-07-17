@@ -4,6 +4,7 @@ using BabySitter.Core.BabySitters.Shifts.Commands;
 using BabySitter.Core.BabySitters.Shifts.Models;
 using BabySitter.Core.BabySitters.Shifts.Queries;
 using BabySitter.Core.General;
+using BabySitter.Core.General.Cqrs;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BabySitter.Web.BabySitters
@@ -11,28 +12,22 @@ namespace BabySitter.Web.BabySitters
     [Route("babysitters/{babySitterId:int}")]
     public class ShiftsController : Controller
     {
-        private readonly IQueryHandler<GetBabySitterShiftsArgs, ShiftModel[]> _getShiftsQuery;
-        private readonly IQueryHandler<GetBabySitterShiftByIdArgs, ShiftModel> _getShiftByIdQuery;
-        private readonly ICommand<EndShiftArgs> _endShiftCommand;
-        private readonly ICommandWithResult<StartShiftArgs, ShiftModel> _startShiftCommand;
+        private readonly IQueryBus _queryBus;
+        private readonly ICommandBus _commandBus;
 
         public ShiftsController(
-            IQueryHandler<GetBabySitterShiftsArgs, ShiftModel[]> getShiftsQuery,
-            IQueryHandler<GetBabySitterShiftByIdArgs, ShiftModel> getShiftByIdQuery,
-            ICommand<EndShiftArgs> endShiftCommand,
-            ICommandWithResult<StartShiftArgs, ShiftModel> startShiftCommand)
+            IQueryBus queryBus,
+            ICommandBus commandBus)
         {
-            _getShiftsQuery = getShiftsQuery;
-            _getShiftByIdQuery = getShiftByIdQuery;
-            _endShiftCommand = endShiftCommand;
-            _startShiftCommand = startShiftCommand;
+            _queryBus = queryBus;
+            _commandBus = commandBus;
         }
 
         [HttpGet("shifts")]
         public async Task<IActionResult> GetBabySitterShifts(int babySitterId)
         {
             var args = new GetBabySitterShiftsArgs(babySitterId);
-            var models = await _getShiftsQuery.Execute(args);
+            var models = await _queryBus.Execute<GetBabySitterShiftsArgs, ShiftModel[]>(args);
             return Ok(models);
         }
         
@@ -40,7 +35,7 @@ namespace BabySitter.Web.BabySitters
         public async Task<IActionResult> GetBabySitterShift(int babySitterId, int shiftId)
         {
             var args = new GetBabySitterShiftByIdArgs(babySitterId, shiftId);
-            var model = await _getShiftByIdQuery.Execute(args);
+            var model = await _queryBus.Execute<GetBabySitterShiftByIdArgs, ShiftModel>(args);
             return Ok(model);
         }
 
@@ -48,7 +43,7 @@ namespace BabySitter.Web.BabySitters
         public async Task<IActionResult> StartShift(int babySitterId, [FromBody] StartShiftArgs args)
         {
             args = args.WithId(babySitterId);
-            var model = await _startShiftCommand.Execute(args);
+            var model = await _commandBus.Execute<StartShiftArgs, ShiftModel>(args);
             return CreatedAtRoute("GetBabySitterShift", new {shiftId = model.Id, babySitterId = model.SitterId}, model);
         }
 
@@ -58,7 +53,7 @@ namespace BabySitter.Web.BabySitters
             args = args.WithShiftId(shiftId)
                 .WithSitterId(babySitterId);
             
-            await _endShiftCommand.Execute(args);
+            await _commandBus.Execute(args);
             return NoContent();
         }
     }
