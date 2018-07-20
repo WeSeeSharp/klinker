@@ -9,10 +9,10 @@ services:
 platform: Any CPU
 configuration: Release
 before_build:
-  - sh: .\babysitter\before_build.sh
+  - sh: ./babysitter/before_build.sh
 build_script:
-  - sh: .\babysitter\build_script.sh
+  - sh: ./babysitter/build_script.sh
 test_script:
-  - sh: .\babysitter\test_script.sh
+  - sh: ./babysitter/test_script.sh
   
   
