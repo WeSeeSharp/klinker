@@ -9,25 +9,25 @@ ProjectSection(SolutionItems) = preProject
 	readme.md = readme.md
 EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabySitter.Core.Test", "test\BabySitter.Core.Test\BabySitter.Core.Test.csproj", "{E494B53D-E286-45FB-B56F-76FB8F40C3DB}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabySitter.Core.Test", "test/BabySitter.Core.Test/BabySitter.Core.Test.csproj", "{E494B53D-E286-45FB-B56F-76FB8F40C3DB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabySitter.Core", "src\BabySitter.Core\BabySitter.Core.csproj", "{B2A77F7E-64DF-417A-8AA2-BDEF7BCC5436}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabySitter.Core", "src/BabySitter.Core/BabySitter.Core.csproj", "{B2A77F7E-64DF-417A-8AA2-BDEF7BCC5436}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabySitter.Specs", "test\BabySitter.Specs\BabySitter.Specs.csproj", "{13BC6B8D-3740-443B-8E79-3757D4E93BE3}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabySitter.Specs", "test/BabySitter.Specs/BabySitter.Specs.csproj", "{13BC6B8D-3740-443B-8E79-3757D4E93BE3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabySitter.Cli.Test", "test\BabySitter.Cli.Test\BabySitter.Cli.Test.csproj", "{6C1341A5-E5FD-4DD3-9505-B75BDB1446DE}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabySitter.Cli.Test", "test/BabySitter.Cli.Test/BabySitter.Cli.Test.csproj", "{6C1341A5-E5FD-4DD3-9505-B75BDB1446DE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabySitter.Cli", "src\BabySitter.Cli\BabySitter.Cli.csproj", "{C0799E27-E9F2-4471-B940-A18B93534047}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabySitter.Cli", "src/BabySitter.Cli/BabySitter.Cli.csproj", "{C0799E27-E9F2-4471-B940-A18B93534047}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabySitter.Web", "src\BabySitter.Web\BabySitter.Web.csproj", "{16DA665C-4307-4CE7-9775-4399DFE241D8}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabySitter.Web", "src/BabySitter.Web/BabySitter.Web.csproj", "{16DA665C-4307-4CE7-9775-4399DFE241D8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabySitter.Web.Test", "test\BabySitter.Web.Test\BabySitter.Web.Test.csproj", "{67661E95-A026-465F-A204-DF674FE885B2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "BabySitter.Web.Test", "test/BabySitter.Web.Test/BabySitter.Web.Test.csproj", "{67661E95-A026-465F-A204-DF674FE885B2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xunit.Gherkin", "test\Xunit.Gherkin\Xunit.Gherkin.csproj", "{3CBB35D5-E351-4CB6-B423-3D18C8F060BD}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xunit.Gherkin", "test/Xunit.Gherkin/Xunit.Gherkin.csproj", "{3CBB35D5-E351-4CB6-B423-3D18C8F060BD}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = ".build", ".build", "{77D8E671-C736-449C-94F5-538E8FFA55D6}"
 ProjectSection(SolutionItems) = preProject
-	..\appveyor.yml = ..\appveyor.yml
+	../appveyor.yml = ../appveyor.yml
 	test_script.ps1 = test_script.ps1
 	build_script.ps1 = build_script.ps1
 	before_build.ps1 = before_build.ps1
