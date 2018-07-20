@@ -1,0 +1,3 @@
+rootProject.name = 'BabySitterMobile'
+
+include ':app'
