@@ -1,10 +1,6 @@
 set -e
 
-pushd ./babysitter
-
-dotnet restore
-
-popd
+dotnet restore ./babysitter/BabySitter.sln
 
 pushd ./babysitter/src/BabySitter.Web/client-app
 
