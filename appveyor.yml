@@ -1,18 +1,18 @@
 version: 1.0.{build}
-image: Visual Studio 2017
+image: Ubuntu
 environment:
   ASPNETCORE_ENVIRONMENT: ci
-install:
-  - choco install docker-compose
+stack: node 9, postgres, python 2.7, docker
 services:
   - postgresql
+  - docker
 platform: Any CPU
 configuration: Release
 before_build:
-  - ps: .\babysitter\before_build.ps1
+  - sh: .\babysitter\before_build.sh
 build_script:
-  - ps: .\babysitter\build_script.ps1
+  - sh: .\babysitter\build_script.sh
 test_script:
-  - ps: .\babysitter\test_script.ps1
+  - sh: .\babysitter\test_script.sh
   
   
