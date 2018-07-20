@@ -2,7 +2,7 @@ version: 1.0.{build}
 image: Ubuntu
 environment:
   ASPNETCORE_ENVIRONMENT: ci
-stack: node 9, postgres, python 2.7, docker
+stack: node 9, python 2.7, docker
 services:
   - postgresql
   - docker
