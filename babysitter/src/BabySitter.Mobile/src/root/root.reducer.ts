@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
-import { NavigationContainer } from 'react-navigation';
-import { createNavigationReducer } from 'react-navigation-redux-helpers';
+import { SittersState, sittersReducer } from '../sitters';
 
-export const createRootReducer = (navigator: NavigationContainer) => {
-  const navReducer = createNavigationReducer(navigator);
-  return combineReducers({
-    nav: navReducer,
+export interface RootState {
+  sitters?: SittersState;
+}
+
+export const createRootReducer = () => {
+  return combineReducers<any>({
+    sitters: sittersReducer,
   });
 };

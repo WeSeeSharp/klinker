@@ -1,32 +1,35 @@
-import { createReducer } from '../../common';
+import { handleActions } from 'redux-actions';
 import { LoadSittersSuccessAction, SittersActionTypes } from '../actions';
 import { SitterModel } from '../models';
-import { IRootState } from '../../root';
+import { RootState } from '../../root';
 
-export type ISittersState = {
+export interface SittersState {
   sitters: {
     [id: string]: SitterModel;
   };
-};
+}
 
-export const sittersInitialState: ISittersState = {
+export const sittersInitialState: SittersState = {
   sitters: {},
 };
 
-export const getSittersArraySelector = ({ sitters: { sitters } = sittersInitialState }: IRootState): SitterModel[] =>
+export const getSittersArraySelector = ({ sitters: { sitters } = sittersInitialState }: RootState): SitterModel[] =>
   Object.keys(sitters).map((key: string) => sitters[key]);
 
-const loadSittersSuccess = (state: ISittersState, action: LoadSittersSuccessAction) => ({
+const loadSittersSuccess = (state: SittersState, action: LoadSittersSuccessAction) => ({
   ...state,
   sitters: {
     ...state.sitters,
-    ...action.payload.reduce((obj: { [id: number]: SitterModel }, sitter: SitterModel, index: number) => {
+    ...(action.payload || []).reduce((obj: { [id: number]: SitterModel }, sitter: SitterModel, index: number) => {
       obj[sitter.id] = sitter;
       return obj;
     }, {}),
   },
 });
 
-export const sittersReducer = createReducer(sittersInitialState, {
-  [SittersActionTypes.LOAD_SITTERS_SUCCESS]: loadSittersSuccess,
-});
+export const sittersReducer = handleActions(
+  {
+    [SittersActionTypes.LOAD_SITTERS_SUCCESS]: loadSittersSuccess,
+  },
+  sittersInitialState
+);

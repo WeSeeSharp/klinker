@@ -1,5 +1,5 @@
 import { SitterModel } from '../models';
-import { ActionsUnion, createAction } from '../../common';
+import { createAction } from 'redux-actions';
 
 export enum SittersActionTypes {
   LOAD_SITTERS = '[Sitters] Load',
@@ -7,13 +7,13 @@ export enum SittersActionTypes {
   LOAD_SITTERS_FAILED = '[Sitters] Load Failed',
 }
 
-const loadSitters = () => createAction(SittersActionTypes.LOAD_SITTERS);
+const loadSitters = createAction(SittersActionTypes.LOAD_SITTERS);
 export type LoadSittersAction = ReturnType<typeof loadSitters>;
 
-const loadSittersSuccess = (sitters: SitterModel[]) => createAction(SittersActionTypes.LOAD_SITTERS_SUCCESS, sitters);
+const loadSittersSuccess = createAction<SitterModel[]>(SittersActionTypes.LOAD_SITTERS_SUCCESS);
 export type LoadSittersSuccessAction = ReturnType<typeof loadSittersSuccess>;
 
-const loadSittersFailed = (error: any) => createAction(SittersActionTypes.LOAD_SITTERS_FAILED, error);
+const loadSittersFailed = createAction<any>(SittersActionTypes.LOAD_SITTERS_FAILED);
 export type LoadSittersFailedAction = ReturnType<typeof loadSittersFailed>;
 
 export const SittersActions = {
@@ -21,5 +21,3 @@ export const SittersActions = {
   loadSittersSuccess,
   loadSittersFailed,
 };
-
-export type Actions = ActionsUnion<typeof SittersActions>;

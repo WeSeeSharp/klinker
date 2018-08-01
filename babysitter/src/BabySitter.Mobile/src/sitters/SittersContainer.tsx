@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
-import { Sitters } from './SittersComponent';
+import { Action } from 'redux-actions';
 import { Dispatch } from 'redux';
+import { Sitters } from './SittersComponent';
 import { SittersActions } from './actions';
-import { Action } from '../common';
-import { IRootState } from '../root';
+import { RootState } from '../root';
 import { getSittersArraySelector } from './reducers';
 
-const mapStateToProps = (state: IRootState) => ({
+const mapStateToProps = (state: RootState) => ({
   sitters: getSittersArraySelector(state),
 });
 

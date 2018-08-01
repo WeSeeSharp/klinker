@@ -1,4 +1,4 @@
 import { AppRegistry } from 'react-native';
 import { Root } from './src';
 
-AppRegistry.registerComponent('Baby-Sitters', () => Root);
+AppRegistry.registerComponent('BabySitterMobile', () => Root);

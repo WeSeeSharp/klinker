@@ -5,7 +5,7 @@ import { SittersActions } from '../actions';
 describe('sittersReducer', () => {
   it('should have initial state', () => {
     // @ts-ignore
-    const state = sittersReducer(null, {});
+    const state = sittersReducer(undefined, {});
     expect(state).toEqual({
       sitters: {},
     });
@@ -15,7 +15,7 @@ describe('sittersReducer', () => {
     const sitters: SitterModel[] = [{ id: 5 }, { id: 7 }];
 
     // @ts-ignore
-    let state = sittersReducer(null, {});
+    let state = sittersReducer(undefined, {});
     state = sittersReducer(state, SittersActions.loadSittersSuccess(sitters));
     expect(state).toEqual({
       sitters: {
