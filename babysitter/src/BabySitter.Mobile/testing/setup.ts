@@ -5,11 +5,9 @@ configure({ adapter: new Adapter() });
 
 const error = console.error;
 console.error = (message?: any, ...optionalParams: any[]) => {
-  if (message.indexOf('Pascal') > -1)
-      return;
-
-  if (message.indexOf('Warning: The tag') > -1)
-      return;
+  if (!isActualError(message)) return;
 
   error(message, optionalParams);
 };
+
+const isActualError = (message: string) => !message.includes('Pascal') && !message.includes('Warning:');

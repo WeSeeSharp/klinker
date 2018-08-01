@@ -6,7 +6,9 @@
     "checkJs": true,
     "jsx": "react",
     "strict": true,
+    "lib": ["es2015"],
     "allowSyntheticDefaultImports": true,
     "esModuleInterop": true
-  }
+  },
+  "exclude": ["node_modules"]
 }
