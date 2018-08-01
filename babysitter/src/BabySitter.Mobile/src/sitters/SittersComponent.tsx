@@ -16,6 +16,10 @@ export class Sitters extends Component<Props> {
   }
   render() {
     const { sitters } = this.props;
-    return <SittersList sitters={sitters} />;
+    return (
+      <View testID="sitters-screen">
+        <SittersList sitters={sitters} />
+      </View>
+    );
   }
 }

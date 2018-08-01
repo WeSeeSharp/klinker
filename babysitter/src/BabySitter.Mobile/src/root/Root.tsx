@@ -5,12 +5,17 @@ import { connect, Provider } from 'react-redux';
 
 import { configureStore, NavigationKey } from './configure-store';
 import { IRootState } from './root.state';
+import { SittersContainer } from '../sitters';
 
-const AppNavigator = createStackNavigator({});
+const AppNavigator = createStackNavigator({
+  Sitters: {
+    screen: SittersContainer,
+  },
+});
 
 const store = configureStore(AppNavigator);
 
-const AppRoot = reduxifyNavigator(AppNavigator, NavigationKey);
+const AppRoot = reduxifyNavigator(AppNavigator, NavigationKey) as any;
 const AppRootWithNavigation = connect((state: IRootState) => ({ state: state.nav }))(AppRoot);
 
 export const Root = () => (

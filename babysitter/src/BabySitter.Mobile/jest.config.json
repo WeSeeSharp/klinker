@@ -7,7 +7,7 @@
     "^.+\\.(js)$": "<rootDir>/node_modules/babel-jest",
     "\\.(ts|tsx)$": "<rootDir>/node_modules/ts-jest/preprocessor.js"
   },
-  "transformIgnorePatterns": ["node_modules/(?!(jest-)?react-native)"],
+  "transformIgnorePatterns": ["node_modules/(?!(jest-)?react-native|react-navigation)"],
   "cacheDirectory": ".jest/cache",
   "testEnvironment": "jsdom",
   "testURL": "http://localhost",
